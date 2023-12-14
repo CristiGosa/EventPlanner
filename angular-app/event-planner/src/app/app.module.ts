@@ -1,6 +1,6 @@
 import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,11 +33,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { RolesService } from './shared/services/roles.service';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WrapperComponent
+    WrapperComponent,
+    HomePageComponent,
+    UserMenuComponent,
+    UserProfileComponent
   ],
   imports: [
     MatDialogModule,

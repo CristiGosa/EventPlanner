@@ -1,0 +1,12 @@
+<div class="page-wrapper">
+<div class="wrapper">
+  <user-profile></user-profile>
+  <nav class="home-page-container">
+    <h1 *ngIf="isAdmin()">{{ 'dashboard Admin' }}</h1>
+    <h1 *ngIf="isStockManager()">{{ 'dashboard StockManager' }}</h1>
+    <h1 *ngIf="!isAdmin() && !isStockManager()">{{ 'dashboard RegularUser' }}</h1>
+    <br />
+    <h1>Works!</h1>
+  </nav>
+</div>
+</div>

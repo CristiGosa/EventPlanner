@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>ec783b0a-e03f-4c92-b7c9-b221936f97d3</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.7.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EventPlanner.Authentication\EventPlanner.Authentication.csproj" />
+	  <ProjectReference Include="..\EventPlanner.Business\EventPlanner.Business.csproj" />
+	  <ProjectReference Include="..\EventPlanner.Database\EventPlanner.Database.csproj" />
+	</ItemGroup>
+
+</Project>

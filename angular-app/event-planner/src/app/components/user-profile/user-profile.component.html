@@ -1,0 +1,12 @@
+<nav class="navbar" (clickOutside)="clickedOutside()">
+  <div class="mat-card">
+    <div class="name-container" (click)="toggleMenu()">
+      <mat-icon>account_circle</mat-icon>
+      <span><b>{{username}}</b></span>
+    </div>
+    <br />
+    <mat-card *ngIf="isMenuOpened">
+      <user-menu></user-menu>
+    </mat-card>
+  </div>
+</nav>
