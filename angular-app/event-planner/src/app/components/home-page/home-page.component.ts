@@ -15,7 +15,7 @@ export class HomePageComponent {
   isAdmin(): boolean {
     return this.rolesService.isAdmin();
   }
-  isStockManager(): boolean {
-    return this.rolesService.isStockManager();
+  isOrganizer(): boolean {
+    return this.rolesService.isOrganizer();
   }
 }

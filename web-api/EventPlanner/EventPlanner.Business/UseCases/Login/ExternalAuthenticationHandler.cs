@@ -46,9 +46,9 @@ public sealed class ExternalAuthenticationHandler : IRequestHandler<ExternalAuth
 			{
 				await _unitOfWork.Users.AddRoleAsync(user, Role.Admin.ToString());
 			}
-			if (user.Email == _options.StockManagerEmail)
+			if (user.Email == _options.OrganizerEmail)
 			{
-				await _unitOfWork.Users.AddRoleAsync(user, Role.StockManager.ToString());
+				await _unitOfWork.Users.AddRoleAsync(user, Role.Organizer.ToString());
 			}
 		}
 

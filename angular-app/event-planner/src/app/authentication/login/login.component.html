@@ -23,7 +23,7 @@
                             <asl-google-signin-button type="standard" size="medium"></asl-google-signin-button>
                         </div>
                         <div class="error-container">
-                            <!-- to do: add error handling -->
+                            <app-error-message *ngIf="errorResp != null" [errorResponse]="errorResp"></app-error-message>
                         </div>
                     </div>
                 </div>

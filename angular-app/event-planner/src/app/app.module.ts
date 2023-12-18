@@ -36,6 +36,7 @@ import { RolesService } from './shared/services/roles.service';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { ErrorMessageComponent } from './shared/components/error-message/error-message.component';
 
 @NgModule({
   declarations: [

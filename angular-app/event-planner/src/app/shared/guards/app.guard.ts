@@ -12,7 +12,7 @@ export function appGuard(): CanActivateFn {
 
     const isAdmin: boolean = rolesService.isAdmin();
     const isUser: boolean = rolesService.isUser();
-    const isStockManager: boolean = rolesService.isStockManager();
+    const isStockManager: boolean = rolesService.isOrganizer();
 
     if (authService.hasAccess()) {
       if (!authService.isTokenExpired()) {

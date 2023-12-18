@@ -1,4 +1,5 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExternalAuthenticationDto } from 'src/app/authentication/interfaces/external-auth.dto';
@@ -13,12 +14,13 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   private returnUrl: string = 'app';
-  private subscription: Subscription;
+  private subscription: Subscription
 
   user: SocialUser;
   loggedIn: boolean;
   isPhonePortrait: boolean = false;
   nrCols: number = 2;
+  public errorResp: HttpErrorResponse | null;
 
   constructor(
     private authService: AuthenticationService,
@@ -61,6 +63,7 @@ export class LoginComponent implements OnInit {
   private validateExternalAuthentication(
     externalAuth: ExternalAuthenticationDto
   ) {
+    this.clearErrorMessage();
     this.authService
       .externalLogin('User/ExternalLogin', externalAuth)
       .subscribe({
@@ -69,7 +72,18 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('refreshToken', res.refreshToken);
           localStorage.setItem('roles', JSON.stringify(res.roles));
           this.router.navigate([this.returnUrl]);
-        }
+        },
+        error: (error: HttpErrorResponse) => {
+          this.setErrorMessage(error);
+        },
       });
+  }
+
+  private setErrorMessage(errorResponse: HttpErrorResponse): void {
+    this.errorResp = errorResponse;
+  }
+
+  private clearErrorMessage(): void {
+    this.errorResp = null;
   }
 }

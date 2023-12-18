@@ -1,0 +1,9 @@
+.error-container {
+    color: #da5d4c;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    display: inline-block;
+
+    padding-bottom: 0.3rem;
+}

@@ -14,7 +14,7 @@ export class RolesService {
     return  localStorage.getItem('roles')?.toString().includes('User')? true: false;
   }
   
-  isStockManager(): boolean {
-    return localStorage.getItem('roles')?.toString().includes('StockManager')? true: false;
+  isOrganizer(): boolean {
+    return localStorage.getItem('roles')?.toString().includes('Organizer')? true: false;
   }
 }

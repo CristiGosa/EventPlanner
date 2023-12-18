@@ -12,9 +12,9 @@ internal class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
 		builder.HasData(
 		new IdentityRole
 		{
-			Id = Role.StockManager.ToString(),
-			Name = Role.StockManager.ToString(),
-			NormalizedName = "StockManager"
+			Id = Role.Organizer.ToString(),
+			Name = Role.Organizer.ToString(),
+			NormalizedName = "Organizer"
 		},
 		new IdentityRole
 		{

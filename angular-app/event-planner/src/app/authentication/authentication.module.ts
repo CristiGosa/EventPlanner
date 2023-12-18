@@ -8,9 +8,11 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ErrorMessageComponent } from '../shared/components/error-message/error-message.component';
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatGridListModule,
     MatCardModule,
     MatToolbarModule
+  ],
+  exports: [
+    ErrorMessageComponent
   ]
 })
 export class AuthenticationModule { }
