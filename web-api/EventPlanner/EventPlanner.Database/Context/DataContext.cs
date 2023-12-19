@@ -3,12 +3,15 @@ using EventPlanner.Database.Configuration;
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EventPlanner.Database.Models;
 
 namespace EventPlanner.Database.Context;
 
 public class DataContext : IdentityDbContext<User>
 {
-	public DataContext(DbContextOptions<DataContext> options) : base(options)
+    public virtual DbSet<LocationData> Locations { get; set; }
+
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
 	{
 
 	}

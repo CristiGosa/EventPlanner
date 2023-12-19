@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventPlanner.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231213172153_InitialCreate")]
+    [Migration("20231219134340_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -21,6 +21,27 @@ namespace EventPlanner.Database.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("EventPlanner.Database.Models.LocationData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Locations");
+                });
 
             modelBuilder.Entity("EventPlanner.Domain.Entities.User", b =>
                 {
@@ -126,9 +147,9 @@ namespace EventPlanner.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "StockManager",
-                            Name = "StockManager",
-                            NormalizedName = "StockManager"
+                            Id = "Organizer",
+                            Name = "Organizer",
+                            NormalizedName = "Organizer"
                         },
                         new
                         {

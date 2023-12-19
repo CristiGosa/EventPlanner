@@ -41,6 +41,7 @@ public static class ServiceExtension
 			})
 			.AddScoped<IUnitOfWork, UnitOfWork>()
 			.AddScoped<IUserRepository, UserRepository>()
+			.AddScoped<ILocationRepository, LocationRepository>()
 			.AddAutoMapper(Assembly.GetExecutingAssembly());
 	}
 }
