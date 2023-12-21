@@ -36,7 +36,9 @@ import { RolesService } from './shared/services/roles.service';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { ErrorMessageComponent } from './shared/components/error-message/error-message.component';
+import { ViewLocationsComponent } from './components/view-locations/view-locations.component';
+import { LocationsRepositoryService } from './shared/services/locations-repository.service';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ErrorMessageComponent } from './shared/components/error-message/error-m
     WrapperComponent,
     HomePageComponent,
     UserMenuComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ViewLocationsComponent,
+    AddLocationComponent
   ],
   imports: [
     MatDialogModule,
@@ -96,7 +100,8 @@ import { ErrorMessageComponent } from './shared/components/error-message/error-m
     },
     GoogleSigninProvider,
     JwtHelperService,
-    RolesService
+    RolesService,
+    LocationsRepositoryService
   ],
   bootstrap: [AppComponent],
 })
