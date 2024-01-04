@@ -1,4 +1,5 @@
 ﻿using EventPlanner.Business.UseCases.CreateEvent;
+using EventPlanner.Business.UseCases.ViewEvent;
 using EventPlanner.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,14 @@ namespace EventPlanner.Api.Controllers
             Event result = await _mediator.Send(request, cancellationToken);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new ViewEventRequest(), cancellationToken);
+
+            return Ok(result);
         }
     }
 }
