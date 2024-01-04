@@ -15,8 +15,6 @@ namespace EventPlanner.Database.Models
 
         public int Capacity { get; set; }
 
-        //public ICollection<DateTime> Bookings { get; set; } = new List<DateTime>(); to be mapped to events
-
-        //public ICollection<EventData> Events { get; set; }
+        public ICollection<EventData>? Events { get; set; } = new List<EventData>();
     }
 }
