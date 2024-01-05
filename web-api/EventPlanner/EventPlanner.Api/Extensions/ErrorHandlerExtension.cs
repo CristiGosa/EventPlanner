@@ -32,7 +32,8 @@ public static class ErrorHandlerExtension
 					OperationCanceledException => (int)HttpStatusCode.ServiceUnavailable,
 					InvalidUserException => (int)HttpStatusCode.BadRequest,
 					InvalidRefreshTokenException => (int)HttpStatusCode.BadRequest,
-					NotFoundException => (int)HttpStatusCode.NotFound,
+                    BookedLocationException => (int)HttpStatusCode.BadRequest,
+                    NotFoundException => (int)HttpStatusCode.NotFound,
 					ValidationException => (int)HttpStatusCode.PreconditionFailed,
 					ExpiredRefreshTokenException =>(int)HttpStatusCode.Forbidden,
 					_ => (int)HttpStatusCode.InternalServerError

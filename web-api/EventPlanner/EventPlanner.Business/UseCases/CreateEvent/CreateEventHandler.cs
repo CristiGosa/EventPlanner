@@ -21,6 +21,11 @@ namespace EventPlanner.Business.UseCases.CreateEvent
         {
             Event createdEvent = _mapper.Map<Event>(request);
 
+            if (IsLocationBooked(createdEvent))
+            {
+                throw new BookedLocationException();
+            }
+
             User organizer = await _unitOfWork.Users.GetByEmailAsync(request.OrganizerEmail);
 
             if (organizer == null)
@@ -33,6 +38,23 @@ namespace EventPlanner.Business.UseCases.CreateEvent
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return result;
+        }
+
+        private bool IsLocationBooked(Event createdEvent)
+        {
+            Location location = _unitOfWork.Locations.GetAllAsync().Result.First(x => x.Id == createdEvent.Location.Id);
+
+            foreach(Event existingEvent in location.Events)
+            {
+                if(((createdEvent.StartDate <= existingEvent.StartDate && createdEvent.EndDate >= existingEvent.StartDate)
+                    || (createdEvent.StartDate >= existingEvent.StartDate && createdEvent.EndDate <= existingEvent.EndDate) 
+                    || (createdEvent.StartDate <= existingEvent.EndDate && createdEvent.EndDate >= existingEvent.EndDate)) 
+                    && (createdEvent.Id != existingEvent.Id))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
