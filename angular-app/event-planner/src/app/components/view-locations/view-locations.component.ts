@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { AddLocationComponent } from '../add-location/add-location.component';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Location } from 'src/app/interfaces/location.dto';
 
 @Component({
   selector: 'app-view-locations',

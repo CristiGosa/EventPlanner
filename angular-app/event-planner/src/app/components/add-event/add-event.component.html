@@ -1,0 +1,48 @@
+<button (click)="closeDialog()">X</button>
+
+<form [formGroup]="eventForm">
+    <div class="form-fields-location">
+        <div class="form-field-location">
+            <mat-label>{{ 'Nume:' }}*</mat-label>
+            <mat-form-field appearance="outline" class="form-fields">
+                <input matInput class="form-input" id="name" type="text" formControlName="name" required>
+            </mat-form-field>
+        </div>
+        <div class="form-field-location">
+            <mat-label>{{ 'Locatie:'}}*</mat-label>
+            <mat-form-field appearance="outline" class="form-fields">
+                <mat-select placeholder="Selecteaza o locatie" formControlName="location">
+                    <mat-option *ngFor="let location of locations" [value]="location">
+                      {{ location.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-field-location">
+            <mat-label>{{ 'Pret bilet:' }}*</mat-label>
+            <mat-form-field appearance="outline" class="form-fields">
+                <input matInput class="form-input" id="ticketPrice" type="number" formControlName="ticketPrice" required>
+            </mat-form-field>
+        </div>
+        <div class="form-field-location">
+            <mat-label>{{ 'Perioada:' }}*</mat-label>
+            <mat-form-field appearance="outline" class="form-fields">
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" id="startDate" formControlName="startDate">
+                    <input matEndDate placeholder="End date" id="endDate" formControlName="endDate">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </div>
+        <div class="form-field-location">
+            <mat-label>{{ 'Descriere:' }}*</mat-label>
+            <mat-form-field appearance="outline" class="form-fields">
+                <input matInput class="form-input" id="description" type="text" formControlName="description" required>
+            </mat-form-field>
+        </div>
+        <div class="button">
+            <button mat-flat-button (click)="addEvent()" class="add-button">{{ 'Adauga noua locatie' }}</button>
+        </div>
+    </div>
+</form>

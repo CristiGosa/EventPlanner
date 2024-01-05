@@ -39,6 +39,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ViewLocationsComponent } from './components/view-locations/view-locations.component';
 import { LocationsRepositoryService } from './shared/services/locations-repository.service';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { ViewEventsComponent } from './components/view-events/view-events.component';
+import { EventsRepositoryService } from './shared/services/events-repository.service';
+import { AddEventComponent } from './components/add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     UserMenuComponent,
     UserProfileComponent,
     ViewLocationsComponent,
-    AddLocationComponent
+    AddLocationComponent,
+    ViewEventsComponent,
+    AddEventComponent
   ],
   imports: [
     MatDialogModule,
@@ -101,7 +106,8 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     GoogleSigninProvider,
     JwtHelperService,
     RolesService,
-    LocationsRepositoryService
+    LocationsRepositoryService,
+    EventsRepositoryService
   ],
   bootstrap: [AppComponent],
 })
