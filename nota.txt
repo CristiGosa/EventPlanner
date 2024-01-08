@@ -1,1 +1,2 @@
-de reinstalat mySQL
+adauga mecanism de approve/decline
+adauga modalitate de inscriere la eveniment (trb adaugata la event o entitate de nr. participanti care sa nu depaseasca capacitatea maxima a locatiei)

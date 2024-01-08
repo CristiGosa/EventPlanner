@@ -46,13 +46,19 @@ export class AddEventComponent {
 
   public addEvent = () => {
     var selectedLocation = this.eventForm.controls["location"].value as Location;
+
+    var startingDate = new Date(this.eventForm.controls["startDate"].value);
+    var endingDate = new Date(this.eventForm.controls["endDate"].value);
+    startingDate.setDate(startingDate.getDate() + 1);
+    endingDate.setDate(endingDate.getDate() + 1);
+
     const createdEvent : CreateEventRequest = {
       name: this.eventForm.controls["name"].value,
       locationId: selectedLocation.id,
       ticketPrice: this.eventForm.controls["ticketPrice"].value,
       description: this.eventForm.controls["description"].value,
-      startDate: this.eventForm.controls["startDate"].value,
-      endDate: this.eventForm.controls["endDate"].value,
+      startDate: startingDate,
+      endDate: endingDate,
     };
     this.eventForm.markAllAsTouched();
     this.eventsRepositoryService.createEvent("Event", createdEvent).subscribe({
