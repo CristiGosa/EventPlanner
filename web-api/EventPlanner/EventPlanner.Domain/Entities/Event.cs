@@ -1,4 +1,6 @@
-﻿namespace EventPlanner.Domain.Entities
+﻿using EventPlanner.Domain.Enum;
+
+namespace EventPlanner.Domain.Entities
 {
     public sealed class Event
     {
@@ -10,5 +12,6 @@
         public DateTime EndDate { get; set; }
         public string OrganizerEmail { get; set; }
         public Location Location { get; set; }
+        public EventStatus Status { get; set; }
     }
 }

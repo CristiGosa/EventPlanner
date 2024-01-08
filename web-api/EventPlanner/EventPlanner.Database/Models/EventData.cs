@@ -1,4 +1,5 @@
 ﻿using EventPlanner.Domain.Entities;
+using EventPlanner.Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,5 +29,7 @@ namespace EventPlanner.Database.Models
         public int LocationId { get; set; }
 
         public LocationData Location { get; set; }
+
+        public EventStatus Status { get; set; }
     }
 }

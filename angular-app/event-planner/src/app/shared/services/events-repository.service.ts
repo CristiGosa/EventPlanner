@@ -4,6 +4,7 @@ import { Observable, Subject, tap } from 'rxjs';
 import { EnvironmentUrlService } from './environment-url.service';
 import { GetEventsResponse } from 'src/app/interfaces/get-events-response.dto';
 import { CreateEventRequest } from 'src/app/interfaces/create-event-request.dto';
+import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
 
 
 @Injectable()
@@ -25,8 +26,18 @@ export class EventsRepositoryService {
       )
   }
 
-  getAllLocations(route: string): Observable<GetEventsResponse> {
+  public getAllLocations(route: string): Observable<GetEventsResponse> {
     return this.http.get<GetEventsResponse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+
+  public updateStatus(route: string, updateStatusDTO: UpdateEventStatusRequest): Observable<UpdateEventStatusRequest> {
+    return this.http.put<UpdateEventStatusRequest>(this.createCompleteRoute(route, this.envUrl.urlAddress), updateStatusDTO)
+    .pipe(
+      tap(() => {
+        this.eventAdded.next()
+      }
+    )
+    )
   }
 
   private createCompleteRoute(route: string, envAddress: string) {

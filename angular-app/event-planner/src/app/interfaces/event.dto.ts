@@ -1,3 +1,4 @@
+import { EventStatus } from "../shared/enums/event-status";
 import { Location } from "./location.dto";
 
 export interface Event {
@@ -7,5 +8,6 @@ export interface Event {
     organizerEmail: string,
     description: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    status: EventStatus
 }

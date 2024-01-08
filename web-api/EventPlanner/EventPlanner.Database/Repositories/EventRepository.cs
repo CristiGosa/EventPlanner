@@ -2,6 +2,7 @@
 using EventPlanner.Database.Context;
 using EventPlanner.Database.Models;
 using EventPlanner.Domain.Entities;
+using EventPlanner.Domain.Enum;
 using EventPlanner.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -24,6 +25,7 @@ namespace EventPlanner.Database.Repositories
             EventData eventData = _mapper.Map<EventData>(createdEvent);
 
             eventData.Organizer = user;
+            eventData.Status = EventStatus.Pending;
 
             _context.Locations.Attach(eventData.Location);
 
@@ -42,6 +44,13 @@ namespace EventPlanner.Database.Repositories
             }
 
             return await events.ToListAsync();
+        }
+
+        public async Task UpdateStatusAsync(int eventId, EventStatus newStatus)
+        {
+            _context.Events.First(x => x.Id == eventId).Status = newStatus;
+
+            await _context.SaveChangesAsync();
         }
     }
 }
