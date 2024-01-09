@@ -14,7 +14,7 @@ import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status
   styleUrls: ['./view-events.component.css']
 })
 export class ViewEventsComponent {
-  columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "status"];
+  columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description"];
   dataSource:  MatTableDataSource<Event>;
   dialogRef: MatDialogRef<AddEventComponent>;
 
@@ -36,6 +36,7 @@ export class ViewEventsComponent {
   ngOnInit(): void {
     if(this.rolesService.isAdmin())
     {
+      this.columnsToDisplay.push("status");
       this.columnsToDisplay.push("buttons");
     }
     this.refreshTable();
@@ -88,7 +89,12 @@ export class ViewEventsComponent {
   }
 
   refreshTable(): void {
-    this.eventsService.getAllLocations("Event").subscribe({
+    var url = "Event/Approved";
+    if(this.rolesService.isAdmin())
+    {
+      url = "Event"
+    }
+    this.eventsService.getAllEvents(url).subscribe({
       next: (response) => {
         this.dataSource.data = response.events;
       }

@@ -1,5 +1,6 @@
 ﻿using EventPlanner.Business.UseCases.CreateEvent;
 using EventPlanner.Business.UseCases.UpdateEventStatus;
+using EventPlanner.Business.UseCases.ViewApprovedEvent;
 using EventPlanner.Business.UseCases.ViewEvent;
 using EventPlanner.Domain.Entities;
 using MediatR;
@@ -33,6 +34,14 @@ namespace EventPlanner.Api.Controllers
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new ViewEventRequest(), cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpGet("Approved")]
+        public async Task<IActionResult> GetAllApprovedAsync(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new ViewApprovedEventRequest(), cancellationToken);
 
             return Ok(result);
         }

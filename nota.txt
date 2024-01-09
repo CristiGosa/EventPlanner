@@ -1,2 +1,2 @@
-adauga mecanism de approve/decline
+filtrare la cererile mele de evenimente pentru utilizatorii organizatori
 adauga modalitate de inscriere la eveniment (trb adaugata la event o entitate de nr. participanti care sa nu depaseasca capacitatea maxima a locatiei)

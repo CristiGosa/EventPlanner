@@ -26,7 +26,7 @@ export class EventsRepositoryService {
       )
   }
 
-  public getAllLocations(route: string): Observable<GetEventsResponse> {
+  public getAllEvents(route: string): Observable<GetEventsResponse> {
     return this.http.get<GetEventsResponse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
