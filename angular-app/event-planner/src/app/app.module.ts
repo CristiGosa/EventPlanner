@@ -42,6 +42,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
 import { ViewEventsComponent } from './components/view-events/view-events.component';
 import { EventsRepositoryService } from './shared/services/events-repository.service';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AddEventComponent } from './components/add-event/add-event.component';
     ViewLocationsComponent,
     AddLocationComponent,
     ViewEventsComponent,
-    AddEventComponent
+    AddEventComponent,
+    ViewEventRequestsComponent
   ],
   imports: [
     MatDialogModule,

@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { EnvironmentUrlService } from './environment-url.service';
 import { GetEventsResponse } from 'src/app/interfaces/get-events-response.dto';
 import { CreateEventRequest } from 'src/app/interfaces/create-event-request.dto';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
+import { EventStatus } from '../enums/event-status';
 
 
 @Injectable()
@@ -28,6 +29,11 @@ export class EventsRepositoryService {
 
   public getAllEvents(route: string): Observable<GetEventsResponse> {
     return this.http.get<GetEventsResponse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+
+  public getByStatus(route: string, status: EventStatus): Observable<GetEventsResponse> {
+    let params = new HttpParams().set('status', status);
+    return this.http.get<GetEventsResponse>(this.createCompleteRoute(route + '/ByStatus', this.envUrl.urlAddress), {params: params})
   }
 
   public updateStatus(route: string, updateStatusDTO: UpdateEventStatusRequest): Observable<UpdateEventStatusRequest> {

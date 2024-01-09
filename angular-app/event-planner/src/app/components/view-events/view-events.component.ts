@@ -47,6 +47,14 @@ export class ViewEventsComponent {
     this.dataSource = new MatTableDataSource<Event>();
   }
 
+  isAdmin(): boolean {
+    return this.rolesService.isAdmin();
+  }
+
+  isOrganizer(): boolean {
+    return this.rolesService.isOrganizer();
+  }
+
   getStatus(status: EventStatus): string {
     switch(status)
     {
@@ -89,16 +97,22 @@ export class ViewEventsComponent {
   }
 
   refreshTable(): void {
-    var url = "Event/Approved";
     if(this.rolesService.isAdmin())
     {
-      url = "Event"
+      this.eventsService.getAllEvents("Event").subscribe({
+        next: (response) => {
+          this.dataSource.data = response.events;
+        }
+      });
     }
-    this.eventsService.getAllEvents(url).subscribe({
-      next: (response) => {
-        this.dataSource.data = response.events;
-      }
-    });
+    else
+    {
+      this.eventsService.getByStatus("Event", EventStatus.Accepted).subscribe({
+        next: (response) => {
+          this.dataSource.data = response.events
+        }
+      });
+    }
   }
 
   openDialog(): void {

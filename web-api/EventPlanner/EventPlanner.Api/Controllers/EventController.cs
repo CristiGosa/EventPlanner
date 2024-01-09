@@ -1,7 +1,8 @@
 ﻿using EventPlanner.Business.UseCases.CreateEvent;
 using EventPlanner.Business.UseCases.UpdateEventStatus;
-using EventPlanner.Business.UseCases.ViewApprovedEvent;
 using EventPlanner.Business.UseCases.ViewEvent;
+using EventPlanner.Business.UseCases.ViewEventByStatus;
+using EventPlanner.Business.UseCases.ViewOwnedEvent;
 using EventPlanner.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -38,10 +39,20 @@ namespace EventPlanner.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Approved")]
-        public async Task<IActionResult> GetAllApprovedAsync(CancellationToken cancellationToken)
+        [HttpGet("ByStatus")]
+        public async Task<IActionResult> GetAllByStatusAsync([FromQuery] ViewEventByStatusRequest request, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new ViewApprovedEventRequest(), cancellationToken);
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpGet("Owned")]
+        public async Task<IActionResult> GetAllOwnedAsync(CancellationToken cancellationToken)
+        {
+            ViewOwnedEventRequest request = new ViewOwnedEventRequest { OrganizerEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email) };
+
+            var result = await _mediator.Send(request, cancellationToken);
 
             return Ok(result);
         }

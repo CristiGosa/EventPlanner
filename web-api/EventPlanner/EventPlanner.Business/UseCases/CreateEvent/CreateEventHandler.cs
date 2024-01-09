@@ -49,7 +49,7 @@ namespace EventPlanner.Business.UseCases.CreateEvent
                 if(((createdEvent.StartDate <= existingEvent.StartDate && createdEvent.EndDate >= existingEvent.StartDate)
                     || (createdEvent.StartDate >= existingEvent.StartDate && createdEvent.EndDate <= existingEvent.EndDate) 
                     || (createdEvent.StartDate <= existingEvent.EndDate && createdEvent.EndDate >= existingEvent.EndDate)) 
-                    && (createdEvent.Id != existingEvent.Id))
+                    && (createdEvent.Id != existingEvent.Id) && existingEvent.Status == Domain.Enum.EventStatus.Approved)
                 {
                     return true;
                 }

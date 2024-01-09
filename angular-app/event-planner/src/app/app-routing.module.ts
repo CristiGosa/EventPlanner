@@ -7,6 +7,7 @@ import { adminGuard } from './shared/guards/admin.guard';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { ViewEventsComponent } from './components/view-events/view-events.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/authentication/login', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'app/view-locations', component: ViewLocationsComponent, canActivate: [adminGuard()]},
   { path: 'app/add-location', component: AddLocationComponent, canActivate: [adminGuard()]},
   { path: 'app/view-events', component: ViewEventsComponent},
-  { path: 'app/add-event', component: AddEventComponent}
+  { path: 'app/add-event', component: AddEventComponent},
+  { path: 'app/view-event-requests', component: ViewEventRequestsComponent},
 ];
 
 @NgModule({

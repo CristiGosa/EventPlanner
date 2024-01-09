@@ -1,8 +1,8 @@
 ﻿using EventPlanner.Domain.Entities;
 
-namespace EventPlanner.Business.UseCases.ViewApprovedEvent
+namespace EventPlanner.Business.UseCases.ViewOwnedEvent
 {
-    public sealed class ViewApprovedEventResponse
+    public sealed class ViewOwnedEventResponse
     {
         public IEnumerable<Event> Events { get; set; }
     }
