@@ -9,7 +9,7 @@ namespace EventPlanner.Business.UseCases.CreateEventReservation
         public CreateEventReservationMapper()
         {
             CreateMap<CreateEventReservationRequest, EventReservation>()
-                .ForPath(dest => dest.Event.Id, opt => opt.MapFrom(src => src.EventId))
+                .ForPath(dest => dest.EventId, opt => opt.MapFrom(src => src.EventId))
                 .ForMember(dest => dest.AttendeeEmail, opt => opt.MapFrom(src => src.AttendeeEmail));
         }
     }

@@ -42,9 +42,11 @@ namespace EventPlanner.Business.UseCases.CreateEventReservation
 
         private bool IsEventAtFullCapacity(EventReservation reservation)
         {
-            Event joinedEvent = _unitOfWork.Events.GetAllAsync(x => x.Id == reservation.Event.Id).Result.First();
+            Event joinedEvent = _unitOfWork.Events.GetAllAsync(x => x.Id == reservation.EventId).Result.First();
 
-            if(joinedEvent.ParticipantsNumber >= joinedEvent.Location.Capacity)
+            Location location = _unitOfWork.Locations.GetAllAsync().Result.First(x => x.Id == joinedEvent.LocationId);
+
+            if(joinedEvent.ParticipantsNumber >= location.Capacity)
             {
                 return true;
             }

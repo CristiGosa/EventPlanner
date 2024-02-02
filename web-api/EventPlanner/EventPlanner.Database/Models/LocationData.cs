@@ -15,6 +15,6 @@ namespace EventPlanner.Database.Models
 
         public int Capacity { get; set; }
 
-        public ICollection<EventData>? Events { get; set; } = new List<EventData>();
+        public ICollection<int> EventsId { get; set; } = new List<int>();
     }
 }

@@ -8,7 +8,7 @@ namespace EventPlanner.Business.UseCases.CreateEvent
         public CreateEventMapper() 
         {
             CreateMap<CreateEventRequest, Event>()
-                .ForPath(dest => dest.Location.Id, opt => opt.MapFrom(src => src.LocationId))
+                .ForPath(dest => dest.LocationId, opt => opt.MapFrom(src => src.LocationId))
                 .ForMember(dest => dest.OrganizerEmail, opt => opt.MapFrom(src => src.OrganizerEmail));
         }
     }

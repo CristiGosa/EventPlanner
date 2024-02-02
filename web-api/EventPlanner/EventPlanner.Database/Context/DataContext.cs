@@ -4,6 +4,8 @@ using EventPlanner.Database.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EventPlanner.Database.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Newtonsoft.Json;
 
 namespace EventPlanner.Database.Context;
 
@@ -21,17 +23,19 @@ public class DataContext : IdentityDbContext<User>
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<EventData>()
-			.HasOne(x => x.Location)
-			.WithMany(x => x.Events)
-			.HasForeignKey(x => x.LocationId);
+			.Property(x => x.ReservationsId)
+			.HasConversion(new ValueConverter<ICollection<int>, string>(
+			v => JsonConvert.SerializeObject(v),
+			v => JsonConvert.DeserializeObject<ICollection<int>>(v)));
 
-		modelBuilder.Entity<EventData>()
+        modelBuilder.Entity<EventData>()
 			.HasOne(x => x.Organizer);
 
-		modelBuilder.Entity<EventReservationData>()
-			.HasOne(x => x.Event)
-			.WithMany(x => x.Reservations)
-			.HasForeignKey(x => x.EventId);
+		modelBuilder.Entity<LocationData>()
+			.Property(x => x.EventsId)
+            .HasConversion(new ValueConverter<ICollection<int>, string>(
+            v => JsonConvert.SerializeObject(v),
+            v => JsonConvert.DeserializeObject<ICollection<int>>(v)));
 
         modelBuilder.Entity<EventReservationData>()
             .HasOne(x => x.Attendee);

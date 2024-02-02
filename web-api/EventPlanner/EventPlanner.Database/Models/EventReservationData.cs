@@ -15,7 +15,5 @@ namespace EventPlanner.Database.Models
 
         [Required]
         public int EventId { get; set; }
-
-        public EventData Event { get; set; }
     }
 }

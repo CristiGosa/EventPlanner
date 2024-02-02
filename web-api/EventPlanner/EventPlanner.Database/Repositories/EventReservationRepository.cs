@@ -25,8 +25,6 @@ namespace EventPlanner.Database.Repositories
 
             reservationData.Attendee = attendee;
 
-            _context.Events.Attach(reservationData.Event);
-
             _context.Events.First(x => x.Id == reservationData.EventId).ParticipantsNumber++;
 
             await _context.EventReservations.AddAsync(reservationData);

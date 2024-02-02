@@ -27,8 +27,6 @@ namespace EventPlanner.Database.Repositories
             eventData.Organizer = user;
             eventData.Status = EventStatus.Pending;
 
-            _context.Locations.Attach(eventData.Location);
-
             await _context.Events.AddAsync(eventData);
 
             return createdEvent;

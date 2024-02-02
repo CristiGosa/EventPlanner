@@ -11,9 +11,9 @@ namespace EventPlanner.Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string OrganizerEmail { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public EventStatus Status { get; set; }
         public int ParticipantsNumber { get; set; } = 0;
-        public ICollection<EventReservation>? Reservations { get; set; } = new List<EventReservation>();
+        public ICollection<int> ReservationsId { get; set; } = new List<int>();
     }
 }

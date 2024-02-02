@@ -1,9 +1,9 @@
 import { EventStatus } from "../shared/enums/event-status";
-import { Location } from "./location.dto";
 
 export interface Event {
+    id: number,
     name: string,
-    location: Location,
+    locationId: number,
     ticketPrice: number,
     organizerEmail: string,
     description: string,

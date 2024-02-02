@@ -28,12 +28,10 @@ namespace EventPlanner.Database.Models
 
         public int LocationId { get; set; }
 
-        public LocationData Location { get; set; }
-
         public EventStatus Status { get; set; }
 
         public int ParticipantsNumber { get; set; }
 
-        public ICollection<EventReservationData>? Reservations { get; set; } = new List<EventReservationData>();
+        public ICollection<int> ReservationsId { get; set; } = new List<int>();
     }
 }

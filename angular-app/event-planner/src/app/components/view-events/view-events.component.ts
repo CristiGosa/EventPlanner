@@ -122,7 +122,7 @@ export class ViewEventsComponent {
   getParticipantsNumber(event: Event): string {
     if(event.status != EventStatus.Accepted)
       return " - ";
-    return event.participantsNumber + "/" + event.location.capacity;
+    return event.participantsNumber + "/" + 1000; //to fix 
   }
 
   refreshTable(): void {

@@ -42,9 +42,11 @@ namespace EventPlanner.Business.UseCases.CreateEvent
 
         private bool IsLocationBooked(Event createdEvent)
         {
-            Location location = _unitOfWork.Locations.GetAllAsync().Result.First(x => x.Id == createdEvent.Location.Id);
+            Location location = _unitOfWork.Locations.GetAllAsync().Result.First(x => x.Id == createdEvent.LocationId);
 
-            foreach(Event existingEvent in location.Events)
+            List<Event> events = _unitOfWork.Events.GetAllAsync(x => x.LocationId == location.Id).Result.ToList();
+
+            foreach(Event existingEvent in events)
             {
                 if(((createdEvent.StartDate <= existingEvent.StartDate && createdEvent.EndDate >= existingEvent.StartDate)
                     || (createdEvent.StartDate >= existingEvent.StartDate && createdEvent.EndDate <= existingEvent.EndDate) 
