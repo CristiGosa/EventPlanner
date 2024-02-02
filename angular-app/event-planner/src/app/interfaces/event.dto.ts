@@ -9,5 +9,6 @@ export interface Event {
     description: string,
     startDate: Date,
     endDate: Date,
-    status: EventStatus
+    status: EventStatus,
+    participantsNumber: number
 }

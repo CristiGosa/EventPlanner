@@ -43,6 +43,7 @@ import { ViewEventsComponent } from './components/view-events/view-events.compon
 import { EventsRepositoryService } from './shared/services/events-repository.service';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
+import { EventReservationsRepositoryService } from './shared/services/event-reservations-repository.service';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { ViewEventRequestsComponent } from './components/view-event-requests/vie
     JwtHelperService,
     RolesService,
     LocationsRepositoryService,
-    EventsRepositoryService
+    EventsRepositoryService,
+    EventReservationsRepositoryService
   ],
   bootstrap: [AppComponent],
 })

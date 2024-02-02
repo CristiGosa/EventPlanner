@@ -7,6 +7,8 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { EventStatus } from 'src/app/shared/enums/event-status';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
+import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
+import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 
 @Component({
   selector: 'app-view-events',
@@ -14,7 +16,7 @@ import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status
   styleUrls: ['./view-events.component.css']
 })
 export class ViewEventsComponent {
-  columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description"];
+  columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
   dataSource:  MatTableDataSource<Event>;
   dialogRef: MatDialogRef<AddEventComponent>;
 
@@ -30,13 +32,18 @@ export class ViewEventsComponent {
   constructor(
     private eventsService: EventsRepositoryService,
     public dialog: MatDialog,
-    private rolesService: RolesService
+    private rolesService: RolesService,
+    private eventReservationsService: EventReservationsRepositoryService
      ) { }
 
   ngOnInit(): void {
     if(this.rolesService.isAdmin())
     {
       this.columnsToDisplay.push("status");
+      this.columnsToDisplay.push("buttons");
+    }
+    if(this.rolesService.isUser())
+    {
       this.columnsToDisplay.push("buttons");
     }
     this.refreshTable();
@@ -55,6 +62,10 @@ export class ViewEventsComponent {
     return this.rolesService.isOrganizer();
   }
 
+  isUser(): boolean {
+    return this.rolesService.isUser();
+  }
+
   getStatus(status: EventStatus): string {
     switch(status)
     {
@@ -66,7 +77,7 @@ export class ViewEventsComponent {
     }
   }
 
-  isPending(event: Event){
+  isPending(event: Event): boolean{
     if(event.status === EventStatus.Pending)
       return true;
     return false;
@@ -94,6 +105,24 @@ export class ViewEventsComponent {
         this.refreshTable();
       }
     });
+  }
+
+  joinEvent(eventId: number): void {
+    const joinEventRequest: JoinEventRequest = {
+      eventId: eventId
+    }
+
+    this.eventReservationsService.createEventReservation("EventReservations", joinEventRequest).subscribe({
+      next: () => {
+        this.refreshTable();
+      }
+    });
+  }
+
+  getParticipantsNumber(event: Event): string {
+    if(event.status != EventStatus.Accepted)
+      return " - ";
+    return event.participantsNumber + "/" + event.location.capacity;
   }
 
   refreshTable(): void {

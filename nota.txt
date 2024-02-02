@@ -1,2 +1,5 @@
-filtrare la cererile mele de evenimente pentru utilizatorii organizatori
 adauga modalitate de inscriere la eveniment (trb adaugata la event o entitate de nr. participanti care sa nu depaseasca capacitatea maxima a locatiei)
+cu attach se rescrie eventData cu participants = 0, fara attach nu se aduna nimic (da eroare pt ca se apeleaza de 2 ori datele).
+solutie1: scapa de parametrii colectii de date (datele sa contina colectii de Id uri de acum)
+solutie2: updateaza nr participants din eventsData in api separat
+dupa ce rezolvi sa se adune participantii, fa sa mearga doar un join/user

@@ -3,6 +3,7 @@ using System;
 using EventPlanner.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventPlanner.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240129113226_AddedParticipantsAndReservations")]
+    partial class AddedParticipantsAndReservations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +63,7 @@ namespace EventPlanner.Database.Migrations
 
                     b.HasIndex("OrganizerId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("EventPlanner.Database.Models.EventReservationData", b =>
@@ -82,7 +85,7 @@ namespace EventPlanner.Database.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("EventReservations", (string)null);
+                    b.ToTable("EventReservations");
                 });
 
             modelBuilder.Entity("EventPlanner.Database.Models.LocationData", b =>
@@ -103,7 +106,7 @@ namespace EventPlanner.Database.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("EventPlanner.Domain.Entities.User", b =>

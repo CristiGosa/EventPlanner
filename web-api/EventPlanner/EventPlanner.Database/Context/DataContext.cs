@@ -11,6 +11,7 @@ public class DataContext : IdentityDbContext<User>
 {
     public virtual DbSet<LocationData> Locations { get; set; }
 	public virtual DbSet<EventData> Events { get; set; }
+	public virtual DbSet<EventReservationData> EventReservations { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
 	{
@@ -27,7 +28,15 @@ public class DataContext : IdentityDbContext<User>
 		modelBuilder.Entity<EventData>()
 			.HasOne(x => x.Organizer);
 
-		modelBuilder.ApplyConfiguration(new RoleConfiguration());
+		modelBuilder.Entity<EventReservationData>()
+			.HasOne(x => x.Event)
+			.WithMany(x => x.Reservations)
+			.HasForeignKey(x => x.EventId);
+
+        modelBuilder.Entity<EventReservationData>()
+            .HasOne(x => x.Attendee);
+
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
 		base.OnModelCreating(modelBuilder);
 	}

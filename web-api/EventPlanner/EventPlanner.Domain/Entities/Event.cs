@@ -13,5 +13,7 @@ namespace EventPlanner.Domain.Entities
         public string OrganizerEmail { get; set; }
         public Location Location { get; set; }
         public EventStatus Status { get; set; }
+        public int ParticipantsNumber { get; set; } = 0;
+        public ICollection<EventReservation>? Reservations { get; set; } = new List<EventReservation>();
     }
 }
