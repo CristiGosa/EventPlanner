@@ -1,8 +1,5 @@
-<button *ngIf="isAdmin() || isOrganizer()" (click)="openDialog()">Adauga un eveniment nou</button>
-<button *ngIf="isOrganizer()" routerLink="/app/view-event-requests">Vizualizeaza cererile mele</button>
-<button *ngIf="isAdmin()" routerLink="/app/view-event-requests">Vizualizeaza cererile neadministrate</button>
-<button *ngIf="isUser()" routerLink="/app/view-events-joined">Vizualizeaza evenimentele tale</button>
-
+<button routerLink="/app">Home</button>
+<h3>Lista de evenimente la care participi</h3>
 <table
     mat-table
     [dataSource]="dataSource"
@@ -44,25 +41,9 @@
         <td mat-cell *matCellDef="let element">{{ element.description }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let element">{{ getStatus(element.status) }}</td>
-      </ng-container>
-
       <ng-container matColumnDef="participants">
         <th mat-header-cell *matHeaderCellDef>Participanti</th>
         <td mat-cell *matCellDef="let element">{{ getParticipantsNumber(element) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="buttons">
-        <th mat-header-cell *matHeaderCellDef="let element"></th>
-        <td mat-cell *matCellDef="let element">
-          <button *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Accept</button>
-          <button *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Reject</button>
-          <button *ngIf="isUser() && !isEventJoined(element.id) && !isEventFull(element)" (click)="joinEvent(element.id)">Join</button>
-          <p *ngIf="isEventJoined(element.id)">Joined</p>
-          <p *ngIf="isEventFull(element)">Full</p>
-        </td>
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

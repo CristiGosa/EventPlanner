@@ -44,6 +44,7 @@ import { EventsRepositoryService } from './shared/services/events-repository.ser
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
 import { EventReservationsRepositoryService } from './shared/services/event-reservations-repository.service';
+import { ViewEventsJoinedComponent } from './components/view-events-joined/view-events-joined.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { EventReservationsRepositoryService } from './shared/services/event-rese
     AddLocationComponent,
     ViewEventsComponent,
     AddEventComponent,
-    ViewEventRequestsComponent
+    ViewEventRequestsComponent,
+    ViewEventsJoinedComponent
   ],
   imports: [
     MatDialogModule,

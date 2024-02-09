@@ -1,3 +1,5 @@
 cauta edge-cases
 cerceteaza daca se salveaza bine id-urile in ICollection sau doar e pusa degeaba
-creeaza pagina de vizualizeaza evenimentele tale pentru regular user
+implementeaza notificari prin email
+vezi ce faci cu harta aia prim google maps
+stilizare
