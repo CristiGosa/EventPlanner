@@ -5,7 +5,6 @@
     <h1 *ngIf="isAdmin()">{{ 'dashboard Admin' }}</h1>
     <h1 *ngIf="isOrganizer()">{{ 'dashboard Organizator' }}</h1>
     <h1 *ngIf="!isAdmin() && !isOrganizer()">{{ 'dashboard User' }}</h1>
-    <button *ngIf="isAdmin()" routerLink="/app/view-locations">Vizualizeaza Locatiile</button>
     <app-view-events></app-view-events>
     <br />
   </nav>

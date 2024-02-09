@@ -1,0 +1,55 @@
+/* Style for buttons */
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Style for table */
+.mat-elevation-z8 {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.mat-elevation-z8 th, .mat-elevation-z8 td {
+  border: 1px solid #dddddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.mat-elevation-z8 th {
+  background-color: #3498db;
+  color: white;
+}
+
+.mat-elevation-z8 tr:nth-child(even) {
+  background-color: #d5eaf6;
+}
+
+.mat-elevation-z8 tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.mat-elevation-z8 tr:hover {
+  background-color: #c1e1f0;
+}
+
+.date {
+  min-width: 6.5rem;
+}
+
+.custom-dialog-container {
+  padding: 20px;
+  background-color: #f8f9fa; /* Adjust background color as needed */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

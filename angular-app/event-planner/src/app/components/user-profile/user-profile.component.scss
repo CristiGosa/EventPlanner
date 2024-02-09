@@ -1,10 +1,43 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-.name-container{
-    display:flex;
+.navbar {
+    display: flex;
+    background-color: #ffffff;
+    padding: 10px;
+  }
+  
+  .mat-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .name-container {
+    display: flex;
     align-items: center;
-}
-
-.mat-card {
-    height: 3rem;
-}
+    cursor: pointer;
+  }
+  
+  .name-container mat-icon {
+    margin-right: 5px;
+  }
+  
+  .name-container span {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .user-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .user-menu.open {
+    display: block;
+  }
+  

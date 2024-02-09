@@ -25,12 +25,9 @@ export class ViewEventsComponent {
   locations: Location[] = [];
 
   desktopDialogConfig: MatDialogConfig = {
-    width: '47%',
-    height: '100vh',
-    position: {
-      left: '26.5%',
-      right: '26.5%',
-    }
+    width: '500px',
+    maxHeight: '90vh', 
+    panelClass: 'custom-dialog-container',
   };
 
   constructor(
