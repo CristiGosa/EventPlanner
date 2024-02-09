@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { EnvironmentUrlService } from './environment-url.service';
@@ -27,6 +27,11 @@ export class LocationsRepositoryService {
 
   getAllLocations(route: string): Observable<GetLocationsResponse> {
     return this.http.get<GetLocationsResponse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+
+  getLocationById(route: string, id: number): Observable<GetLocationsResponse> {
+    let params = new HttpParams().set('id', id);
+    return this.http.get<GetLocationsResponse>(this.createCompleteRoute(route + '/ById', this.envUrl.urlAddress), {params: params})
   }
 
   private createCompleteRoute(route: string, envAddress: string) {

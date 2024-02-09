@@ -23,12 +23,12 @@ namespace EventPlanner.Business.UseCases.CreateEventReservation
 
             if (IsEventAtFullCapacity(createdReservation))
             {
-                throw new Exception("Event is at full capacity");
+                throw new FullEventCapacityException();
             }
 
             User attendee = await _unitOfWork.Users.GetByEmailAsync(request.AttendeeEmail);
 
-            if (attendee == null)
+            if (attendee == null || isUserAlreadyJoined(request))
             {
                 throw new InvalidUserException(request.AttendeeEmail);
             }
@@ -51,6 +51,16 @@ namespace EventPlanner.Business.UseCases.CreateEventReservation
                 return true;
             }
 
+            return false;
+        }
+
+        private bool isUserAlreadyJoined(CreateEventReservationRequest request)
+        {
+            var userReservations = _unitOfWork.EventReservations.GetAllAsync(x => x.AttendeeEmail == request.AttendeeEmail).Result.ToList();
+            if (userReservations.Any(x => x.EventId == request.EventId))
+            {
+                return true;
+            }
             return false;
         }
     }

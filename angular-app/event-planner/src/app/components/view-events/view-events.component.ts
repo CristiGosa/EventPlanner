@@ -9,6 +9,8 @@ import { RolesService } from 'src/app/shared/services/roles.service';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
 import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
+import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
+import { Location } from 'src/app/interfaces/location.dto';
 
 @Component({
   selector: 'app-view-events',
@@ -19,6 +21,8 @@ export class ViewEventsComponent {
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
   dataSource:  MatTableDataSource<Event>;
   dialogRef: MatDialogRef<AddEventComponent>;
+  joinedEvents: Event[] = [];
+  locations: Location[] = [];
 
   desktopDialogConfig: MatDialogConfig = {
     width: '47%',
@@ -33,7 +37,8 @@ export class ViewEventsComponent {
     private eventsService: EventsRepositoryService,
     public dialog: MatDialog,
     private rolesService: RolesService,
-    private eventReservationsService: EventReservationsRepositoryService
+    private eventReservationsService: EventReservationsRepositoryService,
+    private locationsService: LocationsRepositoryService
      ) { }
 
   ngOnInit(): void {
@@ -75,6 +80,19 @@ export class ViewEventsComponent {
       case EventStatus.Cancelled: return "Cancelled";
       default: return "Undefined";
     }
+  }
+
+  getLocations(): void {
+    this.locationsService.getAllLocations("Location").subscribe({
+      next: (response) => {
+        this.locations = response.locations;
+      }
+    });
+  }
+
+  getLocation(locationId: number): string | undefined {
+    var location = this.locations.find(x => x.id == locationId);
+    return location?.name;
   }
 
   isPending(event: Event): boolean{
@@ -119,10 +137,27 @@ export class ViewEventsComponent {
     });
   }
 
+  isEventJoined(eventId: number): boolean {
+    if(this.joinedEvents.find(x => x.id == eventId) != undefined)
+          return true;
+    return false;
+  }
+
+  isEventFull(event: Event): boolean {
+    var location = this.locations.find(x => x.id == event.locationId);
+    if(location?.capacity != undefined){
+      if(location.capacity <= event.participantsNumber){
+        return true;
+      }
+    }
+    return false;
+  }
+
   getParticipantsNumber(event: Event): string {
     if(event.status != EventStatus.Accepted)
       return " - ";
-    return event.participantsNumber + "/" + 1000; //to fix 
+    var location = this.locations.find(x => x.id == event.locationId);
+    return event.participantsNumber + "/" + location?.capacity;
   }
 
   refreshTable(): void {
@@ -142,6 +177,12 @@ export class ViewEventsComponent {
         }
       });
     }
+    this.eventsService.getAllEvents("Event/Joined").subscribe({
+      next: (response) => {
+        this.joinedEvents = response.events;
+      }
+    });
+    this.getLocations()
   }
 
   openDialog(): void {

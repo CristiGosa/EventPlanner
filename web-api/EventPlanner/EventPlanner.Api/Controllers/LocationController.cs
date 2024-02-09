@@ -1,5 +1,7 @@
 ﻿using EventPlanner.Business.UseCases.CreateLocation;
+using EventPlanner.Business.UseCases.ViewEventByStatus;
 using EventPlanner.Business.UseCases.ViewLocation;
+using EventPlanner.Business.UseCases.ViewLocationById;
 using EventPlanner.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,14 @@ namespace EventPlanner.Api.Controllers
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new ViewLocationRequest(), cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpGet("ById")]
+        public async Task<IActionResult> GetAllAsync([FromQuery] ViewLocationByIdRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
 
             return Ok(result);
         }

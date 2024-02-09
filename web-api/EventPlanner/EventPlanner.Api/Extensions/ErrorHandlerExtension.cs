@@ -33,6 +33,7 @@ public static class ErrorHandlerExtension
 					InvalidUserException => (int)HttpStatusCode.BadRequest,
 					InvalidRefreshTokenException => (int)HttpStatusCode.BadRequest,
                     BookedLocationException => (int)HttpStatusCode.BadRequest,
+					FullEventCapacityException => (int)HttpStatusCode.BadRequest,
                     NotFoundException => (int)HttpStatusCode.NotFound,
 					ValidationException => (int)HttpStatusCode.PreconditionFailed,
 					ExpiredRefreshTokenException =>(int)HttpStatusCode.Forbidden,

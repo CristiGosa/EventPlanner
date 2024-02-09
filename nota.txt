@@ -1,6 +1,3 @@
-adauga modalitate de inscriere la eveniment (trb adaugata la event o entitate de nr. participanti care sa nu depaseasca capacitatea maxima a locatiei)
-dupa ce rezolvi sa se adune participantii, fa sa mearga doar un join/user
-creeaza API de GetLocationById
-repara html-urile inde se luau date despre locatie direct din entitatea event
 cauta edge-cases
 cerceteaza daca se salveaza bine id-urile in ICollection sau doar e pusa degeaba
+creeaza pagina de vizualizeaza evenimentele tale pentru regular user

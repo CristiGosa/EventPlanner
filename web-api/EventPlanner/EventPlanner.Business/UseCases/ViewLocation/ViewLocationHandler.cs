@@ -5,11 +5,11 @@ using MediatR;
 
 namespace EventPlanner.Business.UseCases.ViewLocation
 {
-    public sealed class ViewProcedureTypeHandler : IRequestHandler<ViewLocationRequest, ViewLocationResponse>
+    public sealed class ViewLocationHandler : IRequestHandler<ViewLocationRequest, ViewLocationResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ViewProcedureTypeHandler(IUnitOfWork unitOfWork)
+        public ViewLocationHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }

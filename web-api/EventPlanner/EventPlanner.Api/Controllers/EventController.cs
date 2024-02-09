@@ -2,6 +2,7 @@
 using EventPlanner.Business.UseCases.UpdateEventStatus;
 using EventPlanner.Business.UseCases.ViewEvent;
 using EventPlanner.Business.UseCases.ViewEventByStatus;
+using EventPlanner.Business.UseCases.ViewJoinedEvent;
 using EventPlanner.Business.UseCases.ViewOwnedEvent;
 using EventPlanner.Domain.Entities;
 using MediatR;
@@ -51,6 +52,16 @@ namespace EventPlanner.Api.Controllers
         public async Task<IActionResult> GetAllOwnedAsync(CancellationToken cancellationToken)
         {
             ViewOwnedEventRequest request = new ViewOwnedEventRequest { OrganizerEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email) };
+
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpGet("Joined")]
+        public async Task<IActionResult> GetAllJoined(CancellationToken cancellationToken)
+        {
+            ViewJoinedEventRequest request = new ViewJoinedEventRequest { AttendeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email) };
 
             var result = await _mediator.Send(request, cancellationToken);
 
