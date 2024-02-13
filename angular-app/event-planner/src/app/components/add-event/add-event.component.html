@@ -1,6 +1,5 @@
-<button class="close-button" (click)="closeDialog()">X</button>
-
 <div class="popup-container">
+    <button class="close-button" (click)="closeDialog()">X</button>
     <form [formGroup]="eventForm" class="form-container">
         <div class="form-field">
             <label for="name" class="form-label">{{ 'Nume:' }}*</label>
@@ -19,10 +18,10 @@
         <div class="form-field">
             <label class="form-label">{{ 'Perioada:' }}*</label>
             <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date" id="startDate" formControlName="startDate" class="form-input">
-                <input matEndDate placeholder="End date" id="endDate" formControlName="endDate" class="form-input">
+                <input matStartDate placeholder="Start date" id="startDate" formControlName="startDate">
+                <input matEndDate placeholder="End date" id="endDate" formControlName="endDate">
             </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
         </div>
         <div class="form-field">
@@ -30,7 +29,7 @@
             <input id="description" type="text" formControlName="description" class="form-input" required>
         </div>
         <div class="button">
-            <button (click)="addEvent()" class="add-button">{{ 'Adauga noua locatie' }}</button>
+            <button (click)="addEvent()" class="add-button">{{ 'Adauga noul eveniment' }}</button>
         </div>
     </form>
 </div>

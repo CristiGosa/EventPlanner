@@ -1,8 +1,13 @@
 .popup-container {
+    position: fixed;
+    top: 55%;
+    left: 35%; 
+    transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    min-width: 25rem;
 }
 
 .close-button {
