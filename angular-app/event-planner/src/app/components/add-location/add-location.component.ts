@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/interfaces/location.dto';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
@@ -17,6 +17,7 @@ export class AddLocationComponent {
 
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private locationsRepositoryService: LocationsRepositoryService,
     private router: Router,
@@ -24,6 +25,7 @@ export class AddLocationComponent {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data.location, this.data.map);
     this.buildLocationForm();
   }
 
@@ -41,11 +43,19 @@ export class AddLocationComponent {
       next: () => {
         this.dialogRef.close();
         this.router.navigate([this.viewLocationsUrl]);
+        this.addMarker(this.data.location, this.data.map);
       }
     });
   }
 
   public closeDialog(){
     this.dialogRef.close();
+  }
+
+  private addMarker(location: google.maps.LatLng, map: google.maps.Map): void {
+    const marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
   }
 }

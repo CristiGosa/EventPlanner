@@ -1,5 +1,4 @@
 ﻿using EventPlanner.Business.UseCases.CreateLocation;
-using EventPlanner.Business.UseCases.ViewEventByStatus;
 using EventPlanner.Business.UseCases.ViewLocation;
 using EventPlanner.Business.UseCases.ViewLocationById;
 using EventPlanner.Domain.Entities;

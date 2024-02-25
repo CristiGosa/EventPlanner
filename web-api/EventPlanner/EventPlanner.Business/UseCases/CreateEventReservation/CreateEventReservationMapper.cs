@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EventPlanner.Business.UseCases.CreateEvent;
 using EventPlanner.Domain.Entities;
 
 namespace EventPlanner.Business.UseCases.CreateEventReservation

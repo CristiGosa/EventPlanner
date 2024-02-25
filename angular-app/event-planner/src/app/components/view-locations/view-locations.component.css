@@ -1,0 +1,22 @@
+.main {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.map{
+    height: 400px;
+}
+
+.registrations-pannel {
+    width: 40%;
+}
+
+.map-pannel {
+    width: 60%;
+}
+
+.add-button{
+    margin-top: 1rem;
+    position: relative;
+    left: 35%;
+}

@@ -1,6 +1,6 @@
-cauta edge-cases
-cerceteaza daca se salveaza bine id-urile in ICollection sau doar e pusa degeaba
+salveaza locatia markerului in db ca sa ramana si dupa restart
+implementeaza mecanism de selectat locatia la eveniment prin click pe un marker
+schimba culoarea markerului care e click-uit
 implementeaza notificari prin email
-vezi ce faci cu harta aia prim google maps
 stilizare
-centreaza casuta de adagat evenimente
+error-handlers

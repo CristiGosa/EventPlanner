@@ -1,23 +1,33 @@
 <button routerLink="/app">Home</button>
 
-<table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-    id="htmlData"
-  >
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+<div class="main">
 
-    <ng-container matColumnDef="capacity">
-      <th mat-header-cell *matHeaderCellDef>Capacity</th>
-      <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
-    </ng-container>
+  <div class="registrations-pannel">
+    <h1>Locatii inregistrate</h1>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      id="htmlData"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
-  </table>
+      <ng-container matColumnDef="capacity">
+        <th mat-header-cell *matHeaderCellDef>Capacity</th>
+        <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
+      </ng-container>
 
-<button (click)="openDialog()">Adauga o locatie noua</button>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+  </div>
+
+  <div class="map-pannel">
+    <h1>Click pe locatia dorita pentru a o inregistra</h1>
+    <div id="map" class="map"></div>
+  </div>
+
+</div>
