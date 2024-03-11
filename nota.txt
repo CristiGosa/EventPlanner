@@ -1,3 +1,5 @@
+fix location bug(no name shown/capacity undefined)
+fixeaza tabelul de admin(prea multe coloane)
 salveaza locatia markerului in db ca sa ramana si dupa restart
 implementeaza mecanism de selectat locatia la eveniment prin click pe un marker
 schimba culoarea markerului care e click-uit

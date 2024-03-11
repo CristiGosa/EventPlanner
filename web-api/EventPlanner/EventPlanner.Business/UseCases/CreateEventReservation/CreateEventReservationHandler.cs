@@ -44,7 +44,12 @@ namespace EventPlanner.Business.UseCases.CreateEventReservation
         {
             Event joinedEvent = _unitOfWork.Events.GetAllAsync(x => x.Id == reservation.EventId).Result.First();
 
-            Location location = _unitOfWork.Locations.GetAllAsync().Result.First(x => x.Id == joinedEvent.LocationId);
+            Location location = _unitOfWork.Locations.GetAllAsync().Result.FirstOrDefault(x => x.Id == joinedEvent.LocationId);
+
+            if(location == null)
+            {
+                return false;
+            }
 
             if(joinedEvent.ParticipantsNumber >= location.Capacity)
             {
