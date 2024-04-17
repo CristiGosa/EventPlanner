@@ -45,6 +45,7 @@ import { AddEventComponent } from './components/add-event/add-event.component';
 import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
 import { EventReservationsRepositoryService } from './shared/services/event-reservations-repository.service';
 import { ViewEventsJoinedComponent } from './components/view-events-joined/view-events-joined.component';
+import { DialogWindowComponent } from './shared/components/dialog-window/dialog-window.component'
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ViewEventsJoinedComponent } from './components/view-events-joined/view-
     ViewEventsComponent,
     AddEventComponent,
     ViewEventRequestsComponent,
-    ViewEventsJoinedComponent
+    ViewEventsJoinedComponent,
+    DialogWindowComponent,
   ],
   imports: [
     MatDialogModule,

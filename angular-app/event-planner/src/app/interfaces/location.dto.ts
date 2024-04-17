@@ -1,5 +1,7 @@
 export interface Location {
     id: number,
     name: string,
-    capacity: number
+    capacity: number,
+    mapLatitude: number,
+    mapLongitude: number,
 }

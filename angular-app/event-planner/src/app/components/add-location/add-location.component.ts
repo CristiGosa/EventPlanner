@@ -25,7 +25,6 @@ export class AddLocationComponent {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data.location, this.data.map);
     this.buildLocationForm();
   }
 
@@ -39,23 +38,28 @@ export class AddLocationComponent {
   public addLocation = () => {
     this.locationForm.markAllAsTouched();
     this.createdLocation = this.locationForm.value as Location
+    this.createdLocation.mapLatitude = this.data.location.lat();
+    this.createdLocation.mapLongitude = this.data.location.lng();
     this.locationsRepositoryService.createLocation("Location", this.createdLocation).subscribe({
       next: () => {
         this.dialogRef.close();
+        this.placeMarker(this.createdLocation.mapLatitude, this.createdLocation.mapLongitude);
         this.router.navigate([this.viewLocationsUrl]);
-        this.addMarker(this.data.location, this.data.map);
       }
+    });
+  }
+
+  private placeMarker(latitude: any, longitude: any): void {
+    var marker = new google.maps.Marker({
+      position: {
+        lat: latitude,
+        lng: longitude
+      },
+      map: this.data.map
     });
   }
 
   public closeDialog(){
     this.dialogRef.close();
-  }
-
-  private addMarker(location: google.maps.LatLng, map: google.maps.Map): void {
-    const marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
   }
 }

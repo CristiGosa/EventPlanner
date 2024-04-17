@@ -11,6 +11,7 @@ import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { Location } from 'src/app/interfaces/location.dto';
+import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 
 @Component({
   selector: 'app-view-events',
@@ -184,5 +185,9 @@ export class ViewEventsComponent {
 
   openDialog(): void {
     this.dialogRef = this.dialog.open(AddEventComponent, this.desktopDialogConfig);
+  }
+
+  openDescriptionDialog(description: string){
+    this.dialog.open(DialogWindowComponent, { data: description });
   }
 }
