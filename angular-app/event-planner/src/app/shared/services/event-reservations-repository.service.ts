@@ -5,6 +5,7 @@ import { EnvironmentUrlService } from './environment-url.service';
 import { GetEventsResponse } from 'src/app/interfaces/get-events-response.dto';
 import { CreateEventRequest } from 'src/app/interfaces/create-event-request.dto';
 import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
+import { GetParticipantsResponse } from 'src/app/interfaces/get-participants-response.dto';
 
 
 @Injectable()
@@ -24,6 +25,11 @@ export class EventReservationsRepositoryService {
         }
         )
       )
+  }
+
+  public getParticipantsListByEventId(route: string, eventId: number): Observable<GetParticipantsResponse> {
+    let params = new HttpParams().set('eventId', eventId);
+    return this.http.get<GetParticipantsResponse>(this.createCompleteRoute(route + '/ParticipantsByEventId', this.envUrl.urlAddress), {params: params})
   }
 
   private createCompleteRoute(route: string, envAddress: string) {

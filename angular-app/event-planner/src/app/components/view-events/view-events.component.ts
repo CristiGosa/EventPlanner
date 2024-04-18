@@ -12,6 +12,7 @@ import { EventReservationsRepositoryService } from 'src/app/shared/services/even
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { Location } from 'src/app/interfaces/location.dto';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
+import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 
 @Component({
   selector: 'app-view-events',
@@ -191,7 +192,11 @@ export class ViewEventsComponent {
     this.dialog.open(DialogWindowComponent, { data: description });
   }
 
-  openParticipantsDialog(event: Event){
-    console.log(event);
+  openParticipantsDialog(eventId: number){
+    this.eventReservationsService.getParticipantsListByEventId("EventReservations", eventId).subscribe((result) => {
+      if(result.participants != null){
+        this.dialog.open(ViewParticipantsComponent, { data: result.participants });
+      }
+    });
   }
 }
