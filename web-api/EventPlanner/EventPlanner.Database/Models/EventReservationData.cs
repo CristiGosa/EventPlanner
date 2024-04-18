@@ -11,7 +11,7 @@ namespace EventPlanner.Database.Models
         public int Id { get; set; }
 
         [Required]
-        public User Attendee { get; set; }
+        public string AttendeeEmail { get; set; }
 
         [Required]
         public int EventId { get; set; }

@@ -37,9 +37,6 @@ public class DataContext : IdentityDbContext<User>
             v => JsonConvert.SerializeObject(v),
             v => JsonConvert.DeserializeObject<ICollection<int>>(v)));
 
-        modelBuilder.Entity<EventReservationData>()
-            .HasOne(x => x.Attendee);
-
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
 		base.OnModelCreating(modelBuilder);

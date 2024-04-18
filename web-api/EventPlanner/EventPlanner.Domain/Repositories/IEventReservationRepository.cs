@@ -7,5 +7,6 @@ namespace EventPlanner.Domain.Repositories
     {
         Task<EventReservation> CreateAsync(EventReservation createdReservation, User attendee);
         Task<IEnumerable<EventReservation>> GetAllAsync(Expression<Func<EventReservation, bool>> predicate);
+        Task<List<Participant>> GetParticipantById(int eventId);
     }
 }

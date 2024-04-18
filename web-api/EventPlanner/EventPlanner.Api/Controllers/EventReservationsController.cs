@@ -1,4 +1,5 @@
 ﻿using EventPlanner.Business.UseCases.CreateEventReservation;
+using EventPlanner.Business.UseCases.ViewParticipantsByEventId;
 using EventPlanner.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,14 @@ namespace EventPlanner.Api.Controllers
             EventReservation result = await _mediator.Send(request, cancellationToken);
 
             return Created(string.Empty, result);
+        }
+
+        [HttpGet("ParticipantsByEventId")]
+        public async Task<IActionResult> GetParticipantsByEventIdAsync([FromQuery] ViewParticipantsByEventIdRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(request, cancellationToken);
+
+            return Ok(result);
         }
     }
 }

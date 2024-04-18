@@ -190,4 +190,8 @@ export class ViewEventsComponent {
   openDescriptionDialog(description: string){
     this.dialog.open(DialogWindowComponent, { data: description });
   }
+
+  openParticipantsDialog(event: Event){
+    console.log(event);
+  }
 }

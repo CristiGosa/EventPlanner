@@ -23,7 +23,7 @@ namespace EventPlanner.Database.Repositories
         {
             EventReservationData reservationData = _mapper.Map<EventReservationData>(createdReservation);
 
-            reservationData.Attendee = attendee;
+            reservationData.AttendeeEmail = attendee.Email;
 
             _context.Events.First(x => x.Id == reservationData.EventId).ParticipantsNumber++;
 
@@ -42,6 +42,21 @@ namespace EventPlanner.Database.Repositories
             }
 
             return await eventReservations.ToListAsync();
+        }
+
+        public async Task<List<Participant>> GetParticipantById(int eventId)
+        {
+            var eventReservations = await _context.EventReservations.Where(x => x.Id == eventId).ToListAsync();
+
+            var participants = new List<Participant>();
+
+            foreach (var eventReservation in eventReservations)
+            {
+                var user = await _context.Users.FirstAsync(x => x.Email == eventReservation.AttendeeEmail);
+                participants.Add(new Participant { Name = user.Name, Email = user.Email });
+            }
+
+            return participants;
         }
     }
 }

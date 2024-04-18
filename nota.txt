@@ -2,5 +2,7 @@ implementeaza mecanism de selectat locatia la eveniment prin click pe un marker
 schimba culoarea markerului care e click-uit
 implementeaza notificari prin email
 lista cu participantii care s-au inscris
+	-creeaza endpoint de GetAllParticipantsByEvent (din eventReservations gasesti AttendeeId pt EventId,
+din aspnetusers gasesti attendeeEmail pentru attendeeId)
 stilizare
 error-handlers
