@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Loader } from '@googlemaps/js-api-loader';
 import { CreateEventRequest } from 'src/app/interfaces/create-event-request.dto';
 import { Location } from 'src/app/interfaces/location.dto';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
@@ -12,8 +13,12 @@ import { LocationsRepositoryService } from 'src/app/shared/services/locations-re
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
-  public locations: Location[];
+  public locations: Location[] = [];
   public eventForm: FormGroup;
+  public coordinates: [number, number][] = [];
+  public map:  google.maps.Map;
+  public selectedLocation: Location | undefined;
+  private lastMarker: google.maps.Marker;
 
 
   constructor(
@@ -23,12 +28,11 @@ export class AddEventComponent {
   ) { }
 
   ngOnInit(): void {
-    this.locationsRepositoryService.getAllLocations("Location").subscribe({
-      next: (response) => {
-        this.locations = response.locations;
-      }
-    });
+    this.getLocations();
     this.buildForm();
+    setTimeout(() => {
+      this.generateMap();
+    }, 100);
   }
 
   private buildForm(): void {
@@ -44,8 +48,19 @@ export class AddEventComponent {
     );
   }
 
+  private getLocations(){
+    this.locationsRepositoryService.getAllLocations("Location").subscribe({
+      next: (response) => {
+        this.locations = response.locations;
+        this.locations.forEach(location => {
+          this.coordinates.push([location.mapLatitude, location.mapLongitude]);
+        });
+      }
+    });
+  }
+
   public addEvent = () => {
-    var selectedLocation = this.eventForm.controls["location"].value as Location;
+    var location = this.selectedLocation as Location;
 
     var startingDate = new Date(this.eventForm.controls["startDate"].value);
     var endingDate = new Date(this.eventForm.controls["endDate"].value);
@@ -54,7 +69,7 @@ export class AddEventComponent {
 
     const createdEvent : CreateEventRequest = {
       name: this.eventForm.controls["name"].value,
-      locationId: selectedLocation.id,
+      locationId: location.id,
       ticketPrice: this.eventForm.controls["ticketPrice"].value,
       description: this.eventForm.controls["description"].value,
       startDate: startingDate,
@@ -66,6 +81,50 @@ export class AddEventComponent {
         this.dialogRef.close();
       }
     });
+  }
+
+  private generateMap(){
+    let loader = new Loader({
+      apiKey: 'AIzaSyB4peyn0G6T8Kcg3UemZx146WJ94LgPfX4'
+    });
+
+    var element = document.getElementById('map')!;
+      loader.load().then(() => {
+         const map = new google.maps.Map(element, {
+          center: {lat: 45.755440, lng: 21.228242},
+          zoom: 11
+        });
+        this.map = map;
+        this.coordinates.forEach(coordinate => {
+          this.placeMarker(coordinate[0], coordinate[1]);
+        });
+      });
+  }
+
+  private placeMarker(latitude: any, longitude: any): void {
+    var marker = new google.maps.Marker({
+      position: {
+        lat: latitude,
+        lng: longitude
+      },
+      map: this.map
+    });
+    this.lastMarker = marker;
+    marker.addListener("click", (event: any) => {
+      this.lastMarker.setIcon(null);
+      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+      this.selectedLocation = this.locations.find(location => 
+        location.mapLatitude == event.latLng.lat() 
+        && location.mapLongitude == event.latLng.lng());
+      this.lastMarker = marker;
+    });
+  }
+
+  public showSelectedLocation(): string{
+    if(!this.selectedLocation){
+      return "Click pe un punct de pe harta pentru a selecta locatia";
+    }
+    return this.selectedLocation.name + " (Capacitate: " + this.selectedLocation.capacity + ")";
   }
 
   public closeDialog(){
