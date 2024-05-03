@@ -4,6 +4,9 @@ using EventPlanner.Domain.Entities;
 using EventPlanner.Api.Extensions;
 using EventPlanner.Business;
 using EventPlanner.Database;
+using EventPlanner.Api;
+using EventPlanner.Domain.Services;
+using EventPlanner.EmailSender;
 
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 
@@ -21,6 +24,9 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<DataContext>();
 
 builder.Services.ConfigureAuthentication(builder.Configuration);
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailServiceConfiguration, EmailServiceConfiguration>();
 
 builder.Services.AddCors(options =>
 {

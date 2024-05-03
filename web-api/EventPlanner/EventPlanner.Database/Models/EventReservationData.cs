@@ -1,5 +1,4 @@
-﻿using EventPlanner.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventPlanner.Database.Models

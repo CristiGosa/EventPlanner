@@ -1,5 +1,7 @@
-implementeaza mecanism de selectat locatia la eveniment prin click pe un marker
-schimba culoarea markerului care e click-uit
-implementeaza notificari prin email
+implementeaza notificari de accepted/rejected event; joined event
+schimba datele de configurare
+schimba locatia pt fisierul de html sa il gasesca direct dupa clone
+schimba adresa de mail care trimite mailurile
+export pdf pentru lista de participanti
 stilizare
 error-handlers

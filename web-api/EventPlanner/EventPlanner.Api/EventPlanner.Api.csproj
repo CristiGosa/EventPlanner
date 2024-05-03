@@ -21,6 +21,7 @@
 	  <ProjectReference Include="..\EventPlanner.Authentication\EventPlanner.Authentication.csproj" />
 	  <ProjectReference Include="..\EventPlanner.Business\EventPlanner.Business.csproj" />
 	  <ProjectReference Include="..\EventPlanner.Database\EventPlanner.Database.csproj" />
+	  <ProjectReference Include="..\EventPlanner.EmailSender\EventPlanner.EmailSender.csproj" />
 	</ItemGroup>
 
 </Project>
