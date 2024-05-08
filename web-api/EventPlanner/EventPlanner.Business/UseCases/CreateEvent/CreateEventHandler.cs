@@ -27,7 +27,7 @@ namespace EventPlanner.Business.UseCases.CreateEvent
 
             Location location = _unitOfWork.Locations.GetAllAsync().Result.FirstOrDefault(x => x.Id == createdEvent.LocationId);
 
-            if (IsLocationBooked(createdEvent))
+            if (IsLocationBooked(createdEvent, location))
             {
                 throw new BookedLocationException();
             }
@@ -43,12 +43,6 @@ namespace EventPlanner.Business.UseCases.CreateEvent
 
             await _unitOfWork.CommitAsync(cancellationToken);
 
-            var receiverInfo = new ReceiverInfo
-            {
-                FirstName = "Cristi Gosa",
-                Email = "cristi.gosa11@gmail.com"
-            };
-
             var createdEventInfo = new CreatedEventInfo
             {
                 EventName = result.Name,
@@ -57,15 +51,13 @@ namespace EventPlanner.Business.UseCases.CreateEvent
                 CreatedDate = DateTime.Now,
             };
 
-            await _emailService.SendCreatedEventNotification(receiverInfo, createdEventInfo);
+            await _emailService.SendCreatedEventNotification(createdEventInfo);
 
             return result;
         }
 
-        private bool IsLocationBooked(Event createdEvent)
+        private bool IsLocationBooked(Event createdEvent, Location location)
         {
-            Location location = _unitOfWork.Locations.GetAllAsync().Result.FirstOrDefault(x => x.Id == createdEvent.LocationId);
-
             if(location == null)
             {
                 return false;

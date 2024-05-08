@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Roboto, Verdana, sans-serif;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 50px;
+            color: #673ab7;
+        }
+
+        .content {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .redirect {
+            background-color: #673ab7;
+            color: #fff !important;
+            padding: 12px 24px;
+            margin-top: 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+            .redirect:hover {
+                background-color: #512da8;
+            }
+
+        .row {
+            margin: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1 class="title">Event Planner</h1>
+        <p>{introduction}</p>
+        <hr />
+        <table>
+            <tr><p class="row">Event: {event}</p></tr>
+            <tr><p class="row">Location: {location}</p></tr>
+            <tr><p class="row">Response date: {responseDate}</p></tr>
+        </table>
+        <hr />
+        <a href="{link}" class="redirect">{buttonContent}</a>
+    </div>
+</body>
+</html>

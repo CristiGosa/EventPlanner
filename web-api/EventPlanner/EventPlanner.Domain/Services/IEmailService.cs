@@ -4,6 +4,8 @@ namespace EventPlanner.Domain.Services
 {
     public interface IEmailService
     {
-        Task SendCreatedEventNotification(ReceiverInfo addresseeInfoDto, CreatedEventInfo createdTripEmailInfoDto);
+        Task SendCreatedEventNotification(CreatedEventInfo createdTripEmailInfoDto);
+        Task SendApprovedEventNotification(ReceiverInfo receiverInfo, UpdatedEventInfo updatedEventInfo);
+        Task SendRejectedEventNotification(ReceiverInfo receiverInfo, UpdatedEventInfo updatedEventInfo);
     }
 }

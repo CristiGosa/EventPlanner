@@ -1,7 +1,20 @@
-implementeaza notificari de accepted/rejected event; joined event
-schimba datele de configurare
-schimba locatia pt fisierul de html sa il gasesca direct dupa clone
-schimba adresa de mail care trimite mailurile
 export pdf pentru lista de participanti
+pe lista de evenimente la care participi, cand dai click pe locatie sa apara pop-up cu harta si marker pe locatia respectiva
 stilizare
-error-handlers
+schimba locatia pt fisierul de html sa il gasesca direct dupa clone
+fa-ti alte adrese de gmail
+error-handlers*
+
+
+licenta: intorducere -> o scurta descriere a proiectului
+		     -> obiective (cateva obiective punctuale)
+	 fundamente teoretice(15-20pagini)
+  		     -> mediul de dezvoltare
+		     -> ce aplicatii am folosit
+		reprase la tot ce luam si refetinte 
+	motivatie (3-5 pagini) -> aplicatii asemanatoare de pe piata, cu ce e competititva, avantaje/dezavantaje
+	(incercam sa comparam cu ce avem noi)
+	implementare(30-35 pagini) -> talele, relatiile dintre tabele, arhitectura backend, interfata cu utilizatorul, capturi de eran la greu
+	ghid de utilizare(5-7 pagini)
+	concluzii si dezvltari ulterioare(1-2 pagini)
+	bibliografia

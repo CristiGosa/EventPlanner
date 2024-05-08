@@ -46,10 +46,27 @@ namespace EventPlanner.EmailSender
             await smtp.DisconnectAsync(true);
         }
 
-        public async Task SendCreatedEventNotification(ReceiverInfo receiverInfo, CreatedEventInfo createdEventInfo)
+        public async Task SendCreatedEventNotification(CreatedEventInfo createdEventInfo)
         {
+            ReceiverInfo administratorInfo = new ReceiverInfo()
+            {
+                Email = emailServiceConfiguration.AdministratorEmail,
+                FirstName = emailServiceConfiguration.AdministratorName
+            };
             string htmlEmailBody = GetCreatedEventEmailBody(createdEventInfo, "You have a new event request: ");
-            await SendEmail(receiverInfo, htmlEmailBody, "New event request!");
+            await SendEmail(administratorInfo, htmlEmailBody, "New event request!");
+        }
+
+        public async Task SendApprovedEventNotification(ReceiverInfo receiverInfo, UpdatedEventInfo updatedEventInfo)
+        {
+            string htmlEmailBody = GetUpdatedEventEmailBody(updatedEventInfo, "Your event request has been approved: ");
+            await SendEmail(receiverInfo, htmlEmailBody, "Event request approved!");
+        }
+
+        public async Task SendRejectedEventNotification(ReceiverInfo receiverInfo, UpdatedEventInfo updatedEventInfo)
+        {
+            string htmlEmailBody = GetUpdatedEventEmailBody(updatedEventInfo, "Your event request has been rejected: ");
+            await SendEmail(receiverInfo, htmlEmailBody, "Event request rejected");
         }
 
         private string ReadEmailTemplate(string templatePath)
@@ -67,7 +84,19 @@ namespace EventPlanner.EmailSender
             htmlTemplate = htmlTemplate.Replace("{location}", createdEventInfo.LocationName.ToString());
             htmlTemplate = htmlTemplate.Replace("{creator}", createdEventInfo.Creator);
             htmlTemplate = htmlTemplate.Replace("{createdDate}", createdEventInfo.CreatedDate.ToShortDateString());
-            htmlTemplate = htmlTemplate.Replace("{link}", "http://localhost:4200/view-trips");
+            htmlTemplate = htmlTemplate.Replace("{link}", "http://localhost:4200/app/view-event-requests");
+            htmlTemplate = htmlTemplate.Replace("{buttonContent}", "Click to view event");
+            return htmlTemplate;
+        }
+
+        private string GetUpdatedEventEmailBody(UpdatedEventInfo updatedEventInfo, string introduction)
+        {
+            string htmlTemplate = ReadEmailTemplate(@"EmailTemplates\UpdatedEventEmailTemplate.html");
+            htmlTemplate = htmlTemplate.Replace("{introduction}", introduction);
+            htmlTemplate = htmlTemplate.Replace("{event}", updatedEventInfo.EventName.ToString());
+            htmlTemplate = htmlTemplate.Replace("{location}", updatedEventInfo.LocationName.ToString());
+            htmlTemplate = htmlTemplate.Replace("{responseDate}", updatedEventInfo.ResponseDate.ToShortDateString());
+            htmlTemplate = htmlTemplate.Replace("{link}", "http://localhost:4200/app/view-event-requests");
             htmlTemplate = htmlTemplate.Replace("{buttonContent}", "Click to view event");
             return htmlTemplate;
         }
