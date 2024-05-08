@@ -1,4 +1,6 @@
+import { SocialUser } from "@abacritt/angularx-social-login";
 import { Component } from "@angular/core";
+import { AuthenticationService } from "src/app/shared/services/authentication.service";
 import { RolesService } from "src/app/shared/services/roles.service";
 
 @Component({
@@ -8,8 +10,16 @@ import { RolesService } from "src/app/shared/services/roles.service";
 })
 
 export class HomePageComponent {
+  username: string;
 
-  constructor(public rolesService: RolesService) { }
+  constructor(public rolesService: RolesService, public authService: AuthenticationService) {
+    this.authService.extAuthChanged.subscribe((user: SocialUser | null) => {
+      this.username = 'Username';
+      if (user != null) {
+        this.username = user.name;
+      }
+    });
+  }
 
 
   isAdmin(): boolean {
@@ -17,5 +27,9 @@ export class HomePageComponent {
   }
   isOrganizer(): boolean {
     return this.rolesService.isOrganizer();
+  }
+  getWelcomeText(): string {
+    console.log(this.authService.user);
+    return "Bine ai revenit, " + this.username;
   }
 }

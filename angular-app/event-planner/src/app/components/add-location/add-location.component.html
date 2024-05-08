@@ -1,21 +1,19 @@
-<button (click)="closeDialog()">X</button>
 
-<form [formGroup]="locationForm">
-    <div class="form-fields-location">
-        <div class="form-field-location">
-            <mat-label>{{ 'Nume:' }}*</mat-label>
-            <mat-form-field appearance="outline" class="form-fields">
-                <input matInput class="form-input" id="name" type="text" formControlName="name" required>
-            </mat-form-field>
+<div class="popup-container">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <form [formGroup]="locationForm" class="form-container">
+        <div class="form-container">
+            <div class="form-field">
+                <label for="name" class="form-label"> {{ 'Nume:' }}*</label>
+                <input class="form-input" id="name" type="text" formControlName="name" required>
+            </div>
+            <div class="form-field">
+                <label for="capacity" class="form-label">{{ 'Capacitate:'}}*</label>
+                <input class="form-input" id="capacity" type="number" formControlName="capacity" required>
+            </div>
+            <div class="button">
+                <button (click)="addLocation()" class="add-button">{{ 'Adauga noua locatie' }}</button>
+            </div>
         </div>
-        <div class="form-field-location">
-            <mat-label>{{ 'Capacitate:'}}*</mat-label>
-            <mat-form-field appearance="outline" class="form-fields">
-                <input matInput class="form-input" id="capacity" type="number" formControlName="capacity" required>
-            </mat-form-field>
-        </div>
-        <div class="button">
-            <button mat-flat-button (click)="addLocation()" class="add-button">{{ 'Adauga noua locatie' }}</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>

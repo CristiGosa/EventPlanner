@@ -2,9 +2,9 @@
 <div class="wrapper">
   <user-profile></user-profile>
   <nav class="home-page-container">
-    <h1 *ngIf="isAdmin()">{{ 'dashboard Admin' }}</h1>
-    <h1 *ngIf="isOrganizer()">{{ 'dashboard Organizator' }}</h1>
-    <h1 *ngIf="!isAdmin() && !isOrganizer()">{{ 'dashboard User' }}</h1>
+    <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
+    <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
+    <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
     <app-view-events></app-view-events>
     <br />
   </nav>

@@ -65,7 +65,7 @@ export class ViewLocationsComponent {
       loader.load().then(() => {
          const map = new google.maps.Map(element, {
           center: {lat: 45.755440, lng: 21.228242},
-          zoom: 11
+          zoom: 12
         });
         this.map = map;
         map.addListener("click", (event: any) => {

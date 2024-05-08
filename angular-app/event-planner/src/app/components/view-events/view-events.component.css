@@ -63,3 +63,13 @@ button:hover {
 .participants-cell:hover {
   color: darkblue;
 }
+
+.header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 2px solid #fff;
+}

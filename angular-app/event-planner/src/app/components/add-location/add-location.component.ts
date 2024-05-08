@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/interfaces/location.dto';
@@ -10,7 +10,7 @@ import { LocationsRepositoryService } from 'src/app/shared/services/locations-re
   templateUrl: './add-location.component.html',
   styleUrls: ['./add-location.component.css']
 })
-export class AddLocationComponent {
+export class AddLocationComponent implements OnInit {
   public locationForm: FormGroup;
   private viewLocationsUrl: string = 'app/view-locations';
   private createdLocation: Location;
@@ -18,7 +18,6 @@ export class AddLocationComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder,
     private locationsRepositoryService: LocationsRepositoryService,
     private router: Router,
     public dialogRef: MatDialogRef<AddLocationComponent>
@@ -29,10 +28,12 @@ export class AddLocationComponent {
   }
 
   public buildLocationForm(): void {
-    this.locationForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      capacity: ['', [Validators.required, Validators.pattern('^\\d+$')]]
-    });
+    this.locationForm = new FormGroup(
+      {
+        name: new FormControl('', [Validators.required]),
+        capacity: new FormControl('', [Validators.required]),
+      }
+    );
   }
 
   public addLocation = () => {
