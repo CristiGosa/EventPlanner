@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { AddLocationComponent } from '../add-location/add-location.component';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Location } from 'src/app/interfaces/location.dto';
 import { Loader } from '@googlemaps/js-api-loader';
 
@@ -18,17 +18,7 @@ export class ViewLocationsComponent {
   map: google.maps.Map;
   coordinates: [number, number][] = [];
 
-  desktopDialogConfig: MatDialogConfig = {
-    width: '500px',
-    height: '250px',
-    position: {
-      top: '25rem',
-      left: '50rem'
-    },
-    data: { location: null, map: null }
-  };
-
-  constructor(private locationsService: LocationsRepositoryService, public dialog: MatDialog) { }
+  constructor(private locationsService: LocationsRepositoryService, public dialog: MatDialog, private zone: NgZone) { }
 
   ngOnInit(): void {
     this.refreshTable();
@@ -52,8 +42,9 @@ export class ViewLocationsComponent {
   }
 
   openDialog(map: google.maps.Map, location: google.maps.LatLng): void {
-    this.desktopDialogConfig.data = { location: location, map: map }
-    this.dialogRef = this.dialog.open(AddLocationComponent, this.desktopDialogConfig);
+    this.zone.run(() => {
+      this.dialogRef = this.dialog.open(AddLocationComponent, {data: { location: location, map: map }});
+    });
   }
 
   private generateMap(){

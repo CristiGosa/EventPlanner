@@ -26,12 +26,6 @@ export class ViewEventsComponent {
   joinedEvents: Event[] = [];
   locations: Location[] = [];
 
-  desktopDialogConfig: MatDialogConfig = {
-    width: '500px',
-    maxHeight: '90vh', 
-    panelClass: 'custom-dialog-container',
-  };
-
   constructor(
     private eventsService: EventsRepositoryService,
     public dialog: MatDialog,
@@ -185,7 +179,7 @@ export class ViewEventsComponent {
   }
 
   openDialog(): void {
-    this.dialogRef = this.dialog.open(AddEventComponent, this.desktopDialogConfig);
+    this.dialogRef = this.dialog.open(AddEventComponent);
   }
 
   openDescriptionDialog(description: string){

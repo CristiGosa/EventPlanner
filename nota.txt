@@ -1,5 +1,5 @@
 export pdf pentru lista de participanti
-pe lista de evenimente la care participi, cand dai click pe locatie sa apara pop-up cu harta si marker pe locatia respectiva
+fix add location bug(add popup and table)
 stilizare
 schimba locatia pt fisierul de html sa il gasesca direct dupa clone
 fa-ti alte adrese de gmail

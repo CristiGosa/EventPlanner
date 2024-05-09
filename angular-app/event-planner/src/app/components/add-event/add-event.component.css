@@ -1,7 +1,7 @@
 .popup-container {
     position: fixed;
-    top: 55%;
-    left: 35%; 
+    top: 50%;
+    left: 50%; 
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
