@@ -48,6 +48,8 @@ import { ViewEventsJoinedComponent } from './components/view-events-joined/view-
 import { DialogWindowComponent } from './shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from './components/view-participants/view-participants.component';
 import { MapLocationComponent } from './components/map-location/map-location.component'
+import { PdfExportService } from './shared/services/pdf-export.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -111,12 +113,14 @@ import { MapLocationComponent } from './components/map-location/map-location.com
       useClass: JwtInterceptor,
       multi: true,
     },
+    DatePipe,
     GoogleSigninProvider,
     JwtHelperService,
     RolesService,
     LocationsRepositoryService,
     EventsRepositoryService,
-    EventReservationsRepositoryService
+    EventReservationsRepositoryService,
+    PdfExportService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,104 @@
+/* Styles for the close button */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  /* Styles for the main container */
+  .main {
+    min-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* Styles for the registrations panel */
+  .registrations-panel {
+    margin-top: 20px;
+  }
+  
+  .registrations-panel h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styles for the table */
+  .mat-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mat-header-cell,
+  .mat-cell {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .mat-header-cell {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .mat-row:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .mat-elevation-z8 th, .mat-elevation-z8 td {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .mat-elevation-z8 th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .mat-elevation-z8 tr:nth-child(even) {
+    background-color: #d5eaf6;
+  }
+  
+  .mat-elevation-z8 tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  .mat-elevation-z8 tr:hover {
+    background-color: #c1e1f0;
+  }
+
+  .subtitle-header {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.5em; 
+    font-weight: bold; 
+    color: #333; 
+    margin-bottom: 10px;
+  }
+
+  .export-button {
+    margin-left: 200px;
+    display: flex;
+    align-items: center;
+    margin-left: 50%;
+    padding: 10px 20px;
+    margin: 20px 300px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .export-button:hover {
+    background-color: #45a049;
+  }

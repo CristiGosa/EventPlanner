@@ -2,15 +2,15 @@
 <div class="main">
 
   <div class="registrations-pannel">
-    <h1>Participanti inscrisi la evenimet</h1>
+    <h1 class="subtitle-header">{{ dataSource.eventName }} - participanti </h1>
     <table
       mat-table
-      [dataSource]="dataSource"
+      [dataSource]="dataSource.participants"
       class="mat-elevation-z8"
-      id="htmlData"
+      id="participants-table"
     >
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>Nume</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
@@ -22,5 +22,9 @@
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
+    <button class="export-button" (click)="exportPdf()">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <span>Exporta lista</span>
+    </button>
   </div>
 </div>

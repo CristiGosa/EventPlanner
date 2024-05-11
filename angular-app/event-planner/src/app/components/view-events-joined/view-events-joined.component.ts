@@ -76,10 +76,10 @@ export class ViewEventsJoinedComponent implements OnInit {
     this.dialog.open(DialogWindowComponent, { data: description });
   }
 
-  openParticipantsDialog(eventId: number){
+  openParticipantsDialog(eventId: number, eventName: string){
     this.eventReservationsService.getParticipantsListByEventId("EventReservations", eventId).subscribe((result) => {
       if(result.participants != null){
-        this.dialog.open(ViewParticipantsComponent, { data: result.participants });
+        this.dialog.open(ViewParticipantsComponent, { data: { participants: result.participants, eventName: eventName } });
       }
     });
   }

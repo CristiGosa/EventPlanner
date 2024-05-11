@@ -1,6 +1,8 @@
 export pdf pentru lista de participanti
 loading spinner pentru procesele care trimit si mailuri (creeaza eveniment, aproba/respinge/anuleaza)
 caseta de selectare eveniment gratuit (+ selectare/afisare moneda)
+filtru de cautare
+paginare tabele
 stilizare
 schimba locatia pt fisierul de html sa il gasesca direct dupa clone
 fa-ti alte adrese de gmail
