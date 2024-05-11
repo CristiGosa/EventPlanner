@@ -1,10 +1,14 @@
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Event } from 'src/app/interfaces/event.dto';
+import { Location } from 'src/app/interfaces/location.dto';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
+import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { EventStatus } from 'src/app/shared/enums/event-status';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
+import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { RolesService } from 'src/app/shared/services/roles.service';
 
 @Component({
@@ -16,8 +20,12 @@ export class ViewEventRequestsComponent {
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "status", "buttons"];
   dataSource:  MatTableDataSource<Event>;
   errorResp: HttpErrorResponse | null = null;
+  locations: Location[] = [];
 
-  constructor(private eventsService: EventsRepositoryService, private rolesService: RolesService) {}
+  constructor(private eventsService: EventsRepositoryService,
+    private rolesService: RolesService,
+    private locationsService: LocationsRepositoryService,
+    public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.refreshTable();
@@ -28,6 +36,9 @@ export class ViewEventRequestsComponent {
   }
 
   refreshTable(): void {
+    this.locationsService.getAllLocations("Location").subscribe((response) => {
+      this.locations = response.locations;
+    });
     if(this.rolesService.isAdmin())
     {
       this.eventsService.getByStatus("Event", EventStatus.Pending).subscribe({
@@ -51,10 +62,10 @@ export class ViewEventRequestsComponent {
   getStatus(status: EventStatus): string {
     switch(status)
     {
-      case EventStatus.Accepted: return "Accepted";
-      case EventStatus.Rejected: return "Rejected";
-      case EventStatus.Pending: return "Pending";
-      case EventStatus.Cancelled: return "Cancelled";
+      case EventStatus.Accepted: return "Aprobat";
+      case EventStatus.Rejected: return "Respins";
+      case EventStatus.Pending: return "In asteptare";
+      case EventStatus.Cancelled: return "Anulat";
       default: return "Undefined";
     }
   }
@@ -107,5 +118,19 @@ export class ViewEventRequestsComponent {
         this.refreshTable();
       }
     });
+  }
+
+  getLocation(locationId: number): string | undefined {
+    var location = this.locations.find(x => x.id == locationId);
+    return location?.name;
+  }
+
+  openDescriptionDialog(description: string){
+    this.dialog.open(DialogWindowComponent, { data: description });
+  }
+
+  getLink(locationId: number): void{
+    var location = this.locations.find(x => x.id == locationId);
+    window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
   }
 }

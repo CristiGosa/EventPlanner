@@ -40,7 +40,7 @@ public sealed class UpdateEventStatusHandler : IRequestHandler<UpdateEventStatus
         {
             await _emailService.SendApprovedEventNotification(receiverInfo, updatedEventInfo);
         }
-        else
+        else if(request.NewStatus == Domain.Enum.EventStatus.Rejected)
         {
             await _emailService.SendRejectedEventNotification(receiverInfo, updatedEventInfo);
         }

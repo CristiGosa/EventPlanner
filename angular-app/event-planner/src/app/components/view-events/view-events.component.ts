@@ -67,10 +67,10 @@ export class ViewEventsComponent {
   getStatus(status: EventStatus): string {
     switch(status)
     {
-      case EventStatus.Accepted: return "Accepted";
-      case EventStatus.Rejected: return "Rejected";
-      case EventStatus.Pending: return "Pending";
-      case EventStatus.Cancelled: return "Cancelled";
+      case EventStatus.Accepted: return "Aprobat";
+      case EventStatus.Rejected: return "Respins";
+      case EventStatus.Pending: return "In asteptare";
+      case EventStatus.Cancelled: return "Anulat";
       default: return "Undefined";
     }
   }

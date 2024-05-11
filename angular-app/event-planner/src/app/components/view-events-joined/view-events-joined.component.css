@@ -64,6 +64,16 @@ button {
     color: darkblue;
   }
 
+  .participants-cell {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .participants-cell:hover {
+    color: darkblue;
+  }
+
   .header {
     background-color: #3498db;
     color: #fff;

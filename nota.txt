@@ -1,6 +1,7 @@
 export pdf pentru lista de participanti
+loading spinner pentru procesele care trimit si mailuri (creeaza eveniment, aproba/respinge/anuleaza)
+caseta de selectare eveniment gratuit (+ selectare/afisare moneda)
 stilizare
-placeId to Cid ca sa mergi pe locatia in google maps (sau salveaza href in db)
 schimba locatia pt fisierul de html sa il gasesca direct dupa clone
 fa-ti alte adrese de gmail
 error-handlers*

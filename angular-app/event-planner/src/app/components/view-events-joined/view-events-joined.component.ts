@@ -8,6 +8,8 @@ import { EventsRepositoryService } from 'src/app/shared/services/events-reposito
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { MapLocationComponent } from '../map-location/map-location.component';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
+import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
+import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 
 @Component({
   selector: 'app-view-events-joined',
@@ -21,6 +23,7 @@ export class ViewEventsJoinedComponent implements OnInit {
   
   constructor(
     private eventsService: EventsRepositoryService,
+    private eventReservationsService: EventReservationsRepositoryService,
     private locationsService: LocationsRepositoryService,
     public dialog: MatDialog,
      ) { }
@@ -71,5 +74,13 @@ export class ViewEventsJoinedComponent implements OnInit {
 
   openDescriptionDialog(description: string){
     this.dialog.open(DialogWindowComponent, { data: description });
+  }
+
+  openParticipantsDialog(eventId: number){
+    this.eventReservationsService.getParticipantsListByEventId("EventReservations", eventId).subscribe((result) => {
+      if(result.participants != null){
+        this.dialog.open(ViewParticipantsComponent, { data: result.participants });
+      }
+    });
   }
 }
