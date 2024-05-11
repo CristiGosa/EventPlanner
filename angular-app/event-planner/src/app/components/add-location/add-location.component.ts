@@ -41,6 +41,7 @@ export class AddLocationComponent implements OnInit {
     this.createdLocation = this.locationForm.value as Location
     this.createdLocation.mapLatitude = this.data.location.lat();
     this.createdLocation.mapLongitude = this.data.location.lng();
+    this.createdLocation.placeId = this.data.placeId;
     this.locationsRepositoryService.createLocation("Location", this.createdLocation).subscribe({
       next: () => {
         this.dialogRef.close();

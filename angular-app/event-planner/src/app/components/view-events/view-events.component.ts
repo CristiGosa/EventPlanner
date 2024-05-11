@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Event } from 'src/app/interfaces/event.dto';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
 import { AddEventComponent } from '../add-event/add-event.component';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EventStatus } from 'src/app/shared/enums/event-status';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
@@ -192,5 +192,10 @@ export class ViewEventsComponent {
         this.dialog.open(ViewParticipantsComponent, { data: result.participants });
       }
     });
+  }
+
+  getLink(locationId: number): void{
+    var location = this.locations.find(x => x.id == locationId);
+    window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
   }
 }

@@ -41,9 +41,9 @@ export class ViewLocationsComponent {
     });
   }
 
-  openDialog(map: google.maps.Map, location: google.maps.LatLng): void {
+  openDialog(map: google.maps.Map, location: google.maps.LatLng, placeId: string): void {
     this.zone.run(() => {
-      this.dialogRef = this.dialog.open(AddLocationComponent, {data: { location: location, map: map }});
+      this.dialogRef = this.dialog.open(AddLocationComponent, {data: { location: location, map: map, placeId: placeId }});
     });
   }
 
@@ -61,7 +61,7 @@ export class ViewLocationsComponent {
         this.map = map;
         map.addListener("click", (event: any) => {
           if(event.placeId != undefined)
-            this.openDialog(map, event.latLng);
+            this.openDialog(map, event.latLng, event.placeId);
         });
         this.coordinates.forEach(coordinate => {
           this.placeMarker(coordinate[0], coordinate[1]);

@@ -7,6 +7,7 @@ import { EventStatus } from 'src/app/shared/enums/event-status';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { MapLocationComponent } from '../map-location/map-location.component';
+import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 
 @Component({
   selector: 'app-view-events-joined',
@@ -61,5 +62,14 @@ export class ViewEventsJoinedComponent implements OnInit {
   openMapLocationDialog(locationId: number){
     var location = this.locations.find(x => x.id == locationId);
     this.dialog.open(MapLocationComponent, { data: location });
+  }
+
+  getLink(locationId: number): void{
+    var location = this.locations.find(x => x.id == locationId);
+    window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
+  }
+
+  openDescriptionDialog(description: string){
+    this.dialog.open(DialogWindowComponent, { data: description });
   }
 }

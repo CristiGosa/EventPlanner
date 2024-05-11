@@ -20,5 +20,7 @@ namespace EventPlanner.Database.Models
         public float MapLatitude { get; set; }
 
         public float MapLongitude { get; set; }
+
+        public string PlaceId { get; set; }
     }
 }

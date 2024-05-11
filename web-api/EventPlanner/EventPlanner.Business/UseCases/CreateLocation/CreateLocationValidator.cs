@@ -8,6 +8,7 @@ namespace EventPlanner.Business.UseCases.CreateLocation
         {
             RuleFor(x => x.Name).NotEmpty().WithErrorCode("NotEmpty");
             RuleFor(x => x.Name).Matches("^[^a-z]").WithErrorCode("CapitalCase");
+            RuleFor(x => x.PlaceId).NotEmpty().WithErrorCode("NotEmpty");
         }
     }
 }

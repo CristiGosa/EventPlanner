@@ -73,3 +73,13 @@ button:hover {
   font-weight: bold;
   border-bottom: 2px solid #fff;
 }
+
+.location-cell {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.location-cell:hover {
+  color: darkblue;
+}

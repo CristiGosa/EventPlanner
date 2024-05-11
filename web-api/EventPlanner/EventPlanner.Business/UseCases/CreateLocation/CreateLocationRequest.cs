@@ -9,5 +9,6 @@ namespace EventPlanner.Business.UseCases.CreateLocation
         public int Capacity { get; set; }
         public float MapLatitude { get; set; }
         public float MapLongitude { get; set; }
+        public string PlaceId { get; set; }
     }
 }

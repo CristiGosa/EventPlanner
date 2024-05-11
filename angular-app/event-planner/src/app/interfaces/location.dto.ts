@@ -4,4 +4,5 @@ export interface Location {
     capacity: number,
     mapLatitude: number,
     mapLongitude: number,
+    placeId: string,
 }
