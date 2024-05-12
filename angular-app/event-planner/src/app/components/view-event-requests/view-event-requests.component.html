@@ -54,9 +54,9 @@
       <ng-container matColumnDef="buttons">
         <th mat-header-cell *matHeaderCellDef="let element"></th>
         <td mat-cell *matCellDef="let element">
-          <button *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
-          <button *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
-          <button *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
+          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
+          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
+          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
         </td>
       </ng-container>
 

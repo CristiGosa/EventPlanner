@@ -25,6 +25,7 @@ export class ViewEventsComponent {
   dialogRef: MatDialogRef<AddEventComponent>;
   joinedEvents: Event[] = [];
   locations: Location[] = [];
+  isButtonDisabled: boolean = false;
 
   constructor(
     private eventsService: EventsRepositoryService,
@@ -95,6 +96,7 @@ export class ViewEventsComponent {
   }
 
   acceptEvent(eventId: number): void{
+    this.isButtonDisabled = true;
     const updateStatusDTO : UpdateEventStatusRequest = {
       eventId : eventId,
       newStatus: EventStatus.Accepted
@@ -107,6 +109,7 @@ export class ViewEventsComponent {
   }
 
   rejectEvent(eventId: number): void {
+    this.isButtonDisabled = true;
     const updateStatusDTO : UpdateEventStatusRequest = {
       eventId : eventId,
       newStatus: EventStatus.Rejected
@@ -119,6 +122,7 @@ export class ViewEventsComponent {
   }
 
   joinEvent(eventId: number): void {
+    this.isButtonDisabled = true;
     const joinEventRequest: JoinEventRequest = {
       eventId: eventId
     }
@@ -176,6 +180,7 @@ export class ViewEventsComponent {
       }
     });
     this.getLocations()
+    this.isButtonDisabled = false;
   }
 
   openDialog(): void {

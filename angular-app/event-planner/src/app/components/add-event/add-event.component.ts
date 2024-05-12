@@ -19,6 +19,7 @@ export class AddEventComponent {
   public map:  google.maps.Map;
   public selectedLocation: Location | undefined;
   private lastMarker: google.maps.Marker;
+  public isButtonDisabled: boolean = false;
 
 
   constructor(
@@ -60,6 +61,7 @@ export class AddEventComponent {
   }
 
   public addEvent = () => {
+    this.isButtonDisabled = true;
     var location = this.selectedLocation as Location;
 
     var startingDate = new Date(this.eventForm.controls["startDate"].value);

@@ -21,6 +21,7 @@ export class ViewEventRequestsComponent {
   dataSource:  MatTableDataSource<Event>;
   errorResp: HttpErrorResponse | null = null;
   locations: Location[] = [];
+  isButtonDisabled: boolean = false;
 
   constructor(private eventsService: EventsRepositoryService,
     private rolesService: RolesService,
@@ -57,6 +58,7 @@ export class ViewEventRequestsComponent {
         }
       });
     }
+    this.isButtonDisabled = false;
   }
 
   getStatus(status: EventStatus): string {
@@ -85,6 +87,7 @@ export class ViewEventRequestsComponent {
   }
 
   acceptEvent(eventId: number): void{
+    this.isButtonDisabled = true;
     const updateStatusDTO : UpdateEventStatusRequest = {
       eventId : eventId,
       newStatus: EventStatus.Accepted
@@ -97,6 +100,7 @@ export class ViewEventRequestsComponent {
   }
 
   rejectEvent(eventId: number): void {
+    this.isButtonDisabled = true;
     const updateStatusDTO : UpdateEventStatusRequest = {
       eventId : eventId,
       newStatus: EventStatus.Rejected
@@ -109,6 +113,7 @@ export class ViewEventRequestsComponent {
   }
 
   cancelRequest(eventId: number): void {
+    this.isButtonDisabled = true;
     const updateStatusDTO : UpdateEventStatusRequest = {
       eventId : eventId,
       newStatus: EventStatus.Cancelled

@@ -30,7 +30,7 @@
             <div id="map" class="map"></div>
         </div>
         <div class="button">
-            <button (click)="addEvent()" class="add-button">{{ 'Adauga noul eveniment' }}</button>
+            <button [disabled]="isButtonDisabled" (click)="addEvent()" class="add-button">{{ 'Adauga noul eveniment' }}</button>
         </div>
     </form>
 </div>

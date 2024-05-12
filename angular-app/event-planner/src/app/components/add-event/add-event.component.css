@@ -62,6 +62,12 @@
     background-color: #0056b3;
 }
 
+.add-button:disabled{
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
 .map{
     height: 400px;
     width: 600px;
