@@ -1,4 +1,5 @@
 ﻿using EventPlanner.Domain.Entities;
+using EventPlanner.Domain.Enum;
 using MediatR;
 using System.Text.Json.Serialization;
 
@@ -13,6 +14,8 @@ namespace EventPlanner.Business.UseCases.CreateEvent
         public string? Description { get; set; }
 
         public float TicketPrice { get; set; }
+
+        public Currency PriceCurrency { get; set; }
 
         public DateTime StartDate { get; set; }
 

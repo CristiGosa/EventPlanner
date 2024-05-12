@@ -23,7 +23,7 @@
 
       <ng-container matColumnDef="ticketPrice">
         <th mat-header-cell *matHeaderCellDef>Pret Bilet</th>
-        <td mat-cell *matCellDef="let element">{{ element.ticketPrice }}</td>
+        <td mat-cell *matCellDef="let element">{{ getTicketPrice(element) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="startDate">

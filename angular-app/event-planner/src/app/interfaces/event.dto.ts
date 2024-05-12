@@ -1,3 +1,4 @@
+import { Currency } from "../shared/enums/currency";
 import { EventStatus } from "../shared/enums/event-status";
 
 export interface Event {
@@ -5,6 +6,7 @@ export interface Event {
     name: string,
     locationId: number,
     ticketPrice: number,
+    priceCurrency: Currency,
     organizerEmail: string,
     description: string,
     startDate: Date,

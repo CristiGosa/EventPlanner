@@ -6,6 +6,7 @@ import { Event } from 'src/app/interfaces/event.dto';
 import { Location } from 'src/app/interfaces/location.dto';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
+import { Currency } from 'src/app/shared/enums/currency';
 import { EventStatus } from 'src/app/shared/enums/event-status';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
@@ -137,5 +138,22 @@ export class ViewEventRequestsComponent {
   getLink(locationId: number): void{
     var location = this.locations.find(x => x.id == locationId);
     window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
+  }
+
+  getTicketPrice(event: Event): string{
+    switch(event.priceCurrency){
+      case Currency.Ron: {
+        return event.ticketPrice + " RON";
+      }
+      case Currency.Euro: {
+        return event.ticketPrice + " €";
+      }
+      case Currency.Free: {
+        return "Intrare libera";
+      }
+      default: {
+        return event.ticketPrice.toString();
+      }
+    }
   }
 }

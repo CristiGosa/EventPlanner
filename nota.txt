@@ -1,12 +1,9 @@
-caseta de selectare eveniment gratuit (+ selectare/afisare moneda)
 filtru de cautare
 paginare tabele
 stilizare
 schimba locatia pt fisierul de html sa il gasesca direct dupa clone
 fa-ti alte adrese de gmail
 error-handlers*
-bug-nu arata participantii la unele evenimente care au aceleasi field-uri ca altele(la businesstripapp cu pret 0, la invetdeveloper cu pret 12 arata)
-
 licenta: intorducere -> o scurta descriere a proiectului
 		     -> obiective (cateva obiective punctuale)
 	 fundamente teoretice(15-20pagini)

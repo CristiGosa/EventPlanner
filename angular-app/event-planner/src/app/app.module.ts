@@ -50,6 +50,7 @@ import { ViewParticipantsComponent } from './components/view-participants/view-p
 import { MapLocationComponent } from './components/map-location/map-location.component'
 import { PdfExportService } from './shared/services/pdf-export.service';
 import { DatePipe } from '@angular/common';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { DatePipe } from '@angular/common';
     MatTooltipModule,
     MatTabsModule,
     MatSidenavModule,
+    MatCheckboxModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {

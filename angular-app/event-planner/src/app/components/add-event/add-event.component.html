@@ -7,7 +7,12 @@
         </div>
         <div class="form-field">
             <label for="ticketPrice" class="form-label">{{ 'Pret bilet:' }}*</label>
-            <input id="ticketPrice" type="number" formControlName="ticketPrice" class="form-input" required>
+            <div class="price-input">
+                <input id="ticketPrice" type="number" formControlName="ticketPrice" class="form-input" [readOnly]="isSelectedCurrency('Free')">
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('RON')" (change)="setCurrencyRon()">RON</mat-checkbox>
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Euro')" (change)="setCurrencyEuro()">Euro</mat-checkbox>
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Free')" (change)="setCurrencyFree()">Intrare libera</mat-checkbox>
+            </div>
         </div>
         <div class="form-field">
             <label class="form-label">{{ 'Perioada:' }}*</label>
@@ -32,5 +37,6 @@
         <div class="button">
             <button [disabled]="isButtonDisabled" (click)="addEvent()" class="add-button">{{ 'Adauga noul eveniment' }}</button>
         </div>
+        <h1 *ngIf="errorMsg != null" class="error">{{errorMsg}}</h1>
     </form>
 </div>

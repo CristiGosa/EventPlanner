@@ -44,6 +44,12 @@
     outline: none;
 }
 
+.form-input:read-only {
+    background-color: #f2f2f2;
+    color: #999;
+    cursor: not-allowed;
+}
+
 .button {
     text-align: center;
 }
@@ -85,3 +91,11 @@
     color: #333; 
     margin-bottom: 10px;
   }
+
+  .error {
+    color: #d8000c; /* dark red */
+    background-color: #ffd2d2; /* light red */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #b70000; /* red border */
+}

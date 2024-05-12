@@ -18,6 +18,8 @@ namespace EventPlanner.Database.Models
 
         public float TicketPrice { get; set; }
 
+        public Currency PriceCurrency { get; set; }
+
         [Required]
         public DateTime StartDate { get; set; }
 

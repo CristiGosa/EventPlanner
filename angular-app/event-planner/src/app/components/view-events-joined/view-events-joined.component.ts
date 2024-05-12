@@ -10,6 +10,7 @@ import { MapLocationComponent } from '../map-location/map-location.component';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
+import { Currency } from 'src/app/shared/enums/currency';
 
 @Component({
   selector: 'app-view-events-joined',
@@ -82,5 +83,22 @@ export class ViewEventsJoinedComponent implements OnInit {
         this.dialog.open(ViewParticipantsComponent, { data: { participants: result.participants, eventName: eventName } });
       }
     });
+  }
+
+  getTicketPrice(event: Event): string{
+    switch(event.priceCurrency){
+      case Currency.Ron: {
+        return event.ticketPrice + " RON";
+      }
+      case Currency.Euro: {
+        return event.ticketPrice + " €";
+      }
+      case Currency.Free: {
+        return "Intrare libera";
+      }
+      default: {
+        return event.ticketPrice.toString();
+      }
+    }
   }
 }

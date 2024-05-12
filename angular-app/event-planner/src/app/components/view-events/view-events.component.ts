@@ -13,6 +13,7 @@ import { LocationsRepositoryService } from 'src/app/shared/services/locations-re
 import { Location } from 'src/app/interfaces/location.dto';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
+import { Currency } from 'src/app/shared/enums/currency';
 
 @Component({
   selector: 'app-view-events',
@@ -202,5 +203,22 @@ export class ViewEventsComponent {
   getLink(locationId: number): void{
     var location = this.locations.find(x => x.id == locationId);
     window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
+  }
+
+  getTicketPrice(event: Event): string{
+    switch(event.priceCurrency){
+      case Currency.Ron: {
+        return event.ticketPrice + " RON";
+      }
+      case Currency.Euro: {
+        return event.ticketPrice + " €";
+      }
+      case Currency.Free: {
+        return "Intrare libera";
+      }
+      default: {
+        return event.ticketPrice.toString();
+      }
+    }
   }
 }

@@ -46,7 +46,7 @@ namespace EventPlanner.Database.Repositories
 
         public async Task<List<Participant>> GetParticipantById(int eventId)
         {
-            var eventReservations = await _context.EventReservations.Where(x => x.Id == eventId).ToListAsync();
+            var eventReservations = await _context.EventReservations.Where(x => x.EventId == eventId).ToListAsync();
 
             var participants = new List<Participant>();
 

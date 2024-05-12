@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Loader } from '@googlemaps/js-api-loader';
 import { CreateEventRequest } from 'src/app/interfaces/create-event-request.dto';
 import { Location } from 'src/app/interfaces/location.dto';
+import { Currency } from 'src/app/shared/enums/currency';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 
@@ -20,6 +21,8 @@ export class AddEventComponent {
   public selectedLocation: Location | undefined;
   private lastMarker: google.maps.Marker;
   public isButtonDisabled: boolean = false;
+  public currency: Currency = Currency.Ron;
+  public errorMsg: string | null = null;
 
 
   constructor(
@@ -40,8 +43,7 @@ export class AddEventComponent {
     this.eventForm = new FormGroup(
       {
         name: new FormControl('', [Validators.required]),
-        location: new FormControl('', [Validators.required]),
-        ticketPrice: new FormControl('', [Validators.required]),
+        ticketPrice: new FormControl(''),
         description: new FormControl('', [Validators.required]),
         startDate: new FormControl('', [Validators.required]),
         endDate: new FormControl('', [Validators.required]),
@@ -61,27 +63,46 @@ export class AddEventComponent {
   }
 
   public addEvent = () => {
+    this.errorMsg = null;
     this.isButtonDisabled = true;
     var location = this.selectedLocation as Location;
 
     var startingDate = new Date(this.eventForm.controls["startDate"].value);
     var endingDate = new Date(this.eventForm.controls["endDate"].value);
+    var ticketPrice = this.eventForm.controls["ticketPrice"].value;
     startingDate.setDate(startingDate.getDate() + 1);
     endingDate.setDate(endingDate.getDate() + 1);
-
+    if(ticketPrice == null && this.currency == Currency.Free){
+        ticketPrice = 0;
+    }
+    if(!this.eventForm.valid || location == undefined){
+      this.isButtonDisabled = false;
+      this.errorMsg = "Datele introduse sunt incomplete";
+      setTimeout(() => {
+        this.errorMsg = null;
+      }, 5000);
+    }
     const createdEvent : CreateEventRequest = {
       name: this.eventForm.controls["name"].value,
       locationId: location.id,
-      ticketPrice: this.eventForm.controls["ticketPrice"].value,
+      ticketPrice: ticketPrice,
+      priceCurrency: this.currency,
       description: this.eventForm.controls["description"].value,
       startDate: startingDate,
       endDate: endingDate,
     };
     this.eventForm.markAllAsTouched();
     this.eventsRepositoryService.createEvent("Event", createdEvent).subscribe({
-      next: () => {
-        this.dialogRef.close();
-      }
+        next: () => {
+          this.dialogRef.close();
+        },
+        error: () => {
+          this.isButtonDisabled = false;
+          this.errorMsg = "Datele introduse sunt incorecte";
+          setTimeout(() => {
+            this.errorMsg = null;
+          }, 5000);
+        }
     });
   }
 
@@ -131,5 +152,35 @@ export class AddEventComponent {
 
   public closeDialog(){
     this.dialogRef.close();
+  }
+
+  isSelectedCurrency(currency: string){
+    switch(currency){
+      case "RON": {
+        return this.currency === Currency.Ron
+      }
+      case "Euro": {
+        return this.currency === Currency.Euro
+      }
+      case "Free": {
+        return this.currency === Currency.Free
+      }
+      default: {
+        return false;
+      }
+    }
+  }
+
+  public setCurrencyRon(){
+    this.currency = Currency.Ron;
+  }
+
+  public setCurrencyEuro(){
+    this.currency = Currency.Euro;
+  }
+
+  public setCurrencyFree(){
+    this.currency = Currency.Free;
+    this.eventForm.controls["ticketPrice"].reset();
   }
 }

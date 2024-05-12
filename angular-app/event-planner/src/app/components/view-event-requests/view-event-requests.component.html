@@ -27,7 +27,7 @@
 
       <ng-container matColumnDef="ticketPrice">
         <th mat-header-cell *matHeaderCellDef>Pret bilet</th>
-        <td mat-cell *matCellDef="let element">{{ element.ticketPrice }}</td>
+        <td mat-cell *matCellDef="let element">{{ getTicketPrice(element) }}</td>
       </ng-container>
 
       <ng-container matColumnDef="startDate">
@@ -56,7 +56,7 @@
         <td mat-cell *matCellDef="let element">
           <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
           <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
-          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
+          <button *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
         </td>
       </ng-container>
 
