@@ -4,9 +4,13 @@
 <button *ngIf="isAdmin()" routerLink="/app/view-event-requests">Vizualizeaza cererile neadministrate</button>
 <button *ngIf="isUser()" routerLink="/app/view-events-joined">Vizualizeaza evenimentele tale</button>
 
+<app-search-events
+    [unfilteredEvents]="dataSource.data"
+    (onSearch)="handleSearchEvents($event)"
+  ></app-search-events>
 <table
     mat-table
-    [dataSource]="dataSource"
+    [dataSource]="filteredData"
     class="mat-elevation-z8"
     id="htmlData"
   >

@@ -1,3 +1,6 @@
+error handler pt eveniment deja existent la data curenta in locatia selectata
+styling ferestre cu continut gol(cu poza)
+UI de mobile pentru utilizatorul regular
 filtru de cautare
 paginare tabele
 stilizare

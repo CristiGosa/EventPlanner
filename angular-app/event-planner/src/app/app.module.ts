@@ -51,6 +51,10 @@ import { MapLocationComponent } from './components/map-location/map-location.com
 import { PdfExportService } from './shared/services/pdf-export.service';
 import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SearchEventsComponent } from './components/search-events/search-events.component';
+import { SearchEventsService } from './shared/services/search-events.service';
+import { TimePeriodValidatorService } from './shared/services/time-period-validator.service';
+import { SearchPeriodValidatorService } from './shared/services/search-period-validator.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +72,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DialogWindowComponent,
     ViewParticipantsComponent,
     MapLocationComponent,
+    SearchEventsComponent,
   ],
   imports: [
     MatDialogModule,
@@ -122,6 +127,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     LocationsRepositoryService,
     EventsRepositoryService,
     EventReservationsRepositoryService,
+    SearchEventsService,
+    TimePeriodValidatorService,
+    SearchPeriodValidatorService,
     PdfExportService,
   ],
   bootstrap: [AppComponent],

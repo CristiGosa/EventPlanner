@@ -1,0 +1,77 @@
+<mat-card class="search">
+    <mat-card-content>
+      <form
+        class="search-form-container"
+        [formGroup]="searchFilters"
+        (submit)="searchEvents()"
+      >
+        <div class="fields">
+          <div class="calendar-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Data incepere:</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                readonly="true"
+                formControlName="startDate"
+              />
+              <mat-error *ngIf="searchFilters.get('startDate')?.invalid">{{
+                getStartDateErrorMessage()
+              }}</mat-error>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              class="calendar-button"
+              (click)="openCalendar($event, picker)"
+            >
+            <mat-icon class="icon">calendar_month</mat-icon>
+            </button>
+          </div>
+  
+          <div class="calendar-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Data incheiere:</mat-label>
+              <input
+                matInput
+                [matDatepicker]="enddatepicker"
+                readonly="true"
+                formControlName="endDate"
+              />
+              <mat-error>{{ getEndDateErrorMessage() }}</mat-error>
+              <mat-datepicker #enddatepicker ></mat-datepicker>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              class="calendar-button"
+              (click)="openCalendar($event, enddatepicker)"
+            >
+              <mat-icon class="icon">calendar_month</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="actions">
+          <button
+            mat-icon-button
+            matSuffix
+            type="submit"
+            aria-label="Search event"
+            [disabled]="!this.searchFilters.valid"
+            matTooltip="Cauta"
+            matTooltipPosition="below"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="clearFilters($event)"
+            matTooltip="Sterge filtrele"
+            matTooltipPosition="below"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

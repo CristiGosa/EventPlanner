@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Event } from 'src/app/interfaces/event.dto';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
@@ -14,6 +14,7 @@ import { Location } from 'src/app/interfaces/location.dto';
 import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 import { Currency } from 'src/app/shared/enums/currency';
+import { SearchEventsComponent } from '../search-events/search-events.component';
 
 @Component({
   selector: 'app-view-events',
@@ -21,12 +22,14 @@ import { Currency } from 'src/app/shared/enums/currency';
   styleUrls: ['./view-events.component.css']
 })
 export class ViewEventsComponent {
+  @ViewChild(SearchEventsComponent) searchEventsComponent: SearchEventsComponent;
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
   dataSource:  MatTableDataSource<Event>;
   dialogRef: MatDialogRef<AddEventComponent>;
   joinedEvents: Event[] = [];
   locations: Location[] = [];
   isButtonDisabled: boolean = false;
+  filteredData: MatTableDataSource<Event>;
 
   constructor(
     private eventsService: EventsRepositoryService,
@@ -52,6 +55,7 @@ export class ViewEventsComponent {
     });
 
     this.dataSource = new MatTableDataSource<Event>();
+    this.filteredData = new MatTableDataSource(this.dataSource.data);
   }
 
   isAdmin(): boolean {
@@ -164,6 +168,7 @@ export class ViewEventsComponent {
       this.eventsService.getAllEvents("Event").subscribe({
         next: (response) => {
           this.dataSource.data = response.events;
+          this.filteredData.data = response.events;
         }
       });
     }
@@ -171,7 +176,8 @@ export class ViewEventsComponent {
     {
       this.eventsService.getByStatus("Event", EventStatus.Accepted).subscribe({
         next: (response) => {
-          this.dataSource.data = response.events
+          this.dataSource.data = response.events;
+          this.filteredData.data = response.events;
         }
       });
     }
@@ -186,6 +192,9 @@ export class ViewEventsComponent {
 
   openDialog(): void {
     this.dialogRef = this.dialog.open(AddEventComponent);
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.searchEventsComponent.clearFilters(new MouseEvent('click'));
+    })
   }
 
   openDescriptionDialog(description: string){
@@ -220,5 +229,9 @@ export class ViewEventsComponent {
         return event.ticketPrice.toString();
       }
     }
+  }
+
+  handleSearchEvents(events: Array<Event>): void {
+    this.filteredData.data = events;
   }
 }
