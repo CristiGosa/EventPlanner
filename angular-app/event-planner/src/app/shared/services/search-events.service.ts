@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/interfaces/event.dto';
 import { EventsSearchFilters } from 'src/app/interfaces/events-search-filters.dto';
+import { Currency } from '../enums/currency';
 
 @Injectable()
 export class SearchEventsService {
@@ -28,7 +29,10 @@ export class SearchEventsService {
         actualEndDate,
         filterStartDate,
         filterEndDate
-      )
+      ) 
+      && this.doNumbersFullyMatch(event.locationId, filters.locationId)
+      && this.doStringsPartiallyMatch(event.name, filters.eventName)
+      && this.isFreeEventSearch(event, filters.freeEvent)
     );
   }
 
@@ -50,5 +54,20 @@ export class SearchEventsService {
     return (
       actualStartDate >= filterStartDate! && actualEndDate <= filterEndDate!
     );
+  }
+
+  doNumbersFullyMatch(actualNumber: number, filterNumber: number): boolean {
+    return filterNumber == -1 || actualNumber == filterNumber;
+  }
+
+  doStringsPartiallyMatch(actualString: string, filterString: string): boolean {
+    return (
+      filterString == '' ||
+      actualString.toLowerCase().includes(filterString.toLowerCase())
+    );
+  }
+
+  isFreeEventSearch(event: Event, filterFreeEventSearch: boolean){
+    return filterFreeEventSearch == false || event.priceCurrency == Currency.Free
   }
 }

@@ -6,6 +6,26 @@
         (submit)="searchEvents()"
       >
         <div class="fields">
+
+          <mat-form-field appearance="outline" class="name-form-field">
+            <mat-label>Denumire eveniment:</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="eventName"
+              maxlength="20"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Locatie:</mat-label>
+            <mat-select placeholder="Location" formControlName="locationId">
+              <mat-option *ngFor="let locationId of locationIds" [value]="locationId">
+                {{ locationId == -1 ? "Toate" : getLocationById(locationId) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <div class="calendar-container">
             <mat-form-field appearance="outline">
               <mat-label>Data incepere:</mat-label>
@@ -28,7 +48,7 @@
             <mat-icon class="icon">calendar_month</mat-icon>
             </button>
           </div>
-  
+
           <div class="calendar-container">
             <mat-form-field appearance="outline">
               <mat-label>Data incheiere:</mat-label>
@@ -49,6 +69,9 @@
               <mat-icon class="icon">calendar_month</mat-icon>
             </button>
           </div>
+
+          <mat-checkbox [checked]="isFreeEventSearch" (change)="updateFreeEventSearch()">Intrare libera</mat-checkbox>
+
         </div>
         <div class="actions">
           <button

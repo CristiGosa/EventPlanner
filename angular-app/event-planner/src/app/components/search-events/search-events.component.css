@@ -33,6 +33,10 @@
   mat-form-field {
     width: 10vw;
   }
+
+  .name-form-field {
+    width: 12vw;
+  }
   
   .search {
     margin-top: 0.5rem;

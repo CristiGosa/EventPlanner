@@ -6,6 +6,7 @@
 
 <app-search-events
     [unfilteredEvents]="dataSource.data"
+    [locations]="locations"
     (onSearch)="handleSearchEvents($event)"
   ></app-search-events>
 <table
