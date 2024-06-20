@@ -35,6 +35,12 @@ button {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  mat-icon {
+    margin-right: 0.5rem;
   }
   
   button:hover {

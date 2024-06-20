@@ -12,12 +12,14 @@ export class UserProfileComponent {
 
   username: string = 'Username';
   showCard: boolean = false;
+  user: SocialUser;
 
   constructor(private authService: AuthenticationService) {
     this.authService.extAuthChanged.subscribe((user: SocialUser | null) => {
       this.username = 'Username';
       if (user != null) {
         this.username = user.name;
+        this.user = user;
       }
     });
   }

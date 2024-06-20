@@ -1,4 +1,9 @@
 /* Style for buttons */
+.buttons-container {
+  display: flex;
+  align-items: flex-start;
+}
+
 button {
   padding: 10px 20px;
   margin: 5px;
@@ -7,6 +12,8 @@ button {
   background-color: #4CAF50;
   color: white;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 button:hover {
@@ -17,6 +24,14 @@ button:disabled {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
+}
+
+mat-icon {
+  margin-right: 0.5rem;
+}
+
+.action-button {
+  display: inline;
 }
 
 /* Style for table */

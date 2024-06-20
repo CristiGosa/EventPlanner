@@ -10,6 +10,9 @@ namespace EventPlanner.Business.UseCases.CreateEvent
             CreateMap<CreateEventRequest, Event>()
                 .ForPath(dest => dest.LocationId, opt => opt.MapFrom(src => src.LocationId))
                 .ForMember(dest => dest.OrganizerEmail, opt => opt.MapFrom(src => src.OrganizerEmail));
+
+            CreateMap<Event, CreateEventResponse>()
+                .ForMember(dest => dest.Event, opt => opt.MapFrom(src => src));
         }
     }
 }

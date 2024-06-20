@@ -6,12 +6,12 @@
     padding: 10px;
   }
   
-  .mat-card {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  // .mat-card {
+  //   background-color: #fff;
+  //   padding: 10px;
+  //   border-radius: 8px;
+  //   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  // }
   
   .name-container {
     display: flex;
@@ -39,5 +39,12 @@
   
   .user-menu.open {
     display: block;
+  }
+  
+
+  .web-img {
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
   }
   

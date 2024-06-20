@@ -1,8 +1,11 @@
-<button routerLink="/app">Inapoi</button>
+<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Inapoi</button>
 
 <h1 class="header" *ngIf="errorResp==null && isAdmin()">Cereri neadministrate de organizare eveniment</h1>
 <h1 class="header" *ngIf="errorResp==null && isOrganizer()">Lista de evenimente propuse de tine</h1>
-<h1 *ngIf="errorResp!=null">Nu exista niciun eveniment neadministrat</h1>
+<div *ngIf="errorResp!=null" class="no-content-container">
+  <h1 class="no-content-header">Nu exista niciun eveniment neadministrat</h1>
+  <img class="web-img" mat-card-image src="../assets/images/no-content.png" alt="Banner">
+</div>
 
 <table *ngIf="errorResp == null"
     mat-table
@@ -43,7 +46,7 @@
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef>Detalii</th>
         <td mat-cell *matCellDef="let element">
-          <button (click)="openDescriptionDialog(element.description)">Vizualizati</button></td>
+          <button class="action-button" (click)="openDescriptionDialog(element.description)">Vizualizati</button></td>
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -54,9 +57,9 @@
       <ng-container matColumnDef="buttons">
         <th mat-header-cell *matHeaderCellDef="let element"></th>
         <td mat-cell *matCellDef="let element">
-          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
-          <button [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
-          <button *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
+          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
+          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
+          <button class="action-button" *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
         </td>
       </ng-container>
 

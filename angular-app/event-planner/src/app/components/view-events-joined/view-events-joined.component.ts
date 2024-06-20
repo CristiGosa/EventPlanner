@@ -21,6 +21,7 @@ export class ViewEventsJoinedComponent implements OnInit {
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
   dataSource:  MatTableDataSource<Event>;
   locations: Location[];
+  filteredData: MatTableDataSource<Event>;
   
   constructor(
     private eventsService: EventsRepositoryService,
@@ -32,12 +33,14 @@ export class ViewEventsJoinedComponent implements OnInit {
   ngOnInit(): void {
     this.refreshTable();
     this.dataSource = new MatTableDataSource<Event>();
+    this.filteredData = new MatTableDataSource(this.dataSource.data);
   }
 
   refreshTable(): void {
     this.eventsService.getAllEvents("Event/Joined").subscribe({
       next: (response) => {
         this.dataSource.data = response.events;
+        this.filteredData.data = response.events;
       }
     })
     this.getLocations()
@@ -100,5 +103,9 @@ export class ViewEventsJoinedComponent implements OnInit {
         return event.ticketPrice.toString();
       }
     }
+  }
+
+  handleSearchEvents(events: Array<Event>): void {
+    this.filteredData.data = events;
   }
 }

@@ -7,6 +7,8 @@ button {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   
   button:hover {
@@ -17,6 +19,14 @@ button {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
+  }
+
+  .action-button {
+    display: inline;
+  }
+
+  mat-icon {
+    margin-right: 0.5rem;
   }
   
   /* Style for table */
@@ -71,8 +81,7 @@ button {
   }
   
   .header {
-    background-color: #3498db;
-    color: #fff;
+    color: #3498db;
     padding: 20px;
     text-align: center;
     font-size: 24px;
@@ -88,4 +97,18 @@ button {
   
   .location-cell:hover {
     color: darkblue;
+  }
+
+  .no-content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 20rem;
+  }
+
+  .no-content-header {
+    font-style: bold;
+    font-weight: 500;
   }

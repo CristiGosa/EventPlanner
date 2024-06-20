@@ -40,8 +40,11 @@ namespace EventPlanner.EmailSender
         public async Task SendEmailViaSmtp(MimeMessage email)
         {
             using var smtp = new MailKit.Net.Smtp.SmtpClient();
-            await smtp.ConnectAsync(emailServiceConfiguration.SmtpProviderHost, emailServiceConfiguration.SmtpProviderPort, SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync(emailServiceConfiguration.SmtpProviderUsername, emailServiceConfiguration.SmtpProviderPassword);
+            await smtp.ConnectAsync(emailServiceConfiguration.SmtpProviderHost,
+                emailServiceConfiguration.SmtpProviderPort,
+                SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync(emailServiceConfiguration.SmtpProviderUsername,
+                emailServiceConfiguration.SmtpProviderPassword);
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
         }

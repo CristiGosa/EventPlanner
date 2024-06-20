@@ -1,7 +1,7 @@
 import { SocialAuthServiceConfig, GoogleSigninButtonDirective, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 const googleLoginConfig = new GoogleLoginProvider(
-  '31114608670-r5efmhijvi9c6ucgeareenfgmg5go4io.apps.googleusercontent.com',
+  '743850047685-jm2vc2qs705sbee1aq976d6doq089i5d.apps.googleusercontent.com',
   {
     oneTapEnabled: false,
     scopes: 'email'

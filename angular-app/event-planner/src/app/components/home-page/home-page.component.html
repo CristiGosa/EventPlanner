@@ -1,10 +1,13 @@
 <div class="page-wrapper">
 <div class="wrapper">
-  <user-profile></user-profile>
   <nav class="home-page-container">
-    <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
-    <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
-    <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
+    <div class="header-container">
+      <h1 class="app-title"><mat-icon>local_activity</mat-icon>Event Planner</h1>
+      <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
+      <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
+      <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
+      <user-profile></user-profile>
+    </div>
     <app-view-events></app-view-events>
     <br />
   </nav>

@@ -1,6 +1,7 @@
 error handler pt eveniment deja existent la data curenta in locatia selectata
 styling ferestre cu continut gol(cu poza)
 UI de mobile pentru utilizatorul regular
+interfata mai atractiva pentru utilizatorul normal (selectie locatie prin harta, poze la eveniment etc)
 filtru de cautare
 paginare tabele
 stilizare
@@ -12,7 +13,7 @@ licenta: intorducere -> o scurta descriere a proiectului
 	 fundamente teoretice(15-20pagini)
   		     -> mediul de dezvoltare
 		     -> ce aplicatii am folosit
-		reprase la tot ce luam si refetinte 
+		**reprase la tot ce luam si referinte 
 	motivatie (3-5 pagini) -> aplicatii asemanatoare de pe piata, cu ce e competititva, avantaje/dezavantaje
 	(incercam sa comparam cu ce avem noi)
 	implementare(30-35 pagini) -> talele, relatiile dintre tabele, arhitectura backend, interfata cu utilizatorul, capturi de eran la greu

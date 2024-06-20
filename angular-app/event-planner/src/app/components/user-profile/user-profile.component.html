@@ -1,7 +1,7 @@
 <nav class="navbar" (clickOutside)="clickedOutside()">
   <div class="mat-card">
     <div class="name-container" (click)="toggleMenu()">
-      <mat-icon>account_circle</mat-icon>
+      <img class="web-img" mat-card-image [src]="user.photoUrl">
       <span><b>{{username}}</b></span>
     </div>
     <br />

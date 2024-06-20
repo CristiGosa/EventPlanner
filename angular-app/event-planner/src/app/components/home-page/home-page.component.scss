@@ -17,11 +17,25 @@
   }
   
   .header {
-    background-color: #3498db;
-    color: #fff;
+    color: #0099ff;
     padding: 20px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #fff;
   }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .app-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: fantasy;
+    color: #5db73a;
+}

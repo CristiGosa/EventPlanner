@@ -7,10 +7,16 @@ button {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   
   button:hover {
     background-color: #45a049;
+  }
+
+  mat-icon {
+    margin-right: 0.5rem;
   }
   
   /* Style for table */
@@ -74,9 +80,12 @@ button {
     color: darkblue;
   }
 
+  .action-button {
+    display: inline;
+  }
+
   .header {
-    background-color: #3498db;
-    color: #fff;
+    color: #3498db;
     padding: 20px;
     text-align: center;
     font-size: 24px;

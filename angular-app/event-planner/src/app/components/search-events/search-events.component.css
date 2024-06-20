@@ -18,6 +18,12 @@
     height: 55px;
     justify-content: end;
   }
+
+  mat-card {
+    box-shadow: none !important;
+    border: none !important;
+    background-color: transparent !important; /* Optional: If you want to remove the background color as well */
+  }
   
   .calendar-button {
     height: 56px;
