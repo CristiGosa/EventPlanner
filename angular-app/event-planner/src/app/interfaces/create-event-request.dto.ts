@@ -7,5 +7,6 @@ export interface CreateEventRequest {
     priceCurrency: Currency,
     description: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    photoUrl?: string
 }

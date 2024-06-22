@@ -15,6 +15,7 @@ namespace EventPlanner.Domain.Entities
         public int LocationId { get; set; }
         public EventStatus Status { get; set; }
         public int ParticipantsNumber { get; set; } = 0;
+        public string? PhotoUrl { get; set; }
         public ICollection<int> ReservationsId { get; set; } = new List<int>();
     }
 }

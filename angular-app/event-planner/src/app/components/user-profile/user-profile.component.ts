@@ -1,5 +1,5 @@
 import { SocialUser } from "@abacritt/angularx-social-login";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "src/app/shared/services/authentication.service";
 
 @Component({
@@ -8,20 +8,23 @@ import { AuthenticationService } from "src/app/shared/services/authentication.se
   styleUrls: ['./user-profile.component.scss'],
 })
 
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit {
 
   username: string = 'Username';
+  photoUrl: string;
   showCard: boolean = false;
-  user: SocialUser;
+  user: SocialUser | null = null;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService) {}
+
+  ngOnInit(): void {
     this.authService.extAuthChanged.subscribe((user: SocialUser | null) => {
-      this.username = 'Username';
-      if (user != null) {
-        this.username = user.name;
-        this.user = user;
-      }
+      this.user = user;
     });
+    if (this.user != null) {
+      this.username = this.user.name;
+      this.photoUrl = this.user.photoUrl;
+    }
   }
 
   toggleCard() {

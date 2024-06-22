@@ -34,6 +34,8 @@ namespace EventPlanner.Database.Models
 
         public int ParticipantsNumber { get; set; }
 
+        public string? PhotoUrl { get; set; }
+
         public ICollection<int> ReservationsId { get; set; } = new List<int>();
     }
 }

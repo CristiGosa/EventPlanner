@@ -1,5 +1,8 @@
 <button class="close-button" (click)="closeDialog()">X</button>
 <div class="container">
-    <h1>Event Description:</h1>
-    <p>{{ data }}</p>
+    <h1>Descrierea evenimentului:</h1>
+    <div class="content">
+        <img *ngIf="data.photoUrl" class="image" [src]="data.photoUrl"  alt="Base64 Image" width="400" height="300">
+        <p>{{ data.description }}</p>
+    </div>
 </div>

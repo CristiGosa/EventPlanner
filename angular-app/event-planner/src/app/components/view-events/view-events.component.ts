@@ -197,8 +197,8 @@ export class ViewEventsComponent {
     })
   }
 
-  openDescriptionDialog(description: string){
-    this.dialog.open(DialogWindowComponent, { data: description });
+  openDescriptionDialog(description: string, photoUrl: string){
+    this.dialog.open(DialogWindowComponent, { data: { description, photoUrl }  });
   }
 
   openParticipantsDialog(eventId: number, eventName: string){

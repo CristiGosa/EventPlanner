@@ -23,6 +23,7 @@ export class AddEventComponent {
   public isButtonDisabled: boolean = false;
   public currency: Currency = Currency.Ron;
   public errorMsg: string | null = null;
+  public photo: string;
 
 
   constructor(
@@ -90,6 +91,7 @@ export class AddEventComponent {
       description: this.eventForm.controls["description"].value,
       startDate: startingDate,
       endDate: endingDate,
+      photoUrl: this.photo
     };
     this.eventForm.markAllAsTouched();
     this.eventsRepositoryService.createEvent("Event", createdEvent).subscribe({
@@ -182,5 +184,18 @@ export class AddEventComponent {
   public setCurrencyFree(){
     this.currency = Currency.Free;
     this.eventForm.controls["ticketPrice"].reset();
+  }
+
+  onFileChanged(event: any) {
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      if(file.size > 2000000) //2mb
+        return;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.photo = reader.result as string;
+      }
+    }
   }
 }

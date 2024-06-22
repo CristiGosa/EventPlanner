@@ -16,12 +16,16 @@
         </div>
         <div class="form-field">
             <label class="form-label">{{ 'Perioada:' }}*</label>
-            <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date" id="startDate" formControlName="startDate">
-                <input matEndDate placeholder="End date" id="endDate" formControlName="endDate">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
+            <div class="date-container">
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Data incepere" id="startDate" formControlName="startDate">
+                    <input matEndDate placeholder="Data incheiere" id="endDate" formControlName="endDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </div>
+            <label class="form-label">{{ 'Adauga o fotografie de prezentare (optional)' }}</label>
+            <input type="file" class="file-upload" (change)="onFileChanged($event)">
         </div>
         <div class="form-field">
             <label for="description" class="form-label">{{ 'Descriere:' }}*</label>

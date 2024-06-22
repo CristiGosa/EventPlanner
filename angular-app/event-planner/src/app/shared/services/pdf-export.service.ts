@@ -1,5 +1,4 @@
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
 import autoTable from 'jspdf-autotable'
 import { Injectable } from '@angular/core';
