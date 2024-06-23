@@ -25,7 +25,13 @@
                 <mat-date-range-picker #picker></mat-date-range-picker>
             </div>
             <label class="form-label">{{ 'Adauga o fotografie de prezentare (optional)' }}</label>
-            <input type="file" class="file-upload" (change)="onFileChanged($event)">
+            <div class="upload-container">
+                <button class="upload-button" (click)="fileInput.click()">
+                    <mat-icon class="upload-icon">attach_file</mat-icon>Selecteaza fotografia
+                    <input #fileInput type="file" class="file-upload" (change)="onFileChanged($event)" style="display: none;">
+                </button>
+                <mat-icon *ngIf="isUploaded" class="uploaded-icon">check</mat-icon>
+            </div>
         </div>
         <div class="form-field">
             <label for="description" class="form-label">{{ 'Descriere:' }}*</label>

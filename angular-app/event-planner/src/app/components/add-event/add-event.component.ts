@@ -24,6 +24,7 @@ export class AddEventComponent {
   public currency: Currency = Currency.Ron;
   public errorMsg: string | null = null;
   public photo: string;
+  public isUploaded: boolean = false;
 
 
   constructor(
@@ -187,6 +188,7 @@ export class AddEventComponent {
   }
 
   onFileChanged(event: any) {
+    this.isUploaded = true;
     if(event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       if(file.size > 2000000) //2mb
