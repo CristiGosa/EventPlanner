@@ -10,8 +10,8 @@ import { AuthenticationService } from "src/app/shared/services/authentication.se
 
 export class UserProfileComponent implements OnInit {
 
-  username: string = 'Username';
-  photoUrl: string;
+  username: string | undefined = 'Username';
+  photoUrl: string | undefined;
   showCard: boolean = false;
   user: SocialUser | null = null;
 
@@ -22,8 +22,10 @@ export class UserProfileComponent implements OnInit {
       this.user = user;
     });
     if (this.user != null) {
-      this.username = this.user.name;
-      this.photoUrl = this.user.photoUrl;
+      setTimeout(() => {
+        this.username = this.user?.name;
+        this.photoUrl = this.user?.photoUrl;
+      }, 50);
     }
   }
 
