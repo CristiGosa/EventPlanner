@@ -8,7 +8,8 @@
       <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
       <user-profile></user-profile>
     </div>
-    <app-view-events></app-view-events>
+    <app-view-events *ngIf="isAdmin() || isOrganizer()"></app-view-events>
+    <app-user-events *ngIf="!isAdmin() && !isOrganizer()"></app-user-events>
     <br />
   </nav>
 </div>
