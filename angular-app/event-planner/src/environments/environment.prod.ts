@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAddress: 'http://www.invet.com'
+  urlAddress: 'http://www.event-planner.com'
 };

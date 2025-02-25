@@ -29,7 +29,6 @@ export class HomePageComponent {
     return this.rolesService.isOrganizer();
   }
   getWelcomeText(): string {
-    console.log(this.authService.user);
     return "Bine ai revenit, " + this.username;
   }
 }

@@ -74,7 +74,9 @@ namespace EventPlanner.EmailSender
 
         private string ReadEmailTemplate(string templatePath)
         {
-            string buildDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+            string projectPath = Directory.GetParent(assemblyLocation)?.Parent?.Parent?.Parent?.Parent?.FullName;
+            string buildDirectory = Path.Combine(projectPath, "EventPlanner.EmailSender");
             string templateFullPath = $@"{buildDirectory}\{templatePath}";
             return File.ReadAllText(templateFullPath);
         }

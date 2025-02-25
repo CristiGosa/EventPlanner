@@ -11,10 +11,10 @@ import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { Location } from 'src/app/interfaces/location.dto';
-import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 import { Currency } from 'src/app/shared/enums/currency';
 import { SearchEventsComponent } from '../search-events/search-events.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-events',
@@ -34,6 +34,7 @@ export class UserEventsComponent {
   constructor(
     private eventsService: EventsRepositoryService,
     public dialog: MatDialog,
+    private router: Router,
     private rolesService: RolesService,
     private eventReservationsService: EventReservationsRepositoryService,
     private locationsService: LocationsRepositoryService
@@ -197,8 +198,8 @@ export class UserEventsComponent {
     })
   }
 
-  openDescriptionDialog(description: string, photoUrl: string | undefined){
-    this.dialog.open(DialogWindowComponent, { data: { description, photoUrl }  });
+  redirect(event: Event){
+    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
   }
 
   openParticipantsDialog(eventId: number, eventName: string){

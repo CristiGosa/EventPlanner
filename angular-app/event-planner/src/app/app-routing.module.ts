@@ -9,6 +9,7 @@ import { ViewEventsComponent } from './components/view-events/view-events.compon
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { ViewEventRequestsComponent } from './components/view-event-requests/view-event-requests.component';
 import { ViewEventsJoinedComponent } from './components/view-events-joined/view-events-joined.component';
+import { ViewEventDetailsComponent } from './components/view-event-details/view-event-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/authentication/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'app/add-event', component: AddEventComponent},
   { path: 'app/view-event-requests', component: ViewEventRequestsComponent},
   { path: 'app/view-events-joined' , component: ViewEventsJoinedComponent},
+  { path: 'app/view-event-details' , component: ViewEventDetailsComponent},
 ];
 
 @NgModule({

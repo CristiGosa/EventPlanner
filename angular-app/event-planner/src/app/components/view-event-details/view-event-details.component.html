@@ -1,0 +1,21 @@
+<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Inapoi</button>
+<div class="container" style="display: flex">
+    <div class="picture">
+        <img class="image" [src]="verifyPhotoUrl(event.photoUrl)" width="600" height="600">
+    </div>
+    <div class="content">
+        <h1>{{event.name}}</h1>
+        <p><span class="material-icons">schedule</span>{{getDateString(event.startDate, event.endDate)}}</p>
+        <p><span class="material-icons">sell</span>{{getTicketPrice(event)}}</p>
+        <p>
+            <span class="material-icons">place</span>
+            <span  class="location-cell" (click)="getLink(event.locationId)">{{ getLocation(event.locationId) }}</span>
+        </p>
+        <div class="description">
+            <p>{{event.description}}</p>
+        </div>
+        <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isUser() && !isEventJoined(event.id) && !isEventFull(event)" (click)="joinEvent(event.id)">Participa</button>
+        <p *ngIf="isEventJoined(event.id) && isUser()"><span class="material-icons">done</span>Inscris</p>
+        <p *ngIf="isEventFull(event) && isUser()">Capacitate maxima</p>
+    </div>
+</div>

@@ -56,6 +56,7 @@ import { SearchEventsService } from './shared/services/search-events.service';
 import { TimePeriodValidatorService } from './shared/services/time-period-validator.service';
 import { SearchPeriodValidatorService } from './shared/services/search-period-validator.service';
 import { UserEventsComponent } from './components/user-events/user-events.component';
+import { ViewEventDetailsComponent } from './components/view-event-details/view-event-details.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { UserEventsComponent } from './components/user-events/user-events.compon
     MapLocationComponent,
     SearchEventsComponent,
     UserEventsComponent,
+    ViewEventDetailsComponent,
   ],
   imports: [
     MatDialogModule,

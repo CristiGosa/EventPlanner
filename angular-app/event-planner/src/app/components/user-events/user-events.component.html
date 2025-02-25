@@ -19,7 +19,7 @@
 
 <div class="events-gallery">
     <div class="event-box" *ngFor="let element of filteredData.data">
-        <img class="event-image" [src]="verifyPhotoUrl(element.photoUrl)" (click)="openDescriptionDialog(element.description, element.photoUrl)">
+        <img class="event-image" [src]="verifyPhotoUrl(element.photoUrl)" (click)="redirect(element)">
         <p>{{element.name}}</p>
     </div>
 </div>
