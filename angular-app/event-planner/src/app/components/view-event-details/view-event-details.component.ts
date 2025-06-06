@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/interfaces/event.dto';
 import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
 import { Location } from 'src/app/interfaces/location.dto';
+import { Location as NgLocation } from '@angular/common'
 import { Currency } from 'src/app/shared/enums/currency';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
@@ -26,6 +27,7 @@ export class ViewEventDetailsComponent implements OnInit {
     private eventReservationsService: EventReservationsRepositoryService,
     private eventsService: EventsRepositoryService,
     private rolesService: RolesService,
+    private routeLocation: NgLocation,
   ) {}
 
   ngOnInit(): void {
@@ -122,5 +124,9 @@ export class ViewEventDetailsComponent implements OnInit {
         }
       }
       return false;
+    }
+
+    goBack(){
+      this.routeLocation.back();
     }
 }

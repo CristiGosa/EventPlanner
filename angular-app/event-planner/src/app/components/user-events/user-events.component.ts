@@ -6,15 +6,11 @@ import { AddEventComponent } from '../add-event/add-event.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EventStatus } from 'src/app/shared/enums/event-status';
 import { RolesService } from 'src/app/shared/services/roles.service';
-import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
-import { JoinEventRequest } from 'src/app/interfaces/join-event.dto';
-import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { Location } from 'src/app/interfaces/location.dto';
-import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
-import { Currency } from 'src/app/shared/enums/currency';
 import { SearchEventsComponent } from '../search-events/search-events.component';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-user-events',
@@ -29,14 +25,16 @@ export class UserEventsComponent {
   joinedEvents: Event[] = [];
   locations: Location[] = [];
   isButtonDisabled: boolean = false;
+  filtersOn: boolean = false;
   filteredData: MatTableDataSource<Event>;
+  currentPage: number = 0;
+  pageSize: number = 6;
 
   constructor(
     private eventsService: EventsRepositoryService,
     public dialog: MatDialog,
     private router: Router,
     private rolesService: RolesService,
-    private eventReservationsService: EventReservationsRepositoryService,
     private locationsService: LocationsRepositoryService
      ) { }
 
@@ -59,108 +57,8 @@ export class UserEventsComponent {
     this.filteredData = new MatTableDataSource(this.dataSource.data);
   }
 
-  isAdmin(): boolean {
-    return this.rolesService.isAdmin();
-  }
-
-  isOrganizer(): boolean {
-    return this.rolesService.isOrganizer();
-  }
-
   isUser(): boolean {
     return this.rolesService.isUser();
-  }
-
-  getStatus(status: EventStatus): string {
-    switch(status)
-    {
-      case EventStatus.Accepted: return "Aprobat";
-      case EventStatus.Rejected: return "Respins";
-      case EventStatus.Pending: return "In asteptare";
-      case EventStatus.Cancelled: return "Anulat";
-      default: return "Undefined";
-    }
-  }
-
-  getLocations(): void {
-    this.locationsService.getAllLocations("Location").subscribe({
-      next: (response) => {
-        this.locations = response.locations;
-      }
-    });
-  }
-
-  getLocation(locationId: number): string | undefined {
-    var location = this.locations.find(x => x.id == locationId);
-    return location?.name;
-  }
-
-  isPending(event: Event): boolean{
-    if(event.status === EventStatus.Pending)
-      return true;
-    return false;
-  }
-
-  acceptEvent(eventId: number): void{
-    this.isButtonDisabled = true;
-    const updateStatusDTO : UpdateEventStatusRequest = {
-      eventId : eventId,
-      newStatus: EventStatus.Accepted
-    }
-    this.eventsService.updateStatus("Event", updateStatusDTO).subscribe({
-      next: () => {
-        this.refreshTable();
-      }
-    });
-  }
-
-  rejectEvent(eventId: number): void {
-    this.isButtonDisabled = true;
-    const updateStatusDTO : UpdateEventStatusRequest = {
-      eventId : eventId,
-      newStatus: EventStatus.Rejected
-    }
-    this.eventsService.updateStatus("Event", updateStatusDTO).subscribe({
-      next: () => {
-        this.refreshTable();
-      }
-    });
-  }
-
-  joinEvent(eventId: number): void {
-    this.isButtonDisabled = true;
-    const joinEventRequest: JoinEventRequest = {
-      eventId: eventId
-    }
-
-    this.eventReservationsService.createEventReservation("EventReservations", joinEventRequest).subscribe({
-      next: () => {
-        this.refreshTable();
-      }
-    });
-  }
-
-  isEventJoined(eventId: number): boolean {
-    if(this.joinedEvents.find(x => x.id == eventId) != undefined)
-          return true;
-    return false;
-  }
-
-  isEventFull(event: Event): boolean {
-    var location = this.locations.find(x => x.id == event.locationId);
-    if(location?.capacity != undefined){
-      if(location.capacity <= event.participantsNumber){
-        return true;
-      }
-    }
-    return false;
-  }
-
-  getParticipantsNumber(event: Event): string {
-    if(event.status != EventStatus.Accepted)
-      return " - ";
-    var location = this.locations.find(x => x.id == event.locationId);
-    return event.participantsNumber + "/" + location?.capacity;
   }
 
   refreshTable(): void {
@@ -191,45 +89,16 @@ export class UserEventsComponent {
     this.isButtonDisabled = false;
   }
 
-  openDialog(): void {
-    this.dialogRef = this.dialog.open(AddEventComponent);
-    this.dialogRef.afterClosed().subscribe(() => {
-      this.searchEventsComponent.clearFilters(new MouseEvent('click'));
-    })
-  }
-
-  redirect(event: Event){
-    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
-  }
-
-  openParticipantsDialog(eventId: number, eventName: string){
-    this.eventReservationsService.getParticipantsListByEventId("EventReservations", eventId).subscribe((result) => {
-      if(result.participants != null){
-        this.dialog.open(ViewParticipantsComponent, { data: { participants: result.participants, eventName: eventName } });
+  getLocations(): void {
+    this.locationsService.getAllLocations("Location").subscribe({
+      next: (response) => {
+        this.locations = response.locations;
       }
     });
   }
 
-  getLink(locationId: number): void{
-    var location = this.locations.find(x => x.id == locationId);
-    window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
-  }
-
-  getTicketPrice(event: Event): string{
-    switch(event.priceCurrency){
-      case Currency.Ron: {
-        return event.ticketPrice + " RON";
-      }
-      case Currency.Euro: {
-        return event.ticketPrice + " €";
-      }
-      case Currency.Free: {
-        return "Intrare libera";
-      }
-      default: {
-        return event.ticketPrice.toString();
-      }
-    }
+  redirect(event: Event){
+    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
   }
 
   handleSearchEvents(events: Array<Event>): void {
@@ -238,6 +107,21 @@ export class UserEventsComponent {
 
   verifyPhotoUrl(photoUrl: string | undefined) {
     return photoUrl != undefined ? photoUrl : "../assets/images/no-image.jpg"
+  }
+
+  toggleFilters(){
+    this.filtersOn = !this.filtersOn
+  }
+
+  get paginatedData() {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    return this.filteredData.data.slice(start, end);
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
   }
 }
 

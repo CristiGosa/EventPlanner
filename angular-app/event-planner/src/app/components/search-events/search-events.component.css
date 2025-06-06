@@ -54,3 +54,27 @@
     margin-left: 7px !important;
   }
   
+  @media (max-width: 768px) {
+    .search-form-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .fields,
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+  
+    mat-form-field,
+    .calendar-container,
+    .name-form-field {
+      width: 70% !important;
+    }
+  
+    .calendar-button {
+      width: 10%;
+      height: 55px;
+    }
+  }

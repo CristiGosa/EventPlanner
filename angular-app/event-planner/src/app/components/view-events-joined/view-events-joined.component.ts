@@ -7,10 +7,10 @@ import { EventStatus } from 'src/app/shared/enums/event-status';
 import { EventsRepositoryService } from 'src/app/shared/services/events-repository.service';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { MapLocationComponent } from '../map-location/map-location.component';
-import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/dialog-window.component';
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 import { EventReservationsRepositoryService } from 'src/app/shared/services/event-reservations-repository.service';
 import { Currency } from 'src/app/shared/enums/currency';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-events-joined',
@@ -28,6 +28,7 @@ export class ViewEventsJoinedComponent implements OnInit {
     private eventReservationsService: EventReservationsRepositoryService,
     private locationsService: LocationsRepositoryService,
     public dialog: MatDialog,
+    public router: Router,
      ) { }
 
   ngOnInit(): void {
@@ -76,10 +77,6 @@ export class ViewEventsJoinedComponent implements OnInit {
     window.open("https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + location?.placeId)?.focus();
   }
 
-  openDescriptionDialog(description: string){
-    this.dialog.open(DialogWindowComponent, { data: description });
-  }
-
   openParticipantsDialog(eventId: number, eventName: string){
     this.eventReservationsService.getParticipantsListByEventId("EventReservations", eventId).subscribe((result) => {
       if(result.participants != null){
@@ -107,5 +104,9 @@ export class ViewEventsJoinedComponent implements OnInit {
 
   handleSearchEvents(events: Array<Event>): void {
     this.filteredData.data = events;
+  }
+
+  redirect(event: Event){
+    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
   }
 }

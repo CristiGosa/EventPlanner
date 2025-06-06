@@ -44,7 +44,7 @@
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef>Detalii</th>
         <td mat-cell *matCellDef="let element">
-          <button class="action-button" (click)="openDescriptionDialog(element.description)">Vizualizati</button></td>
+          <button class="action-button" (click)="redirect(element)">Vizualizati</button></td>
       </ng-container>
 
       <ng-container matColumnDef="participants">

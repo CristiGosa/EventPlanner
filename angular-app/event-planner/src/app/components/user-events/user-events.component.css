@@ -64,4 +64,49 @@ mat-icon {
     height: 380px;
     border-radius: 5px;
     object-fit: contain;
+} 
+  .search-wrapper {
+    animation: slideDown 0.5s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 100%;
+      opacity: 1;
+    }
+  }
+
+@media only screen and (max-width: 575.98px) {
+  .event-image {
+    width: 300px;
+    height: 280px;
+  } 
+
+  .event-box {
+    width: 300px;
+    height: 300px;
+  }
+
+  .events-gallery {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 5 columns */
+    gap: 10px;
+    padding: 10px;
+  }
+
+  mat-paginator {
+    font-size: 12px;
+    .mat-paginator-range-label,
+    .mat-paginator-page-size {
+      display: none;
+    }
+  }
+
+  .buttons-container {
+    padding-left: 33px;
+  }
 }
