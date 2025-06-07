@@ -1,60 +1,68 @@
 <div class="popup-container">
-    <button class="close-button" (click)="closeDialog()">X</button>
-    <form [formGroup]="eventForm" class="form-container">
-        <div style="display: flex; gap: 50px">
-            <div class="left-container">
-                <div class="form-field">
-                    <label for="name" class="form-label">{{ 'Nume:' }}*</label>
-                    <input id="name" type="text" formControlName="name" class="form-input" required>
-                </div>
-                <div class="form-field">
-                    <label for="ticketPrice" class="form-label">{{ 'Pret bilet:' }}*</label>
-                    <div class="price-input">
-                        <input id="ticketPrice" type="number" formControlName="ticketPrice" class="form-input" [readOnly]="isSelectedCurrency('Free')">
-                        <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('RON')" (change)="setCurrencyRon()">RON</mat-checkbox>
-                        <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Euro')" (change)="setCurrencyEuro()">Euro</mat-checkbox>
-                        <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Free')" (change)="setCurrencyFree()">Intrare libera</mat-checkbox>
-                    </div>
-                </div>
-                <div class="form-field">
-                    <label class="form-label">{{ 'Perioada:' }}*</label>
-                    <div class="date-container">
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate placeholder="Data incepere" id="startDate" formControlName="startDate">
-                            <input matEndDate placeholder="Data incheiere" id="endDate" formControlName="endDate">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                    </div>
-                    <label class="form-label">{{ 'Adauga o fotografie de prezentare (optional)' }}</label>
-                    <div class="upload-container">
-                        <button class="upload-button" (click)="fileInput.click()">
-                            <mat-icon class="upload-icon">attach_file</mat-icon>Selecteaza fotografia
-                            <input #fileInput type="file" class="file-upload" (change)="onFileChanged($event)" style="display: none;">
-                        </button>
-                        <mat-icon *ngIf="isUploaded" class="uploaded-icon">check</mat-icon>
-                    </div>
-                </div>
-                <div class="form-field">
-                    <label for="description" class="form-label">{{ 'Descriere:' }}*</label>
-                    <textarea id="description" formControlName="description" 
-                        class="form-input" required style="min-height: 7.9rem; width: 100%; resize: none;">
-                    </textarea>
-                </div>
-            </div>
-            <div class="right-containter">
-                <div class="form-field">
-                    <label for="location" class="form-label">{{ 'Locatie:'}}*</label>
-                </div>
-                <div class="map-pannel">
-                    <h1 class="subtitle-header">{{ showSelectedLocation() }}</h1>
-                    <div id="map" class="map"></div>
-                </div>
+  <button class="close-button" (click)="closeDialog()">X</button>
+  <form [formGroup]="eventForm" class="form-container">
+    <div class="form-layout">
+      <div class="left-container">
+        <div class="form-field">
+          <label for="name" class="form-label">Name:*</label>
+          <input id="name" type="text" formControlName="name" class="form-input" required>
+        </div>
+
+        <div class="form-field">
+        <label for="ticketPrice" class="form-label">Ticket price:*</label>
+        <div class="price-input">
+            <input id="ticketPrice" type="number" formControlName="ticketPrice" class="form-input" [readOnly]="isSelectedCurrency('Free')">
+            <div class="checkbox-group">
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('RON')" (change)="setCurrencyRon()">RON</mat-checkbox>
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Euro')" (change)="setCurrencyEuro()">EURO</mat-checkbox>
+                <mat-checkbox class="checkbox" [checked]="isSelectedCurrency('Free')" (change)="setCurrencyFree()">Free entry</mat-checkbox>
             </div>
         </div>
-        <div class="button">
-            <button [disabled]="isButtonDisabled" (click)="addEvent()" class="add-button">{{ 'Adauga noul eveniment' }}</button>
         </div>
-        <h1 *ngIf="errorMsg != null" class="error">{{errorMsg}}</h1>
-    </form>
+
+        <div class="form-field">
+          <label class="form-label">Date:*</label>
+          <div class="date-container">
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Data incepere" id="startDate" formControlName="startDate">
+              <input matEndDate placeholder="Data incheiere" id="endDate" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Add a presentation picture (optional)</label>
+          <div class="upload-container">
+            <button class="upload-button" (click)="fileInput.click()">
+              <mat-icon class="upload-icon">attach_file</mat-icon>Select picture
+              <input #fileInput type="file" class="file-upload" (change)="onFileChanged($event)" style="display: none;">
+            </button>
+            <mat-icon *ngIf="isUploaded" class="uploaded-icon">check</mat-icon>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="description" class="form-label">Description:*</label>
+          <textarea id="description" formControlName="description"
+            class="form-input" required style="min-height: 7.9rem; width: 100%; resize: none;"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="location" class="form-label">Location:*</label>
+        </div>
+        <div class="map-pannel">
+          <h1 class="subtitle-header">{{ showSelectedLocation() }}</h1>
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button">
+      <button [disabled]="isButtonDisabled" (click)="addEvent()" class="add-button">Add event</button>
+    </div>
+
+    <h1 *ngIf="errorMsg != null" class="error">{{ errorMsg }}</h1>
+  </form>
 </div>

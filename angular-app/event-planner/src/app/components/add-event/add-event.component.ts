@@ -148,7 +148,7 @@ export class AddEventComponent {
 
   public showSelectedLocation(): string{
     if(!this.selectedLocation){
-      return "Click pe un punct de pe harta pentru a selecta locatia";
+      return "Select a location";
     }
     return this.selectedLocation.name + " (Capacitate: " + this.selectedLocation.capacity + ")";
   }

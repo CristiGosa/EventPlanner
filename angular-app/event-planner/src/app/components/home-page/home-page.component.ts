@@ -29,6 +29,6 @@ export class HomePageComponent {
     return this.rolesService.isOrganizer();
   }
   getWelcomeText(): string {
-    return "Bine ai revenit, " + this.username;
+    return "Welcome back, " + this.username;
   }
 }

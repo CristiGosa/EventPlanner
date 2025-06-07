@@ -5,8 +5,8 @@
       <span class="app-title"><mat-icon class="logo-icon">local_activity</mat-icon>Event Planner</span>
       <user-profile></user-profile>
     </div>
-    <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
-    <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
+    <h1 class="header" *ngIf="isAdmin()">{{ 'Admin Dashboard' }}</h1>
+    <h1 class="header" *ngIf="isOrganizer()">{{ 'Organizer Dashboard' }}</h1>
     <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
     <app-view-events *ngIf="isAdmin() || isOrganizer()"></app-view-events>
     <app-user-events *ngIf="!isAdmin() && !isOrganizer()"></app-user-events>
