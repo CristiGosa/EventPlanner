@@ -15,6 +15,7 @@ import { DialogWindowComponent } from 'src/app/shared/components/dialog-window/d
 import { ViewParticipantsComponent } from '../view-participants/view-participants.component';
 import { Currency } from 'src/app/shared/enums/currency';
 import { SearchEventsComponent } from '../search-events/search-events.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-events',
@@ -24,15 +25,17 @@ import { SearchEventsComponent } from '../search-events/search-events.component'
 export class ViewEventsComponent {
   @ViewChild(SearchEventsComponent) searchEventsComponent: SearchEventsComponent;
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
-  dataSource:  MatTableDataSource<Event>;
+  dataSource: Event[] = [];
+  filteredData: Event[] = [];
   dialogRef: MatDialogRef<AddEventComponent>;
   joinedEvents: Event[] = [];
   locations: Location[] = [];
   isButtonDisabled: boolean = false;
-  filteredData: MatTableDataSource<Event>;
+  filtersOn: boolean = false;
 
   constructor(
     private eventsService: EventsRepositoryService,
+    private router: Router,
     public dialog: MatDialog,
     private rolesService: RolesService,
     private eventReservationsService: EventReservationsRepositoryService,
@@ -54,8 +57,7 @@ export class ViewEventsComponent {
       this.refreshTable();
     });
 
-    this.dataSource = new MatTableDataSource<Event>();
-    this.filteredData = new MatTableDataSource(this.dataSource.data);
+    this.filteredData = this.dataSource;
   }
 
   isAdmin(): boolean {
@@ -73,10 +75,10 @@ export class ViewEventsComponent {
   getStatus(status: EventStatus): string {
     switch(status)
     {
-      case EventStatus.Accepted: return "Aprobat";
-      case EventStatus.Rejected: return "Respins";
-      case EventStatus.Pending: return "In asteptare";
-      case EventStatus.Cancelled: return "Anulat";
+      case EventStatus.Accepted: return "Approved";
+      case EventStatus.Rejected: return "Rejected";
+      case EventStatus.Pending: return "Pending";
+      case EventStatus.Cancelled: return "Canceled";
       default: return "Undefined";
     }
   }
@@ -167,8 +169,8 @@ export class ViewEventsComponent {
     {
       this.eventsService.getAllEvents("Event").subscribe({
         next: (response) => {
-          this.dataSource.data = response.events;
-          this.filteredData.data = response.events;
+          this.dataSource = response.events;
+          this.filteredData = response.events;
         }
       });
     }
@@ -176,8 +178,8 @@ export class ViewEventsComponent {
     {
       this.eventsService.getByStatus("Event", EventStatus.Accepted).subscribe({
         next: (response) => {
-          this.dataSource.data = response.events;
-          this.filteredData.data = response.events;
+          this.dataSource = response.events;
+          this.filteredData = response.events;
         }
       });
     }
@@ -197,8 +199,8 @@ export class ViewEventsComponent {
     })
   }
 
-  openDescriptionDialog(description: string, photoUrl: string){
-    this.dialog.open(DialogWindowComponent, { data: { description, photoUrl }  });
+  openDescriptionDialog(event: Event){
+    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
   }
 
   openParticipantsDialog(eventId: number, eventName: string){
@@ -232,6 +234,10 @@ export class ViewEventsComponent {
   }
 
   handleSearchEvents(events: Array<Event>): void {
-    this.filteredData.data = events;
+    this.filteredData = events;
+  }
+
+  toggleFilters(){
+    this.filtersOn = !this.filtersOn
   }
 }

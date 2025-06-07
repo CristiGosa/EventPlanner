@@ -2,12 +2,12 @@
 <div class="wrapper">
   <nav class="home-page-container">
     <div class="header-container">
-      <h1 class="app-title"><mat-icon class="logo-icon">local_activity</mat-icon>Event Planner</h1>
-      <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
-      <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
-      <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
+      <span class="app-title"><mat-icon class="logo-icon">local_activity</mat-icon>Event Planner</span>
       <user-profile></user-profile>
     </div>
+    <h1 class="header" *ngIf="isAdmin()">{{ 'Panou Administrator' }}</h1>
+    <h1 class="header" *ngIf="isOrganizer()">{{ 'Panou Organizator' }}</h1>
+    <h1 class="header" *ngIf="!isAdmin() && !isOrganizer()">{{ getWelcomeText() }}</h1>
     <app-view-events *ngIf="isAdmin() || isOrganizer()"></app-view-events>
     <app-user-events *ngIf="!isAdmin() && !isOrganizer()"></app-user-events>
     <br />

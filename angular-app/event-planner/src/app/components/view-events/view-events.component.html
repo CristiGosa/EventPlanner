@@ -1,84 +1,74 @@
 <div class="buttons-container">
   <button *ngIf="isAdmin()" routerLink="/app/view-locations">
-    <mat-icon> location_on</mat-icon>Administreaza Locatiile</button>
+    <mat-icon>location_on</mat-icon> Locations
+  </button>
   <button *ngIf="isAdmin() || isOrganizer()" (click)="openDialog()">
-    <mat-icon>add</mat-icon>Adauga un eveniment nou</button>
+    <mat-icon>add</mat-icon> Add event
+  </button>
   <button *ngIf="isOrganizer()" routerLink="/app/view-event-requests">
-    <mat-icon>remove_red_eye</mat-icon>Vizualizeaza cererile mele</button>
+    <mat-icon>remove_red_eye</mat-icon> My requests
+  </button>
   <button *ngIf="isAdmin()" routerLink="/app/view-event-requests">
-    <mat-icon>remove_red_eye</mat-icon>Vizualizeaza cererile neadministrate</button>
+    <mat-icon>remove_red_eye</mat-icon> Pending requests
+  </button>
   <button *ngIf="isUser()" routerLink="/app/view-events-joined">
-    <mat-icon>remove_red_eye</mat-icon>Vizualizeaza evenimentele tale</button>
+    <mat-icon>remove_red_eye</mat-icon> My events
+  </button>
+  <button *ngIf="isUser()" (click)="toggleFilters()">
+    <mat-icon>remove_red_eye</mat-icon> Filters
+  </button>
 </div>
 
 <app-search-events
-    [unfilteredEvents]="dataSource.data"
+    class="search-wrapper"
+    *ngIf="filtersOn"
+    [unfilteredEvents]="dataSource"
     [locations]="locations"
     (onSearch)="handleSearchEvents($event)"
   ></app-search-events>
-<table
-    mat-table
-    [dataSource]="filteredData"
-    class="mat-elevation-z8"
-    id="htmlData"
-  >
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Nume</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
 
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef>Locatie</th>
-      <td mat-cell *matCellDef="let element" class="location-cell" (click)="getLink(element.locationId)">{{ getLocation(element.locationId) }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="organizer">
-        <th mat-header-cell *matHeaderCellDef>Organizator</th>
-        <td mat-cell *matCellDef="let element">{{ element.organizerEmail }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="ticketPrice">
-        <th mat-header-cell *matHeaderCellDef>Pret bilet</th>
-        <td mat-cell *matCellDef="let element">{{ getTicketPrice(element) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="startDate"> 
-        <th mat-header-cell *matHeaderCellDef class="date">Data incepere</th>
-        <td mat-cell *matCellDef="let element">{{ element.startDate | date:"dd/MM/yyyy" }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef class="date">Data incheiere</th>
-        <td mat-cell *matCellDef="let element">{{ element.endDate | date: "dd/MM/yyyy" }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Detalii</th>
-        <td mat-cell *matCellDef="let element">
-          <button class="action-button" (click)="openDescriptionDialog(element.description, element.photoUrl)">Vizualizati</button></td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let element">{{ getStatus(element.status) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="participants">
-        <th mat-header-cell *matHeaderCellDef>Participanti</th>
-        <td mat-cell *matCellDef="let element" class="participants-cell" (click)="openParticipantsDialog(element.id, element.name)">{{ getParticipantsNumber(element) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="buttons">
-        <th mat-header-cell *matHeaderCellDef="let element"></th>
-        <td mat-cell *matCellDef="let element">
-          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
-          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
-          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isUser() && !isEventJoined(element.id) && !isEventFull(element)" (click)="joinEvent(element.id)">Participa</button>
-          <p *ngIf="isEventJoined(element.id) && isUser()">Inscris</p>
-          <p *ngIf="isEventFull(element) && isUser()">Capacitate maxima</p>
+<div class="table-container">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Nume</th>
+        <th>Locatie</th>
+        <th>Pret bilet</th>
+        <th>Data incepere</th>
+        <th>Data incheiere</th>
+        <th>Detalii</th>
+        <th>Status</th>
+        <th>Participanti</th>
+        <th>Actiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of filteredData">
+        <td data-label="Nume">{{ element.name }}</td>
+        <td data-label="Locatie" class="location-cell" (click)="getLink(element.locationId)">
+          <span class="location-link">{{ getLocation(element.locationId) }}</span>
         </td>
-      </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        <td data-label="Pret bilet">{{ getTicketPrice(element) }}</td>
+        <td data-label="Data incepere">{{ element.startDate | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Data incheiere">{{ element.endDate | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Status">{{ getStatus(element.status) }}</td>
+        <td data-label="Participanti" class="participants-cell" (click)="openParticipantsDialog(element.id, element.name)">
+          {{ getParticipantsNumber(element) }}
+        </td>
+        <td>
+          <button class="action-button" (click)="openDescriptionDialog(element)">
+            View details
+          </button>
+          <button class="action-button" [disabled]="isButtonDisabled"
+            *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">
+            Approve
+          </button>
+          <button class="action-button" [disabled]="isButtonDisabled"
+            *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">
+            Decline
+          </button>
+        </td>
+      </tr>
+    </tbody>
   </table>
+</div>

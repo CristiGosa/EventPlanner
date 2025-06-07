@@ -13,5 +13,5 @@ export interface Event {
     endDate: Date,
     status: EventStatus,
     participantsNumber: number,
-    photoUrl?: string,
+    photoUrl: string,
 }
