@@ -19,9 +19,10 @@ import { Router } from '@angular/router';
 })
 export class ViewEventsJoinedComponent implements OnInit {
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "participants"];
-  dataSource:  MatTableDataSource<Event>;
+  dataSource:  Event[] = [];
   locations: Location[];
-  filteredData: MatTableDataSource<Event>;
+  filteredData: Event[] = [];
+  filtersOn: boolean = false;
   
   constructor(
     private eventsService: EventsRepositoryService,
@@ -33,15 +34,13 @@ export class ViewEventsJoinedComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshTable();
-    this.dataSource = new MatTableDataSource<Event>();
-    this.filteredData = new MatTableDataSource(this.dataSource.data);
   }
 
   refreshTable(): void {
     this.eventsService.getAllEvents("Event/Joined").subscribe({
       next: (response) => {
-        this.dataSource.data = response.events;
-        this.filteredData.data = response.events;
+        this.dataSource = response.events;
+        this.filteredData = response.events;
       }
     })
     this.getLocations()
@@ -103,10 +102,14 @@ export class ViewEventsJoinedComponent implements OnInit {
   }
 
   handleSearchEvents(events: Array<Event>): void {
-    this.filteredData.data = events;
+    this.filteredData = events;
   }
 
   redirect(event: Event){
     this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
+  }
+
+  toggleFilters(){
+    this.filtersOn = !this.filtersOn
   }
 }

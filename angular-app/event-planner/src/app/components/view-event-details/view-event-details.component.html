@@ -1,4 +1,4 @@
-<button (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon>Inapoi</button>
+<button (click)="goBack()" class="back-button"><mat-icon>keyboard_backspace</mat-icon>Back</button>
 <div class="container" style="display: flex">
     <div class="picture">
         <img class="image" [src]="verifyPhotoUrl(event.photoUrl)" width="600" height="600">
@@ -14,8 +14,8 @@
         <div class="description">
             <p>{{event.description}}</p>
         </div>
-        <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isUser() && !isEventJoined(event.id) && !isEventFull(event)" (click)="joinEvent(event.id)">Participa</button>
+        <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isUser() && !isEventJoined(event.id) && !isEventFull(event)" (click)="joinEvent(event.id)">Join event</button>
         <p *ngIf="isEventJoined(event.id) && isUser()"><span class="material-icons">done</span>Inscris</p>
-        <p *ngIf="isEventFull(event) && isUser()">Capacitate maxima</p>
+        <p *ngIf="isEventFull(event) && isUser()">Full capacity</p>
     </div>
 </div>

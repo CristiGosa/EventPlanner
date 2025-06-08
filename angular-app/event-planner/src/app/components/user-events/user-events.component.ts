@@ -28,7 +28,7 @@ export class UserEventsComponent {
   filtersOn: boolean = false;
   filteredData: MatTableDataSource<Event>;
   currentPage: number = 0;
-  pageSize: number = 6;
+  pageSize: number = 3;
 
   constructor(
     private eventsService: EventsRepositoryService,

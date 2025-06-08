@@ -1,68 +1,61 @@
-<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Inapoi</button>
+<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Back</button>
 
-<h1 class="header" *ngIf="errorResp==null && isAdmin()">Cereri neadministrate de organizare eveniment</h1>
-<h1 class="header" *ngIf="errorResp==null && isOrganizer()">Lista de evenimente propuse de tine</h1>
+<h1 class="header" *ngIf="errorResp==null && isAdmin()">Unhandled event requests</h1>
+<h1 class="header" *ngIf="errorResp==null && isOrganizer()">Events proposed by you</h1>
+<button (click)="toggleFilters()" class="filter-button">
+    <mat-icon>filter_list</mat-icon> Filters
+  </button>
 <div *ngIf="errorResp!=null" class="no-content-container">
-  <h1 class="no-content-header">Nu exista niciun eveniment neadministrat</h1>
+  <h1 class="no-content-header">All events have been handled</h1>
   <img class="web-img" mat-card-image src="../assets/images/no-content.png" alt="Banner">
 </div>
 
-<table *ngIf="errorResp == null"
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-    id="htmlData"
-  >
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Nume</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+<app-search-events
+    class="search-wrapper"
+    *ngIf="filtersOn"
+    [unfilteredEvents]="dataSource"
+    [locations]="locations"
+    (onSearch)="handleSearchEvents($event)"
+  ></app-search-events>
 
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef>Locatie</th>
-      <td mat-cell *matCellDef="let element" class="location-cell" (click)="getLink(element.locationId)">{{ getLocation(element.locationId) }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="organizer">
-        <th mat-header-cell *matHeaderCellDef>Organizator</th>
-        <td mat-cell *matCellDef="let element">{{ element.organizerEmail }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="ticketPrice">
-        <th mat-header-cell *matHeaderCellDef>Pret bilet</th>
-        <td mat-cell *matCellDef="let element">{{ getTicketPrice(element) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="startDate">
-        <th mat-header-cell *matHeaderCellDef>Data incepere</th>
-        <td mat-cell *matCellDef="let element">{{ element.startDate | date:"dd/MM/yyyy" }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef>Data incheiere</th>
-        <td mat-cell *matCellDef="let element">{{ element.endDate | date: "dd/MM/yyyy" }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Detalii</th>
-        <td mat-cell *matCellDef="let element">
-          <button class="action-button" (click)="openDescriptionDialog(element.description)">Vizualizati</button></td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let element">{{ getStatus(element.status) }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="buttons">
-        <th mat-header-cell *matHeaderCellDef="let element"></th>
-        <td mat-cell *matCellDef="let element">
-          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">Aproba</button>
-          <button class="action-button" [disabled]="isButtonDisabled" *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">Respinge</button>
-          <button class="action-button" *ngIf="isPending(element) && isOrganizer()" (click)="cancelRequest(element.id)">Anuleaza</button>
+<div class="table-container">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Nume</th>
+        <th>Locatie</th>
+        <th>Pret bilet</th>
+        <th>Data incepere</th>
+        <th>Data incheiere</th>
+        <th>Detalii</th>
+        <th>Status</th>
+        <th>Actiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of filteredData">
+        <td data-label="Name">{{ element.name }}</td>
+        <td data-label="Location" class="location-cell" (click)="getLink(element.locationId)">
+          <span class="location-link">{{ getLocation(element.locationId) }}</span>
         </td>
-      </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        <td data-label="Ticket price">{{ getTicketPrice(element) }}</td>
+        <td data-label="Starting date">{{ element.startDate | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Ending date">{{ element.endDate | date: 'dd/MM/yyyy' }}</td>
+        <td data-label="Status">{{ getStatus(element.status) }}</td>
+        <td>
+          <button class="action-button" (click)="openDescriptionDialog(element)">
+            View details
+          </button>
+          <button class="action-button" [disabled]="isButtonDisabled"
+            *ngIf="isPending(element) && isAdmin()" (click)="acceptEvent(element.id)">
+            Approve
+          </button>
+          <button class="action-button" [disabled]="isButtonDisabled"
+            *ngIf="isPending(element) && isAdmin()" (click)="rejectEvent(element.id)">
+            Decline
+          </button>
+        </td>
+      </tr>
+    </tbody>
   </table>
+</div>

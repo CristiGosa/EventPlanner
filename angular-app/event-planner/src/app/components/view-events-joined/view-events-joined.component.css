@@ -1,94 +1,167 @@
-/* Style for buttons */
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-
-  mat-icon {
-    margin-right: 0.5rem;
-  }
-  
-  /* Style for table */
-  .mat-elevation-z8 {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: auto;
-  }
-  
-  .mat-elevation-z8 th, .mat-elevation-z8 td {
-    border: 1px solid #dddddd;
-    padding: 12px;
-    text-align: center;
-  }
-  
-  .mat-elevation-z8 th {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .mat-elevation-z8 tr:nth-child(even) {
-    background-color: #d5eaf6;
-  }
-  
-  .mat-elevation-z8 tr:nth-child(odd) {
-    background-color: #f2f2f2;
-  }
-  
-  .mat-elevation-z8 tr:hover {
-    background-color: #c1e1f0;
-  }
-  
-  .date {
-    min-width: 6.5rem;
-  }
-  
-  .custom-dialog-container {
-    padding: 20px;
-    background-color: #f8f9fa; /* Adjust background color as needed */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .location-cell {
-    cursor: pointer;
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  .location-cell:hover {
-    color: darkblue;
-  }
-
-  .participants-cell {
-    cursor: pointer;
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  .participants-cell:hover {
-    color: darkblue;
-  }
-
-  .action-button {
-    display: inline;
-  }
-
-  .header {
-    color: #3498db;
-    padding: 20px;
+.header {
+    color: #0099ff;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #fff;
   }
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.buttons-container button {
+  width: 90%;
+  text-align: center;
+  white-space: normal;
+  /* height: 100%; */
+}
+
+
+.buttons-container button mat-icon {
+  font-size: 20px;
+}
+
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  margin-bottom: 20px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.filter-button {
+  margin-left: 36%;
+}
+
+mat-icon {
+  margin-right: 0.5rem;
+}
+
+.buttons-container {
+  align-items: center;
+}
+
+/* table styling  */
+
+.location-link {
+  color: purple;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.location-link:hover {
+  color: purple;
+}
+
+
+.responsive-table td[data-label="Organizator"] {
+  font-size: 0.85rem;
+  word-break: break-word;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+.table-container {
+  margin-left: 5%;
+  max-width: 90%;
+  overflow-x: hidden;
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: 12px 15px;
+  border: 1px solid gray;
+  text-align: left;
+}
+
+.responsive-table td:first-child {
+    background-color: orange;
+    color: white;
+  }
+
+.responsive-table th {
+  background-color: #06fcfc;
+}
+
+.search-wrapper {
+    animation: slideDown 0.5s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 100%;
+      opacity: 1;
+    }
+  }
+
+@media (max-width: 600px) {
+  .responsive-table thead {
+    display: none;
+  }
+
+  .responsive-table,
+  .responsive-table tbody,
+  .responsive-table tr,
+  .responsive-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .responsive-table tr {
+    margin-bottom: 15px;
+  }
+
+  .responsive-table td {
+    text-align: left;
+    padding-left: 50%;
+    position: relative;
+    background-color: cyan;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: calc(50% - 10px);
+    font-weight: bold;
+    text-align: left;
+  }
+} 

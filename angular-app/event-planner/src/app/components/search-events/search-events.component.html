@@ -8,7 +8,7 @@
         <div class="fields">
 
           <mat-form-field appearance="outline" class="name-form-field">
-            <mat-label>Denumire eveniment:</mat-label>
+            <mat-label>Event name:</mat-label>
             <input
               matInput
               type="text"
@@ -18,17 +18,17 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Locatie:</mat-label>
+            <mat-label>Location:</mat-label>
             <mat-select placeholder="Location" formControlName="locationId">
               <mat-option *ngFor="let locationId of locationIds" [value]="locationId">
-                {{ locationId == -1 ? "Toate" : getLocationById(locationId) }}
+                {{ locationId == -1 ? "All locations" : getLocationById(locationId) }}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <div class="calendar-container">
             <mat-form-field appearance="outline">
-              <mat-label>Data incepere:</mat-label>
+              <mat-label>Starting date:</mat-label>
               <input
                 matInput
                 [matDatepicker]="picker"
@@ -51,7 +51,7 @@
 
           <div class="calendar-container">
             <mat-form-field appearance="outline">
-              <mat-label>Data incheiere:</mat-label>
+              <mat-label>Ending date:</mat-label>
               <input
                 matInput
                 [matDatepicker]="enddatepicker"
@@ -70,10 +70,9 @@
             </button>
           </div>
 
-          <mat-checkbox [checked]="isFreeEventSearch" (change)="updateFreeEventSearch()">Intrare libera</mat-checkbox>
-
         </div>
         <div class="actions">
+          <mat-checkbox [checked]="isFreeEventSearch" (change)="updateFreeEventSearch()">Free entry</mat-checkbox>
           <button
             mat-icon-button
             matSuffix

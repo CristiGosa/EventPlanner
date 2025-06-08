@@ -54,7 +54,7 @@
 }
 
 /* Button styling */
-button, .action-button {
+.action-button {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border: none;
@@ -63,6 +63,24 @@ button, .action-button {
   border-radius: 0.25rem;
   cursor: pointer;
   width: fit-content;
+}
+
+.back-button {
+  padding: 10px 20px;
+  margin: 5px;
+  margin-bottom: 20px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.back-button:hover {
+  background-color: #45a049;
 }
 
 button[disabled] {

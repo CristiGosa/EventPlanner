@@ -1,8 +1,8 @@
 <div class="buttons-container">
     <button *ngIf="isUser()" routerLink="/app/view-events-joined">
-      <mat-icon>remove_red_eye</mat-icon>Your events</button>
+      <mat-icon>remove_red_eye</mat-icon>My events</button>
     <button class="filter-button" *ngIf="isUser()" (click)="toggleFilters()" class="toggle-search-button">
-    <mat-icon>remove_red_eye</mat-icon>Filters</button>
+    <mat-icon>filter_list</mat-icon>Filters</button>
 </div>
   
 <app-search-events

@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Event } from 'src/app/interfaces/event.dto';
 import { Location } from 'src/app/interfaces/location.dto';
 import { UpdateEventStatusRequest } from 'src/app/interfaces/update-event-status-request.dto';
@@ -19,14 +20,17 @@ import { RolesService } from 'src/app/shared/services/roles.service';
 })
 export class ViewEventRequestsComponent {
   columnsToDisplay: string[] = ["name", "location", "organizer", "ticketPrice", "startDate", "endDate", "description", "status", "buttons"];
-  dataSource:  MatTableDataSource<Event>;
+  dataSource: Event[] = [];
   errorResp: HttpErrorResponse | null = null;
   locations: Location[] = [];
   isButtonDisabled: boolean = false;
+  filtersOn: boolean = false;
+  filteredData: Event[] = [];
 
   constructor(private eventsService: EventsRepositoryService,
     private rolesService: RolesService,
     private locationsService: LocationsRepositoryService,
+    private router: Router,
     public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -34,7 +38,6 @@ export class ViewEventRequestsComponent {
     this.eventsService.eventAdded.subscribe(() => {
       this.refreshTable();
     });
-    this.dataSource = new MatTableDataSource<Event>();
   }
 
   refreshTable(): void {
@@ -45,7 +48,8 @@ export class ViewEventRequestsComponent {
     {
       this.eventsService.getByStatus("Event", EventStatus.Pending).subscribe({
         next: (response) => {
-          this.dataSource.data = response.events;
+          this.dataSource = response.events;
+          this.filteredData = response.events;
         },
         error: (errorResponse) => {
           this.errorResp = errorResponse;
@@ -55,7 +59,8 @@ export class ViewEventRequestsComponent {
     else{
       this.eventsService.getAllEvents("Event/Owned").subscribe({
         next: (response) => {
-          this.dataSource.data = response.events;
+          this.dataSource = response.events;
+          this.filteredData = response.events;
         }
       });
     }
@@ -65,10 +70,10 @@ export class ViewEventRequestsComponent {
   getStatus(status: EventStatus): string {
     switch(status)
     {
-      case EventStatus.Accepted: return "Aprobat";
-      case EventStatus.Rejected: return "Respins";
-      case EventStatus.Pending: return "In asteptare";
-      case EventStatus.Cancelled: return "Anulat";
+      case EventStatus.Accepted: return "Approved";
+      case EventStatus.Rejected: return "Rejectd";
+      case EventStatus.Pending: return "Pending";
+      case EventStatus.Cancelled: return "Canceled";
       default: return "Undefined";
     }
   }
@@ -131,8 +136,8 @@ export class ViewEventRequestsComponent {
     return location?.name;
   }
 
-  openDescriptionDialog(description: string){
-    this.dialog.open(DialogWindowComponent, { data: description });
+  openDescriptionDialog(event: Event){
+    this.router.navigateByUrl("/app/view-event-details", { state: { eventData: event } } );
   }
 
   getLink(locationId: number): void{
@@ -155,5 +160,13 @@ export class ViewEventRequestsComponent {
         return event.ticketPrice.toString();
       }
     }
+  }
+
+  toggleFilters(){
+    this.filtersOn = !this.filtersOn
+  }
+
+  handleSearchEvents(events: Array<Event>): void {
+    this.filteredData = events;
   }
 }
