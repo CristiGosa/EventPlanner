@@ -2,11 +2,11 @@
 
 <h1 class="header" *ngIf="errorResp==null && isAdmin()">Unhandled event requests</h1>
 <h1 class="header" *ngIf="errorResp==null && isOrganizer()">Events proposed by you</h1>
-<button (click)="toggleFilters()" class="filter-button">
+<button (click)="toggleFilters()" class="filter-button" *ngIf="errorResp==null">
     <mat-icon>filter_list</mat-icon> Filters
   </button>
 <div *ngIf="errorResp!=null" class="no-content-container">
-  <h1 class="no-content-header">All events have been handled</h1>
+  <h1 class="no-content-header" style="font-weight: bold; margin-left: 37px; margin-top: 200px;">All events have been handled</h1>
   <img class="web-img" mat-card-image src="../assets/images/no-content.png" alt="Banner">
 </div>
 
@@ -18,7 +18,7 @@
     (onSearch)="handleSearchEvents($event)"
   ></app-search-events>
 
-<div class="table-container">
+<div class="table-container" *ngIf="errorResp==null">
   <table class="responsive-table">
     <thead>
       <tr>

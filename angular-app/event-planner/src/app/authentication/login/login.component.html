@@ -3,22 +3,18 @@
         <mat-grid-tile>
             <div class="first-tile">
                 <div class="background-div" [ngClass]="{'is-phone-portrait': isPhonePortrait}">
-                    <span class="app-name">Event Planner</span>
+                    <span class="app-name" style="font-size: x-large;">Event Planner</span>
                 </div>
                 <div class="text-container">
                     <div class="sign-in-container" [ngClass]="{'is-phone-portrait': isPhonePortrait}">
                         <div>
-                            <h1>Autentificare</h1>
+                            <h1 style="font-size: large;">Welcome back!</h1>
                         </div>
                         <div class="description-div-container">
-                            <p class="description-container-web" *ngIf="!isPhonePortrait">Bine ați revenit! Conectați-vă la contul dumneavoastră Event Planner.</p>
-                            <div *ngIf="isPhonePortrait">
-                                <p class="description-mobile-first">Bine ați revenit!</p>
-                                <p class="description-mobile-second">Conectați-vă la contul dumneavoastră Event Planner.</p>
-                            </div>
+                            <p class="description-container-web" *ngIf="!isPhonePortrait">Welcome back!</p>
                         </div>
-                        <div>
-                            <asl-google-signin-button type="standard" size="medium"></asl-google-signin-button>
+                        <div class="google-button-wrapper">
+                            <asl-google-signin-button size="medium" type="standard"></asl-google-signin-button>
                         </div>
                         <div class="error-container">
                             <app-error-message *ngIf="errorResp != null" [errorResponse]="errorResp"></app-error-message>
@@ -27,8 +23,6 @@
                 </div>
             </div>
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="!isPhonePortrait">
-            <img class="web-img" mat-card-image src="../assets/images/login-page-img.png" alt="Banner">
-        </mat-grid-tile>
+            <img class="web-img" src="../assets/images/login-page-img.png">
     </mat-grid-list>
 </div>

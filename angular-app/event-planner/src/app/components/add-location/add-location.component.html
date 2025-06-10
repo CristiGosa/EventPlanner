@@ -4,15 +4,15 @@
     <form [formGroup]="locationForm" class="form-container">
         <div class="form-container">
             <div class="form-field">
-                <label for="name" class="form-label"> {{ 'Nume:' }}*</label>
+                <label for="name" class="form-label"> {{ 'Name:' }}*</label>
                 <input class="form-input" id="name" type="text" formControlName="name" required>
             </div>
             <div class="form-field">
-                <label for="capacity" class="form-label">{{ 'Capacitate:'}}*</label>
+                <label for="capacity" class="form-label">{{ 'Capacity:'}}*</label>
                 <input class="form-input" id="capacity" type="number" formControlName="capacity" required>
             </div>
             <div class="button">
-                <button (click)="addLocation()" class="add-button">{{ 'Adauga noua locatie' }}</button>
+                <button (click)="addLocation()" class="add-button">{{ 'Add new location' }}</button>
             </div>
         </div>
     </form>

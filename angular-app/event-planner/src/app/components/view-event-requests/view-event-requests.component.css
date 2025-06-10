@@ -164,4 +164,12 @@ body {
     font-weight: bold;
     text-align: left;
   }
+
+  .web-img{
+    width: 400px;
+  }
+
+  .no-content-container{
+    margin-top: 20px;
+  }
 } 

@@ -1,10 +1,11 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { LocationsRepositoryService } from 'src/app/shared/services/locations-repository.service';
 import { AddLocationComponent } from '../add-location/add-location.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Location } from 'src/app/interfaces/location.dto';
 import { Loader } from '@googlemaps/js-api-loader';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-view-locations',
@@ -12,6 +13,7 @@ import { Loader } from '@googlemaps/js-api-loader';
   styleUrls: ['./view-locations.component.css']
 })
 export class ViewLocationsComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   columnsToDisplay: string[] = ["name", "capacity"];
   dataSource:  MatTableDataSource<Location> = new MatTableDataSource<Location>;
   dialogRef: MatDialogRef<AddLocationComponent>;
@@ -28,6 +30,10 @@ export class ViewLocationsComponent {
     setTimeout(() => {
       this.generateMap();
     }, 100);
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   refreshTable(): void {

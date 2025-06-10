@@ -67,19 +67,16 @@ mat-grid-list {
     margin: 0;
 }
 
-asl-google-signin-button {
-    margin: 20px 0;
-}
-
 .error-container {
     margin-top: 20px;
 }
 
 .web-img {
-    width: 100%;
+    margin-top: 10%;
+    width: 80%;
     height: auto;
     display: block;
-    border-radius: 0 8px 8px 0;
+    margin-left: 10%;
 }
 
 /* Responsive styling */
@@ -89,15 +86,12 @@ asl-google-signin-button {
     }
 
     .first-tile {
+        margin-top: 30%;
         border-radius: 8px;
     }
 
     .background-div {
         border-radius: 8px 8px 0 0;
-    }
-
-    .web-img {
-        display: none;
     }
 }
 
@@ -116,4 +110,9 @@ asl-google-signin-button {
 
 .is-phone-portrait .description-mobile-second {
     font-size: 14px;
+}
+
+.google-button-wrapper {
+  justify-content: center;
+  width: 100%;
 }

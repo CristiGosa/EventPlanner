@@ -1,9 +1,9 @@
-<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Inapoi</button>
+<button routerLink="/app"><mat-icon>keyboard_backspace</mat-icon>Back</button>
 
 <div class="main">
 
   <div class="registrations-pannel">
-    <h1 class="subtitle-header">Locatii inregistrate</h1>
+    <h1 class="subtitle-header">Registered locations</h1>
     <table
       mat-table
       [dataSource]="dataSource"
@@ -11,22 +11,24 @@
       id="htmlData"
     >
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Denumire</th>
+        <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="capacity">
-        <th mat-header-cell *matHeaderCellDef>Capacitate</th>
+        <th mat-header-cell *matHeaderCellDef>Capacity</th>
         <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[3]" showFirstLastButtons></mat-paginator>
   </div>
 
   <div class="map-pannel">
-    <h1 class="subtitle-header">Click pe locatia dorita pentru a o inregistra</h1>
+    <h1 class="subtitle-header">Select a new location to register</h1>
     <div id="map" class="map"></div>
   </div>
 
