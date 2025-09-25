@@ -79,7 +79,7 @@ export class AddEventComponent {
     }
     if(!this.eventForm.valid || location == undefined){
       this.isButtonDisabled = false;
-      this.errorMsg = "Datele introduse sunt incomplete";
+      this.errorMsg = "Please complete all mandatory fields";
       setTimeout(() => {
         this.errorMsg = null;
       }, 5000);
@@ -101,7 +101,7 @@ export class AddEventComponent {
         },
         error: () => {
           this.isButtonDisabled = false;
-          this.errorMsg = "Datele introduse sunt incorecte";
+          this.errorMsg = "Inserted data is invalid";
           setTimeout(() => {
             this.errorMsg = null;
           }, 5000);
