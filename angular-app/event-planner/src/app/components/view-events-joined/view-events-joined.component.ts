@@ -93,7 +93,7 @@ export class ViewEventsJoinedComponent implements OnInit {
         return event.ticketPrice + " €";
       }
       case Currency.Free: {
-        return "Intrare libera";
+        return "Free entry";
       }
       default: {
         return event.ticketPrice.toString();

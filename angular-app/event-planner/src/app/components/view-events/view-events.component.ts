@@ -225,7 +225,7 @@ export class ViewEventsComponent {
         return event.ticketPrice + " €";
       }
       case Currency.Free: {
-        return "Intrare libera";
+        return "Free entry";
       }
       default: {
         return event.ticketPrice.toString();
